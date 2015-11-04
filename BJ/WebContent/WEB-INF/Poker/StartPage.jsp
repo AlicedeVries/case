@@ -11,6 +11,7 @@
 <h1 style="color:#f67f00">Welcome to Poker Online</h1>
 
 Deze opmerking zit alleen in de master branch
+Dit is een wijziging voor op de branch
 
 <form method="post" action="/BJ/StartPoker">
 <h3>Enter your name to start poker: </h3><input name="name" type="text" style="width: 200px; height: 35px; font-size: 14px; text-indent: 10px">
