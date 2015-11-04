@@ -10,8 +10,11 @@
 <body>
 	<table>
 		<tr> 
-			<td> <h4>Dealers hand:</h4></td> 
-			<c:forEach items="${game.dealerHand}" var="card">
+			<td> <h4>Table:</h4></td> 
+			<td> 
+				<img src="<c:url value="${game.stack.image}" />" width="84pt"  height="122pt" >			
+			</td>
+			<c:forEach items="${game.table}" var="card">
 			<td>	
 			<img src="<c:url value="${card.image}" />" width="84pt"  height="122pt"  alt="${card.waarde} ${card.kleur}">			
 			</td>
