@@ -1,6 +1,8 @@
 package nl.poker.texasHoldEm.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,17 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+import nl.poker.texasHoldEm.game.Game;
+import nl.poker.texasHoldEm.game.Player;
+
 /**
- * Servlet implementation class StartPoker
+ * Servlet implementation class PlayPoker
  */
-@WebServlet("/StartPoker")
-public class StartPoker extends HttpServlet {
+@WebServlet("/PlayPoker")
+public class PlayPoker extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StartPoker() {
+    public PlayPoker() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +35,26 @@ public class StartPoker extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
 		ServletContext context = getServletContext();
-		String name = (String) request.getParameter("name");
-		if (name==null || name==""){
-			context.getRequestDispatcher("/Poker/StartPage.jsp").forward(request, response);	
-		}
-		else{
-			HttpSession session = request.getSession(true);
-			session.setMaxInactiveInterval(600);
-			session.setAttribute("name", name);
-			context.getRequestDispatcher("/Wait").forward(request, response);	
-		}
+		HttpSession session = request.getSession(false);
 
+		if (session==null){
+			context.getRequestDispatcher("/StartPoker").forward(request, response);
+		}
 		
-		
-		
-		
-		
+		else {
+			Player p = (Player) session.getAttribute("player");
+			if (p==null){
+					p = new Player((String) session.getAttribute("name"));
+					session.setAttribute("player", p);
+			}
+			List<Player> players = new ArrayList<Player>();		
+			players.add(p);						
+			Game game = new Game(players);
+			context.setAttribute("game", game);
+			context.setAttribute("players", players);
+			context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+		}
 	}
 
 	/**
