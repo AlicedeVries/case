@@ -8,18 +8,18 @@
 <title>Game</title>
 </head>
 <body>
-<h1 style="color:#00a1e4">Welcome to Blackjack Online</h1>
+<h1 style="color:#f67f00">Welcome to Blackjack Online</h1>
 	<c:import url="/Display.jsp"></c:import>
 	<table>
 	<tr>
 		<td>
 		<form method="post" action="/BJ/Hit">
-			<input type="submit" value="Hit" style="width: 90px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #00a1e4">
+			<input type="submit" value="Hit" style="width: 90px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
 		</form>
 		</td>
 		<td>
 		<form method="post" action="/BJ/Stand">
-			<input type="submit" value="Stand" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #00a1e4">
+			<input type="submit" value="Stand" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>
 	</tr>

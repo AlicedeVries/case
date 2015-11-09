@@ -8,7 +8,7 @@
 <title>You Won!</title>
 </head>
 <body>
-<h1 style="color:#00a1e4">Welcome to Blackjack Online</h1>
+<h1 style="color:#f67f00">Welcome to Blackjack Online</h1>
 <c:import url="/Display.jsp"></c:import>
 <h2 style="color:green">You have won this game! </h2>
 <h2>${msg}</h2>
@@ -17,7 +17,7 @@
 	<tr>
 		<td>
 		<form method="post" action="/BJ/Play">
-			<input type="submit" value="Start new game" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #0080FF">
+			<input type="submit" value="Start new game" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>
 		<td>
