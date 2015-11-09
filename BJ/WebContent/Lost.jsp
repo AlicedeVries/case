@@ -11,7 +11,7 @@
 <body>
 <h1 style="color:#f67f00">Welcome to Blackjack Online</h1>
 <c:import url="/Display.jsp"></c:import>
-<h2 style="color:red">You have lost this game! </h2>
+<h2>You have lost this game! </h2>
 <h2>${msg}</h2>
 	<table>
 	<tr>
