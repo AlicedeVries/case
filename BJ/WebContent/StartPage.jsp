@@ -8,10 +8,10 @@
 <title>Welcome</title>
 </head>
 <body>
-<h1 style="color:#00a1e4">Welcome to Blackjack Online</h1>
+<h1 style="color:#f67f00">Welcome to Blackjack Online</h1>
 
 <form method="post" action="/BJ/Start">
 <h3>Enter your name to start blackjack: </h3><input name="name" type="text" style="width: 200px; height: 35px; font-size: 14px; text-indent: 10px">
-<input type="submit" value="Start game" style="width: 100px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #0080FF"></form>
+<input type="submit" value="Start game" style="width: 100px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00"></form>
 </body>
 </html>

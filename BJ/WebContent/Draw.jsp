@@ -9,14 +9,14 @@
 <title>It's a draw!</title>
 </head>
 <body>
-<h1 style="color:#00a1e4">Welcome to Blackjack Online</h1>
+<h1 style="color:#f67f00">Welcome to Blackjack Online</h1>
 <c:import url="/Display.jsp"></c:import>
 <h2> It's a draw! </h2>
 	<table>
 	<tr>
 		<td>
 		<form method="post" action="/BJ/Play">
-			<input type="submit" value="Start new game" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #00a1e4">
+			<input type="submit" value="Start new game" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>
 		<td>

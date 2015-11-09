@@ -43,7 +43,7 @@ public class Card {
 
 	public String getImage() {
 		if (this.kleur==Kleur.SECRET)
-			return "/IMAGES/backOfCard.svg";
+			return "/IMAGES/backWithYCP.svg";
 		String img = "/IMAGES/";
 		switch (this.kleur){
 			case HARTEN:
@@ -61,7 +61,7 @@ public class Card {
 		if(getal==1)
 			return img+"(A).svg";
 		if(getal==11)
-			return img+"(J).svg";
+			return img+"(J).svg"; 
 		else if(getal==12)
 			return img+"(Q).svg";
 		else if(getal==13)
