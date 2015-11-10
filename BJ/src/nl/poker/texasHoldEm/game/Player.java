@@ -38,17 +38,6 @@ public class Player extends HandHolder{
 		
 		//sorteer deze lijst van hoog naar laag
 		Collections.sort(combine,new CardComparator());
-
-		//azen als hoogste en laagste kaart in combine
-		for (int i=combine.size()-1; i>=combine.size()-7 ;i--){
-			if (combine.get(6).getGetal()==1){
-				combine.add(0, combine.get(6));
-				i--;
-			}
-		}
-		
-//		for (Card c : combine)
-//			System.out.print(c+ " " );
 		
 		System.out.println("Has RoyalFlush:"+ (hasRoyalFlush(combine) != -1));
 		System.out.println("Has StraightFlush:"+ (hasStraightFlush(combine) != -1));
@@ -57,22 +46,19 @@ public class Player extends HandHolder{
 		System.out.println("Has 4 of a kind:"+ (hasFourOfaKind(combine) != -1));
 		System.out.println("Has 3 of a kind:" + (hasThreeOfaKind(combine) != -1));
 		System.out.println("Has pair:" + (hasPair(combine) != -1));
+		System.out.println("Has Full House:" + (hasFullHouse(combine) != -1));
+		System.out.println("Has Two Pair:" + (hasTwoPair(combine) != -1));
 		
 		return true;
 	}
-	
-	
-	public int hasRoyalFlush(List<Card> combine){
-		
-		System.out.println("hier:"+hasStraightFlush(combine));
+
+	public int hasRoyalFlush(ArrayList<Card> combine){
 		if(hasStraightFlush(combine) == 1)
 			return 1;
 		return -1;
-		
-
 	}
 	
-	public int hasFourOfaKind(List<Card> combine) {
+	public int hasFourOfaKind(ArrayList<Card> combine) {
 		int teller = 1;
 		int getWaarde = 0;
 		// loop door de lijst en zie of er 4 kaarten van dezelfde waarde inzitten
@@ -89,7 +75,7 @@ public class Player extends HandHolder{
 		return -1;
 	}
 	
-	public int hasThreeOfaKind(List<Card> combine) {
+	public int hasThreeOfaKind(ArrayList<Card> combine) {
 		int teller = 1;
 		int getWaarde = 0;
 		// loop door de lijst en zie of er 3 kaarten van dezelfde waarde inzitten
@@ -106,36 +92,72 @@ public class Player extends HandHolder{
 		return -1;
 	}
 	
-	public int hasPair(List<Card> combine) {
+	public int hasPair(ArrayList<Card> combine) {
 		int teller = 1;
-		int getWaarde = 0;
 		// loop door de lijst en zie of er 2 kaarten van dezelfde waarde inzitten
 		for(int k = 0; k < combine.size()-1; k++) {
 			if(combine.get(k).getGetal() == combine.get(k+1).getGetal()) {
-				return getWaarde;
+				return combine.get(k).getGetal();
 			}
 		}
 		return -1;
 	}
 	
-//	public int hasTwoPair(List<Card> combine) {
-//		
-//		if(hasThreeOfaKind(combine) == -1)
-//		
-//		
-//		
-//		
-//	
-//		
-//		
-//		return -1;
-//	}
-	
+	public int hasFullHouse(ArrayList<Card> combine) {
+		int waardeTOK;
+		int waardePair;
+		
+		waardeTOK = hasThreeOfaKind(combine);
+		if(waardeTOK == -1)
+			return -1;
+		
+		//remove three of a kind from copy of combine
+		ArrayList<Card> copy = (ArrayList<Card>) combine.clone();
+		for(int k = 0; k < copy.size(); k++) {
+			if (copy.get(k).getGetal()==waardeTOK){ 
+				copy.remove(k);
+				copy.remove(k);
+				copy.remove(k);
+				break;
+			}
+		}
+		
+		waardePair = hasPair(copy);
+		if(waardePair == -1)
+			return -1;
+		else
+			return waardeTOK;
+	}
+
+	public int hasTwoPair(ArrayList<Card> combine) {
+		int waardePair;
+		int waardePair2;
+		
+		waardePair = hasPair(combine);
+		if(waardePair == -1)
+			return -1;
+		//remove three of a kind from copy of combine
+		ArrayList<Card> copy = (ArrayList<Card>) combine.clone();
+		for(int k = 0; k < copy.size(); k++) {
+			if (copy.get(k).getGetal()==waardePair){ 
+				copy.remove(k);
+				copy.remove(k);
+				break;
+			}
+		}
+		
+		waardePair2 = hasPair(copy);
+		if(waardePair2 == -1)
+			return -1;
+		else{
+			return waardePair;
+		}
+
+	}
 
 	
 	
-	
-	public int hasFlush(List<Card> combine){
+	public int hasFlush(ArrayList<Card> combine){
 		
 		if (returnAllOneColor(Kleur.HARTEN,combine).size() >= 5)
 			return returnAllOneColor(Kleur.HARTEN,combine).get(0).getGetal();
@@ -152,16 +174,31 @@ public class Player extends HandHolder{
 		return -1;
 	}
 	
-	
 	@SuppressWarnings("unchecked")
-	public int hasStraight(ArrayList<Card> cards){
-		ArrayList<Card> combine = (ArrayList<Card>) cards.clone();
-		//verwijder 'dubbele getallen' in combine
-		for(int i = 0; i < (combine.size()-1); i++) {
-			if (combine.get(i).getGetal()==combine.get(i+1).getGetal())
-				combine.remove(i+1);
-		}
+	public ArrayList<Card> noDoublesButDoubleAces(ArrayList<Card> combine) {
+		ArrayList<Card> doubleAces = (ArrayList<Card>) combine.clone();
 		
+		
+		for (int i=doubleAces.size()-1; i> ( doubleAces.size() - combine.size() ) &&i >= 0;i--){
+			if (doubleAces.get(i).getGetal()==1){
+				doubleAces.add(0, doubleAces.get(i));
+			}
+		}
+
+		//verwijder 'dubbele getallen' in combine		
+		for(int i = 0; i < (doubleAces.size()-1); i++) {
+			if (doubleAces.get(i).getGetal()==doubleAces.get(i+1).getGetal())
+				doubleAces.remove(i+1);
+		}
+				
+		return doubleAces;
+		
+	}
+		
+
+	public int hasStraight(ArrayList<Card> cards){
+		ArrayList<Card> combine = noDoublesButDoubleAces(cards);
+
 		int maxIndex = combine.size()-1;
 
 		
@@ -191,7 +228,7 @@ public class Player extends HandHolder{
 		
 	
 	
-	public int hasStraightFlush(List<Card> combine){
+	public int hasStraightFlush(ArrayList<Card> combine){
 		//dit kan korter, maar nog ff zo voor lennarts duidelijkheid
 		ArrayList<Card> harten = returnAllOneColor(Kleur.HARTEN,combine);
 		if(hasStraight(harten) != -1)
@@ -221,8 +258,6 @@ public class Player extends HandHolder{
 		}
 		return kleur;		
 	}
-
-	
 }
 
 
