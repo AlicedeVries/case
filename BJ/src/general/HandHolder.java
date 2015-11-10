@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class HandHolder {
 
 	private String name;
-	protected List<Card> hand = new ArrayList<Card>();
+	private List<Card> hand = new ArrayList<Card>();
 	
 	public HandHolder(String name) {
 		this.name = name;	
@@ -35,7 +35,7 @@ public abstract class HandHolder {
 	}
 	
 	public void printHand(){
-		System.out.println(name + "'s hand:");
+		System.out.println(name+":");
 		for (Card c : hand)
 			System.out.println(c);
 	}

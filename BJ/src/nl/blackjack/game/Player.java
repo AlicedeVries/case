@@ -16,7 +16,7 @@ public class Player extends HandHolder{
 	public boolean ask(Deck deck){
 		if (stand==true)
 			return false;
-		hand.add(deck.draw());
+		getHand().add(deck.draw());
 		return true;
 	}
 	
@@ -27,7 +27,7 @@ public class Player extends HandHolder{
 	public int getScore(){
 		int sum=0;
 		int azen  = 0;
-		for (Card c: hand){
+		for (Card c: getHand()){
 			sum+=c.getWaarde();
 			if (c.getWaarde()==11)
 				azen++;
