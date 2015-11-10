@@ -20,10 +20,10 @@ public class Game  {
 		Player p = new Player("lennart");
 		deck = new Deck();
 		deck.shuffle();
-		p.add(new Card(6, Kleur.RUITEN));
-		p.add(new Card(9, Kleur.KLAVEREN));
-		table.add(new Card(7, Kleur.KLAVEREN));
-		table.add(new Card(8, Kleur.KLAVEREN));
+		p.add(new Card(7, Kleur.RUITEN));
+		p.add(new Card(7, Kleur.KLAVEREN));
+		table.add(new Card(7, Kleur.SCHOPPEN));
+		table.add(new Card(7, Kleur.HARTEN));
 		table.add(new Card(5, Kleur.KLAVEREN));
 		p.printHand();
 //		flop();

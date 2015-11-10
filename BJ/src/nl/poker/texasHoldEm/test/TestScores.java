@@ -83,5 +83,60 @@ public class TestScores {
 		table.printHand();
 		p.getScore(table);
 	}
+	
+	@Test
+	public void testFourOfaKind() {
+		Player p = new Player("lennart");
+		deck = new Deck();
+		deck.shuffle();
+		p.add(new Card(7, Kleur.KLAVEREN));
+		p.add(new Card(5, Kleur.RUITEN));
+		table.add(new Card(9, Kleur.KLAVEREN));
+		table.add(new Card(5, Kleur.KLAVEREN));
+		table.add(new Card(5, Kleur.SCHOPPEN));
+		table.add(new Card(5, Kleur.HARTEN));
+		table.add(new Card(13, Kleur.KLAVEREN));
+		p.printHand();
+		table.printHand();
+		p.getScore(table);
+	}
 
+	@Test
+	public void testThreeOfaKind() {
+		Player p = new Player("lennart");
+		deck = new Deck();
+		deck.shuffle();
+		p.add(new Card(5, Kleur.KLAVEREN));
+		p.add(new Card(5, Kleur.RUITEN));
+		table.add(new Card(5, Kleur.KLAVEREN));
+		table.add(new Card(9, Kleur.KLAVEREN));
+		table.add(new Card(9, Kleur.SCHOPPEN));
+		table.add(new Card(9, Kleur.HARTEN));
+		table.add(new Card(9, Kleur.KLAVEREN));
+		p.printHand();
+		table.printHand();
+		p.getScore(table);
+	}
+	
+	
+	@Test
+	public void testPair() {
+		Player p = new Player("lennart");
+		deck = new Deck();
+		deck.shuffle();
+		p.add(new Card(7, Kleur.KLAVEREN));
+		p.add(new Card(5, Kleur.RUITEN));
+		table.add(new Card(3, Kleur.KLAVEREN));
+		table.add(new Card(9, Kleur.KLAVEREN));
+		table.add(new Card(11, Kleur.SCHOPPEN));
+		table.add(new Card(10, Kleur.HARTEN));
+		table.add(new Card(1, Kleur.KLAVEREN));
+		p.printHand();
+		table.printHand();
+		p.getScore(table);
+	}
+	
 }
+
+
+

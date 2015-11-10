@@ -32,7 +32,7 @@ public class Player extends HandHolder{
 	
 	public boolean getScore(HandHolder table){
 		//combineer eigen hand en tafel
-		List<Card> combine = new ArrayList<Card>();
+		ArrayList<Card> combine = new ArrayList<Card>();
 		combine.addAll(table.getHand());
 		combine.addAll(getHand());
 		
@@ -54,6 +54,9 @@ public class Player extends HandHolder{
 		System.out.println("Has StraightFlush:"+ (hasStraightFlush(combine) != -1));
 		System.out.println("Has Flush:"+ (hasFlush(combine) != -1));
 		System.out.println("Has Straight:"+ (hasStraight(combine) != -1));
+		System.out.println("Has 4 of a kind:"+ (hasFourOfaKind(combine) != -1));
+		System.out.println("Has 3 of a kind:" + (hasThreeOfaKind(combine) != -1));
+		System.out.println("Has pair:" + (hasPair(combine) != -1));
 		
 		return true;
 	}
@@ -66,51 +69,71 @@ public class Player extends HandHolder{
 			return 1;
 		return -1;
 		
-		
-		
-		
-		
-//		List<Card> clubsRoyalFlush = new ArrayList<Card>();
-//		List<Card> spadesRoyalFlush = new ArrayList<Card>();
-//		List<Card> diamondsRoyalFlush = new ArrayList<Card>();
-//		List<Card> heartsRoyalFlush = new ArrayList<Card>();
-//		
-//		clubsRoyalFlush.add(new Card(1, Kleur.KLAVEREN));
-//		clubsRoyalFlush.add(new Card(10, Kleur.KLAVEREN));
-//		clubsRoyalFlush.add(new Card(11, Kleur.KLAVEREN));
-//		clubsRoyalFlush.add(new Card(12, Kleur.KLAVEREN));
-//		clubsRoyalFlush.add(new Card(13, Kleur.KLAVEREN));
-//		
-//		spadesRoyalFlush.add(new Card(1, Kleur.SCHOPPEN));
-//		spadesRoyalFlush.add(new Card(10, Kleur.SCHOPPEN));
-//		spadesRoyalFlush.add(new Card(11, Kleur.SCHOPPEN));
-//		spadesRoyalFlush.add(new Card(12, Kleur.SCHOPPEN));
-//		spadesRoyalFlush.add(new Card(13, Kleur.SCHOPPEN));
-//		
-//		diamondsRoyalFlush.add(new Card(1, Kleur.RUITEN));
-//		diamondsRoyalFlush.add(new Card(10, Kleur.RUITEN));
-//		diamondsRoyalFlush.add(new Card(11, Kleur.RUITEN));
-//		diamondsRoyalFlush.add(new Card(12, Kleur.RUITEN));
-//		diamondsRoyalFlush.add(new Card(13, Kleur.RUITEN));
-//		
-//		heartsRoyalFlush.add(new Card(1, Kleur.HARTEN));
-//		heartsRoyalFlush.add(new Card(10, Kleur.HARTEN));
-//		heartsRoyalFlush.add(new Card(11, Kleur.HARTEN));
-//		heartsRoyalFlush.add(new Card(12, Kleur.HARTEN));
-//		heartsRoyalFlush.add(new Card(13, Kleur.HARTEN));
-//		
-//		
-//		if (combine.containsAll(clubsRoyalFlush)) 
-//			return true;
-//		if (combine.containsAll(spadesRoyalFlush))
-//			return true;
-//		if (combine.containsAll(diamondsRoyalFlush))
-//			return true;
-//		if (combine.containsAll(heartsRoyalFlush))
-//			return true;
-//		
-//		return false;
+
 	}
+	
+	public int hasFourOfaKind(List<Card> combine) {
+		int teller = 1;
+		int getWaarde = 0;
+		// loop door de lijst en zie of er 4 kaarten van dezelfde waarde inzitten
+		for(int k = 0; k < combine.size()-1; k++) {
+			if(combine.get(k).getGetal() == combine.get(k+1).getGetal()) {
+				teller ++;
+				getWaarde = combine.get(k).getGetal();
+			}
+			else
+				teller = 1;
+			if(teller == 4)
+				return getWaarde;
+			}
+		return -1;
+	}
+	
+	public int hasThreeOfaKind(List<Card> combine) {
+		int teller = 1;
+		int getWaarde = 0;
+		// loop door de lijst en zie of er 3 kaarten van dezelfde waarde inzitten
+		for(int k = 0; k < combine.size()-1; k++) {
+			if(combine.get(k).getGetal() == combine.get(k+1).getGetal()) {
+				teller ++;
+				getWaarde = combine.get(k).getGetal();
+			}
+			else
+				teller = 1;
+			if(teller == 3)
+				return getWaarde;
+			}
+		return -1;
+	}
+	
+	public int hasPair(List<Card> combine) {
+		int teller = 1;
+		int getWaarde = 0;
+		// loop door de lijst en zie of er 2 kaarten van dezelfde waarde inzitten
+		for(int k = 0; k < combine.size()-1; k++) {
+			if(combine.get(k).getGetal() == combine.get(k+1).getGetal()) {
+				return getWaarde;
+			}
+		}
+		return -1;
+	}
+	
+//	public int hasTwoPair(List<Card> combine) {
+//		
+//		if(hasThreeOfaKind(combine) == -1)
+//		
+//		
+//		
+//		
+//	
+//		
+//		
+//		return -1;
+//	}
+	
+
+	
+	
 	
 	public int hasFlush(List<Card> combine){
 		
@@ -130,7 +153,9 @@ public class Player extends HandHolder{
 	}
 	
 	
-	public int hasStraight(List<Card> combine){
+	@SuppressWarnings("unchecked")
+	public int hasStraight(ArrayList<Card> cards){
+		ArrayList<Card> combine = (ArrayList<Card>) cards.clone();
 		//verwijder 'dubbele getallen' in combine
 		for(int i = 0; i < (combine.size()-1); i++) {
 			if (combine.get(i).getGetal()==combine.get(i+1).getGetal())
@@ -168,19 +193,19 @@ public class Player extends HandHolder{
 	
 	public int hasStraightFlush(List<Card> combine){
 		//dit kan korter, maar nog ff zo voor lennarts duidelijkheid
-		List<Card> harten = returnAllOneColor(Kleur.HARTEN,combine);
+		ArrayList<Card> harten = returnAllOneColor(Kleur.HARTEN,combine);
 		if(hasStraight(harten) != -1)
 			return hasStraight(harten);
 		
-		List<Card> klaveren = returnAllOneColor(Kleur.KLAVEREN,combine);
+		ArrayList<Card> klaveren = returnAllOneColor(Kleur.KLAVEREN,combine);
 		if(hasStraight(klaveren) != -1)
 			return hasStraight(klaveren);
 
-		List<Card> schoppen = returnAllOneColor(Kleur.SCHOPPEN,combine);
+		ArrayList<Card> schoppen = returnAllOneColor(Kleur.SCHOPPEN,combine);
 		if(hasStraight(schoppen) != -1)
 			return hasStraight(schoppen);
 		
-		List<Card> ruiten = returnAllOneColor(Kleur.RUITEN,combine);
+		ArrayList<Card> ruiten = returnAllOneColor(Kleur.RUITEN,combine);
 		if(hasStraight(ruiten) != -1)
 			return hasStraight(ruiten);
 		
@@ -188,8 +213,8 @@ public class Player extends HandHolder{
 		
 	}
 	
-	public List<Card> returnAllOneColor(Kleur k, List<Card> hand){
-		List<Card> kleur = new ArrayList<Card>();
+	public ArrayList<Card> returnAllOneColor(Kleur k, List<Card> hand){
+		ArrayList<Card> kleur = new ArrayList<Card>();
 		for (Card c : hand){
 			if(c.getKleur() == k)
 				kleur.add(c);
