@@ -12,7 +12,7 @@ import general.Kleur;
 
 public class Player extends HandHolder{
 
-	private boolean stand;
+	private double stack = 100;
 	
 	public Player(String name) {
 		super(name);	
@@ -20,14 +20,8 @@ public class Player extends HandHolder{
 	
 	@Override
 	public boolean ask(Deck deck){
-		if (stand==true)
-			return false;
 		getHand().add(deck.draw());
 		return true;
-	}
-	
-	public void stand(){
-		stand = true;
 	}
 	
 	public int getScore(HandHolder table){
@@ -84,6 +78,28 @@ public class Player extends HandHolder{
 		
 
 	}
+	
+	
+	public void check(){
+		
+	}
+	
+	public void bet(){
+		stack -= 5;	
+	}
+	
+	public void call(){
+		stack -= 5;
+	}
+	
+	public void raise(){
+		stack -= 10;
+	}
+	
+	public void fold(){
+		
+	}
+	
 
 	public int hasRoyalFlush(ArrayList<Card> combine){
 		if(hasStraightFlush(combine) == 1)
