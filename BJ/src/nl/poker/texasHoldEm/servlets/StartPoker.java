@@ -30,7 +30,7 @@ public class StartPoker extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		new Game();
+		new Game(null);
 		getServletContext().getRequestDispatcher("/StartPage.jsp").forward(request, response);	
 		
 		

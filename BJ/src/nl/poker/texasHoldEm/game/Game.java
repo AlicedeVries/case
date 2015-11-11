@@ -59,4 +59,8 @@ public class Game  {
 		else
 			return false;
 	}
+	
+	public List<Card> getTable(HandHolder table) {
+		return table.getHand();
+	}
 }

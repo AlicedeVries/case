@@ -17,10 +17,17 @@
 			</td>
 			</c:forEach>
 		</tr>
-		<c:forEach items="${players}" var="player">
+		<c:forEach items="${players}" var="p">
 		<tr> 
-				<td> <h4> ${player.name} 's hand:</h4></td> 
-			<c:forEach items="${player.hand}" var="card">
+			<td> 
+			<c:if test="${p.name!=player.name}">
+				<h4> ${p.name} 's hand:</h4> 
+			</c:if>
+			<c:if test="${p.name==player.name}">
+				<h4> Your hand:</h4> 
+			</c:if>		
+			</td>
+			<c:forEach items="${p.hand}" var="card">
 			<td>
 			<img src="<c:url value="${card.image}" />" height="122" width="84"alt="${card.waarde} ${card.kleur}">			
 			</td>
