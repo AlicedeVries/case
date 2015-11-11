@@ -9,10 +9,9 @@
 </head>
 <body>
 <h1 style="color:#f67f00">Welcome to Blackjack Online</h1>
-<c:import url="/Display.jsp"></c:import>
+<c:import url="/BlackJack/Display.jsp"></c:import>
 <h2>${msg}</h2>  
 <c:if test="${game.hasFinished!=false}">
-	<h2>GAME HAS FINISHED</h2>
 	<table>
 	<tr>
 		<td>
@@ -22,7 +21,7 @@
 		</td>
 		<td>
 		<form method="post" action="/BJ/Start">
-			<input type="submit" value="Logout" style="width: 75px; color: #000000; height: 40px; font-size: 14px; font-weight: normal">
+			<input type="submit" name="logout" value="Logout" style="width: 75px; color: #000000; height: 40px; font-size: 14px; font-weight: normal">
 		</form>
 		</td>
 	</tr>

@@ -79,7 +79,7 @@ public class Game {
 	
 	public boolean isFinished(){
 		for (Player p: players){
-			if (!p.isStanding()){
+			if (!p.getStand()){
 				System.out.println(p.getName());
 				return false;
 			}

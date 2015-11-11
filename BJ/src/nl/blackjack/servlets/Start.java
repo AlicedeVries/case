@@ -45,10 +45,13 @@ public class Start extends HttpServlet {
 		ServletContext context = getServletContext();
 		String name = (String) request.getParameter("name");
 		if (name==null || name==""){
-			context.getRequestDispatcher("/StartPage.jsp").forward(request, response);	
+			context.getRequestDispatcher("/BlackJack/StartPage.jsp").forward(request, response);	
 		}
 		else{
 			HttpSession session = request.getSession(true);
+			if (request.getParameter("logout")!=null){
+				session.setAttribute("player", null);
+			}
 			session.setMaxInactiveInterval(600);
 			session.setAttribute("name", name);
 			context.getRequestDispatcher("/Wait").forward(request, response);	

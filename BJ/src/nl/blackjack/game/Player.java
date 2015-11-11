@@ -19,14 +19,6 @@ public class Player extends HandHolder{
 		super.getHand().add(deck.draw());
 		return true;
 	}
-	
-	public void stand(){
-		stand = true;
-	}
-
-	public boolean isStanding(){
-		return stand;
-	}
 
 	public int getScore(){
 		int sum=0;
@@ -44,6 +36,16 @@ public class Player extends HandHolder{
 		}
 		return sum;
 	}
+
+	public void setStand(boolean b) {
+		stand = b;		
+	}
+	
+	public boolean getStand(){
+		return stand;
+	}
+
+
 	
 }
 

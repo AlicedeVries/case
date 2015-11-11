@@ -48,24 +48,26 @@ public class Hit extends HttpServlet {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
 		if (session==null){
-			getServletContext().getRequestDispatcher("/Start.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/Start").forward(request, response);
 		}
-		Player p = (Player) session.getAttribute("player");
-		if (p==null)
-			System.out.println("geen player");
-		Game game = (Game) context.getAttribute("game");
-		if (game==null)
-			System.out.println("geen game");
-		
-		game.drawCard(p);
-		
-		if (!game.hasValidScore(p)){
-			p.stand();
-			request.setAttribute("msg", "You lost! You went bust!!");
-			getServletContext().getRequestDispatcher("/Stand").forward(request, response);			
+		else{			
+			Player p = (Player) session.getAttribute("player");
+			if (p==null)
+				System.out.println("geen player");
+			Game game = (Game) context.getAttribute("game");
+			if (game==null)
+				System.out.println("geen game");
+			
+			game.drawCard(p);
+			
+			if (!game.hasValidScore(p)){
+				p.setStand(true);
+				session.setAttribute("msg", "You lost! You went bust!!");
+				getServletContext().getRequestDispatcher("/Stand").forward(request, response);			
+			}
+			else
+				getServletContext().getRequestDispatcher("/BlackJack/Game.jsp").forward(request, response);
 		}
-		else
-			getServletContext().getRequestDispatcher("/Game.jsp").forward(request, response);
 	}
 
 }

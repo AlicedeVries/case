@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1 style="color:#f67f00">Welcome to Blackjack Online</h1>
-	<c:import url="/Display.jsp"></c:import>
+	<c:import url="/BlackJack/Display.jsp"></c:import>
 	<table>
 	<tr>
 		<td>

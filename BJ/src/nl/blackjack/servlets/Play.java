@@ -69,11 +69,11 @@ public class Play extends HttpServlet {
 		}
 		else { 
 			if (game.hasBlackjack(p)){
-				request.setAttribute("msg", "You won! You have blackjack!!");
+				session.setAttribute("msg", "You won! You have blackjack!!");
 				getServletContext().getRequestDispatcher("/Stand").forward(request, response);
 			}
 			else
-				getServletContext().getRequestDispatcher("/Game.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/BlackJack/Game.jsp").forward(request, response);
 		}
 	}
 

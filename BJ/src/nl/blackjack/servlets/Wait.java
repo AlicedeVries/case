@@ -22,6 +22,11 @@ import nl.blackjack.game.Player;
 @WebServlet("/Wait")
 public class Wait extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private static int WAIT_TIME_FOR_NEW_GAME = 30*1000;
+	private static int MAX_TIME_FOR_GAME = 300*1000;
+	private static int MAX_TIME_AFTER_GAME = 20*1000;
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -64,26 +69,26 @@ public class Wait extends HttpServlet {
 			}
 			
 			if (context.getAttribute("game") == null){
-				System.out.println("game is null");
-				List<Player> players = null;
+//				System.out.println("game is null");
 	
 				if (context.getAttribute("timer")==null){
-					System.out.println("timer is null");
-					players = new ArrayList<Player>();		
+//					System.out.println("timer is null");
+					List<Player> players = new ArrayList<Player>();		
 					players.add(p);						
 					context.setAttribute("timer", System.currentTimeMillis());
 					context.setAttribute("nextPlayers",players);
-					context.getRequestDispatcher("/Wait.jsp").forward(request, response);	
+					context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);	
 				}
 				else{
-					players = (List<Player>) context.getAttribute("nextPlayers");
+					List<Player> players = (List<Player>) context.getAttribute("nextPlayers");
 					if (!players.contains(p)){
+//						System.out.println("other players are waiting");
 						players.add(p);						
 						context.setAttribute("nextPlayers",players);
 					}
 									
-					if (System.currentTimeMillis()- (long) context.getAttribute("timer") >= 60000){
-						
+					if (System.currentTimeMillis()- (long) context.getAttribute("timer") >= WAIT_TIME_FOR_NEW_GAME){
+//						System.out.println("wait is over"+ players.size());						
 						Game game = new Game(players);
 						context.setAttribute("game", game);
 						context.setAttribute("timer", null);
@@ -91,34 +96,46 @@ public class Wait extends HttpServlet {
 						context.setAttribute("nextPlayers",null);
 						context.getRequestDispatcher("/Play").forward(request, response);
 					}
-					else
-						context.getRequestDispatcher("/Wait.jsp").forward(request, response);
+					else{
+//						System.out.println("player is waiting");
+						context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);
+					}
 				}
 			}
 			else {
-				System.out.println("game exists");
+//				System.out.println("game exists");
 				Game game = (Game) context.getAttribute("game");
 				if (game.getHasFinished()){
-					System.out.println("game finished");
+//					System.out.println("game finished");
 					p.clearHand();
-					if (System.currentTimeMillis()- game.endTime>= 30000){
-						System.out.println("game ended long time ago");
+					p.setStand(false);
+					if (System.currentTimeMillis()- game.endTime>= MAX_TIME_AFTER_GAME){
+//						System.out.println("game ended long time ago");
 						context.setAttribute("game", null);
+						context.setAttribute("timer", System.currentTimeMillis()-WAIT_TIME_FOR_NEW_GAME);
+						List<Player>players = new ArrayList<Player>();		
+						players.add(p);						
+						context.setAttribute("nextPlayers",players);
 					}					
-					context.getRequestDispatcher("/Wait.jsp").forward(request, response);	
+					context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);	
 				}
-				else if (System.currentTimeMillis()- game.startTime>= 300000){
-					System.out.println("game started long time ago");
+				else if (System.currentTimeMillis()- game.startTime>= MAX_TIME_FOR_GAME){
+//					System.out.println("game started long time ago");
 					context.setAttribute("game", null);
-					context.getRequestDispatcher("/Wait.jsp").forward(request, response);	
+					context.setAttribute("game", null);
+					context.setAttribute("timer", System.currentTimeMillis()-WAIT_TIME_FOR_NEW_GAME);
+					List<Player>players = new ArrayList<Player>();		
+					players.add(p);						
+					context.setAttribute("nextPlayers",players);
+					context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);	
 				}
 				else{
 					List<Player> players = (List<Player>) context.getAttribute("players");
 					if (players.contains(p)){
-						System.out.println("player of game");
+//						System.out.println("player of game");
 						context.getRequestDispatcher("/Play").forward(request, response);	
 					}
-					context.getRequestDispatcher("/Wait.jsp").forward(request, response);						
+					context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);						
 				}
 			}
 		}
