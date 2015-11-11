@@ -13,8 +13,9 @@ import general.Kleur;
 public class Game  {
 	
 	private Deck deck;
-	private Card stack;
+	private Card bovensteKaart;
 	private HandHolder table = new Player("table");
+	private double potSize = 0;
 
 	public Game(List<Player> players) {
 		deck = new Deck();
@@ -26,7 +27,7 @@ public class Game  {
 		for (Player p : players){
 			p.ask(deck);			
 		}
-		stack = new Card(0, Kleur.SECRET);
+		bovensteKaart = new Card(0, Kleur.SECRET);
 	}
 	
 	public void flop(){ 
@@ -66,7 +67,17 @@ public class Game  {
 		return table.getHand();
 	}
 	
-	public Card getStack() {
-		return stack;
+	public Card getBovensteKaart() {
+		return bovensteKaart;
 	}
+	
+	public double getPotSize() {
+		return potSize;
+	}
+	
+	public void bet(Player p){
+		p.bet();
+		potSize+=5;
+	}
+	
 }
