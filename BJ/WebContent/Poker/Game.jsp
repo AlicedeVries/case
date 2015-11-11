@@ -13,7 +13,7 @@
 	<table>
 	<tr>
 		<td>
-		<form method="post" action="/Poker/Check">
+		<form method="post" action="/BJ/Check">
 			<input type="submit" value="Check" style="width: 90px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
 		</form>
 		</td>
