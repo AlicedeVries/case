@@ -15,26 +15,6 @@ public class Game  {
 	private Deck deck;
 	private HandHolder table = new Player("table");
 
-	
-	public Game() {
-		Player p = new Player("lennart");
-		deck = new Deck();
-		deck.shuffle();
-		p.add(new Card(7, Kleur.RUITEN));
-		p.add(new Card(7, Kleur.KLAVEREN));
-		table.add(new Card(7, Kleur.SCHOPPEN));
-		table.add(new Card(7, Kleur.HARTEN));
-		table.add(new Card(5, Kleur.KLAVEREN));
-		p.printHand();
-//		flop();
-		turn();
-		river();
-		table.printHand();
-		p.getScore(table);
-	
-		
-	}
-
 	public Game(List<Player> players) {
 		deck = new Deck();
 		deck.shuffle();
@@ -64,6 +44,11 @@ public class Game  {
 		table.ask(deck);
 	}
 
-	
-	
+	public Player winnerOfHand(Player p1, Player p2) {
+		if(p1.getScore(table) > p2.getScore(table))
+			return p1;
+		if(p1.getScore(table) < p2.getScore(table))
+			return p2;
+		return null;
+	}	
 }
