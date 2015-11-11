@@ -30,7 +30,7 @@ public class Player extends HandHolder{
 		stand = true;
 	}
 	
-	public boolean getScore(HandHolder table){
+	public int getScore(HandHolder table){
 		//combineer eigen hand en tafel
 		ArrayList<Card> combine = new ArrayList<Card>();
 		combine.addAll(table.getHand());
@@ -39,17 +39,50 @@ public class Player extends HandHolder{
 		//sorteer deze lijst van hoog naar laag
 		Collections.sort(combine,new CardComparator());
 		
-		System.out.println("Has RoyalFlush:"+ (hasRoyalFlush(combine) != -1));
-		System.out.println("Has StraightFlush:"+ (hasStraightFlush(combine) != -1));
-		System.out.println("Has Flush:"+ (hasFlush(combine) != -1));
-		System.out.println("Has Straight:"+ (hasStraight(combine) != -1));
-		System.out.println("Has 4 of a kind:"+ (hasFourOfaKind(combine) != -1));
-		System.out.println("Has 3 of a kind:" + (hasThreeOfaKind(combine) != -1));
-		System.out.println("Has pair:" + (hasPair(combine) != -1));
-		System.out.println("Has Full House:" + (hasFullHouse(combine) != -1));
-		System.out.println("Has Two Pair:" + (hasTwoPair(combine) != -1));
+
+		if(hasRoyalFlush(combine) != -1)
+			return 1000;
 		
-		return true;
+		if(hasStraightFlush(combine) != -1)
+			return (900 + hasStraightFlush(combine));
+		
+		if(hasFourOfaKind(combine) != -1)
+			return (800 + hasFourOfaKind(combine));
+		
+		if(hasFullHouse(combine) != -1)
+			return (700 + hasFullHouse(combine));
+		
+		if(hasFlush(combine) != -1)
+			return (600 + hasFlush(combine));
+		
+		if(hasStraight(combine) != -1)
+			return (500 + hasStraight(combine));
+		
+		if(hasThreeOfaKind(combine) != -1)
+			return (400 + hasThreeOfaKind(combine));
+		
+		if(hasTwoPair(combine) != -1)
+			return (300 + hasTwoPair(combine));
+		
+		if(hasPair(combine) != -1)
+			return (200 + hasPair(combine));
+		
+		else
+			return 100 + hasHighCard(combine);
+		
+		
+//		System.out.println("Has RoyalFlush:"+ (hasRoyalFlush(combine) != -1));
+//		System.out.println("Has StraightFlush:"+ (hasStraightFlush(combine) != -1));
+//		System.out.println("Has Flush:"+ (hasFlush(combine) != -1));
+//		System.out.println("Has Straight:"+ (hasStraight(combine) != -1));
+//		System.out.println("Has 4 of a kind:"+ (hasFourOfaKind(combine) != -1));
+//		System.out.println("Has 3 of a kind:" + (hasThreeOfaKind(combine) != -1));
+//		System.out.println("Has pair:" + (hasPair(combine) != -1));
+//		System.out.println("Has Full House:" + (hasFullHouse(combine) != -1));
+//		System.out.println("Has Two Pair:" + (hasTwoPair(combine) != -1));
+//		System.out.println("Has High Card" + (hasHighCard(combine)));
+		
+
 	}
 
 	public int hasRoyalFlush(ArrayList<Card> combine){
@@ -258,6 +291,20 @@ public class Player extends HandHolder{
 		}
 		return kleur;		
 	}
+	
+	public int hasHighCard(ArrayList<Card> combine){
+		int x = combine.size() - 1;
+		//Indien er een Aas in het spel zit pak dan deze
+		if(combine.get(x).getGetal() == 1)
+			// + 13 om de Aas een waarde van 14 (de hoogste waarde) te geven
+			return (combine.get(x).getGetal() + 13);
+		//Als er geen Aas in het spel zit
+		else
+			return combine.get(0).getGetal();
+		}
 }
+	
+	
+
 
 
