@@ -51,7 +51,7 @@ public class Start extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setMaxInactiveInterval(600);
 			session.setAttribute("name", name);
-			context.getRequestDispatcher("/Play").forward(request, response);	
+			context.getRequestDispatcher("/Wait").forward(request, response);	
 		}
 		
 		

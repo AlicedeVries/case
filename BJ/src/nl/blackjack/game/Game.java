@@ -9,8 +9,12 @@ public class Game {
 	
 	private Deck deck;
 	private Dealer dealer;
+	private List<Player> players;
+	public long startTime;
+	public long endTime = -1;
 
 	public Game(List<Player> players) {
+		this.players=players;
 		dealer = new Dealer("Deler");
 		deck = new Deck();
 		deck.shuffle();
@@ -23,6 +27,7 @@ public class Game {
 			p.ask(deck);			
 		}
 		dealer.ask(deck);
+		startTime = System.currentTimeMillis();
 	}
 	
 	public List<Card> getDealerHand(){
@@ -50,6 +55,7 @@ public class Game {
 	public boolean hasBlackjack (Player p){
 		return (p.getScore()==21);
 	}
+	
 
 	public boolean dealerHasBlackjack (){
 		return (dealer.getScore()==21 && dealer.getHand().size()==2);
@@ -66,4 +72,22 @@ public class Game {
 	public boolean dealerPlayerDraw(Player p) {
 		return ( p.getScore()==dealer.getScore() );
 	}
+	
+	public boolean getHasFinished (){
+		return endTime != -1;
+	}
+	
+	public boolean isFinished(){
+		for (Player p: players){
+			if (!p.isStanding()){
+				System.out.println(p.getName());
+				return false;
+			}
+		}
+		if (!dealer.hasVisibleHand())
+			playDealer();
+		endTime = System.currentTimeMillis();
+		return true;
+	}
 }
+

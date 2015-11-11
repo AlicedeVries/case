@@ -48,32 +48,41 @@ public class Stand extends HttpServlet {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
 		if (session==null){
-			getServletContext().getRequestDispatcher("/Start.jsp").forward(request, response);
+			context.getRequestDispatcher("/Start").forward(request, response);
 		}
-		Player p1 = (Player) session.getAttribute("player");
-		if (p1==null)
-			System.out.println("geen player");
-		Game game = (Game) context.getAttribute("game");
-		if (game==null)
-			System.out.println("geen game");
-		game.playDealer();
-		
-		if (game.dealerHasBlackjack()){
-			request.setAttribute("msg", "Dealer has blackjack");
-			getServletContext().getRequestDispatcher("/Lost.jsp").forward(request, response);			
+		else{
+			Player p1 = (Player) session.getAttribute("player");
+			Game game = (Game) context.getAttribute("game");
+			if (p1==null|| game==null)
+				context.getRequestDispatcher("/Start").forward(request, response);
+			else{		
+				p1.stand();
+				if(game.isFinished()){
+					if (game.dealerHasBlackjack()){
+						System.out.println("dealer blackjack");
+						session.setAttribute("msg", "You lost! Dealer has blackjack");
+					}
+					else if (!game.dealerHasValidScore()){
+						System.out.println("dealer bust");
+						session.setAttribute("msg", "You won! Dealer went bust");
+					}
+					else if (game.dealerBeatsPlayer(p1)){
+						System.out.println("dealer beats " +p1.getName());
+						session.setAttribute("msg", "You lost!");
+					}
+					else if (game.dealerPlayerDraw(p1)){
+						System.out.println("draw");
+						session.setAttribute("msg", "You have a draw with Dealer!");
+					}
+					else{
+						System.out.println(p1.getName()+"beats dealer");
+						session.setAttribute("msg", "You won!");
+						
+					}
+				}
+				getServletContext().getRequestDispatcher("/Stand.jsp").forward(request, response);
+			}
 		}
-		else if (!game.dealerHasValidScore()){
-			request.setAttribute("msg", "Dealer went bust");
-			getServletContext().getRequestDispatcher("/Won.jsp").forward(request, response);			
-		}
-		else if (game.dealerBeatsPlayer(p1)){
-			getServletContext().getRequestDispatcher("/Lost.jsp").forward(request, response);			
-		}
-		else if (game.dealerPlayerDraw(p1)){
-			getServletContext().getRequestDispatcher("/Draw.jsp").forward(request, response);			
-		}
-		else
-			getServletContext().getRequestDispatcher("/Won.jsp").forward(request, response);
 	}
 
 }

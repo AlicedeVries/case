@@ -53,45 +53,28 @@ public class Play extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
-
+		
 		if (session==null){
-			getServletContext().getRequestDispatcher("/Start.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/Start").forward(request, response);
 		}
 		
-		List<Player> players= (List<Player>) context.getAttribute("players");		
-		
-		if ( players == null || players.size()==0){
-			players= new ArrayList<Player>();		
-		}
-		
-		Player p = (Player) session.getAttribute("player");
-
-		if (p==null){
-				p = new Player((String) session.getAttribute("name"));
-				session.setAttribute("player", p);
-		}
-		
-		if (!players.contains(p)){
-			players.add(p);						
-		}
-		
-		context.setAttribute("players",players);
-		
+//		getServletContext().getRequestDispatcher("/Game.jsp").forward(request, response);
+//		List<Player> players = (List<Player>) context.getAttribute("nextPlayers");
+//		
 		Game game = (Game) context.getAttribute("game");
+		Player p = (Player) session.getAttribute("player");
 		
 		if (game==null){
-			game = new Game(players);
-			context.setAttribute("game", game);
+			getServletContext().getRequestDispatcher("/Wait").forward(request, response);
+		}
+		else { 
 			if (game.hasBlackjack(p)){
-				request.setAttribute("msg", "You have blackjack");
-				getServletContext().getRequestDispatcher("/Won.jsp").forward(request, response);
+				request.setAttribute("msg", "You won! You have blackjack!!");
+				getServletContext().getRequestDispatcher("/Stand").forward(request, response);
 			}
 			else
 				getServletContext().getRequestDispatcher("/Game.jsp").forward(request, response);
 		}
-		
-		else
-			getServletContext().getRequestDispatcher("/Game.jsp").forward(request, response);
 	}
 
 }
