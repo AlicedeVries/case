@@ -42,7 +42,7 @@ public class StartPoker extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setMaxInactiveInterval(600);
 			session.setAttribute("name", name);
-			context.getRequestDispatcher("/Wait").forward(request, response);	
+			context.getRequestDispatcher("/PlayPoker").forward(request, response);	
 		}
 
 		

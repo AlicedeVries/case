@@ -13,6 +13,7 @@ import general.Kleur;
 public class Game  {
 	
 	private Deck deck;
+	private Card stack;
 	private HandHolder table = new Player("table");
 
 	public Game(List<Player> players) {
@@ -25,6 +26,7 @@ public class Game  {
 		for (Player p : players){
 			p.ask(deck);			
 		}
+		stack = new Card(0, Kleur.SECRET);
 	}
 	
 	public void flop(){ 
@@ -60,7 +62,11 @@ public class Game  {
 			return false;
 	}
 	
-	public List<Card> getTable(HandHolder table) {
+	public List<Card> getTable() {
 		return table.getHand();
+	}
+	
+	public Card getStack() {
+		return stack;
 	}
 }
