@@ -6,7 +6,7 @@ import general.HandHolder;
 
 public class Player extends HandHolder{
 
-	private boolean stand;
+	private boolean stand = false;
 	
 	public Player(String name) {
 		super(name);	
@@ -16,14 +16,18 @@ public class Player extends HandHolder{
 	public boolean ask(Deck deck){
 		if (stand==true)
 			return false;
-		getHand().add(deck.draw());
+		super.getHand().add(deck.draw());
 		return true;
 	}
 	
 	public void stand(){
 		stand = true;
 	}
-	
+
+	public boolean isStanding(){
+		return stand;
+	}
+
 	public int getScore(){
 		int sum=0;
 		int azen  = 0;

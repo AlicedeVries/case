@@ -56,12 +56,13 @@ public class Hit extends HttpServlet {
 		Game game = (Game) context.getAttribute("game");
 		if (game==null)
 			System.out.println("geen game");
+		
 		game.drawCard(p);
 		
 		if (!game.hasValidScore(p)){
-			game.dealerHandVisible(true);
-			request.setAttribute("msg", "You went bust");
-			getServletContext().getRequestDispatcher("/Lost.jsp").forward(request, response);			
+			p.stand();
+			request.setAttribute("msg", "You lost! You went bust!!");
+			getServletContext().getRequestDispatcher("/Stand").forward(request, response);			
 		}
 		else
 			getServletContext().getRequestDispatcher("/Game.jsp").forward(request, response);

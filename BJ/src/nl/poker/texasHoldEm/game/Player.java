@@ -305,6 +305,3 @@ public class Player extends HandHolder{
 }
 	
 	
-
-
-

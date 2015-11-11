@@ -10,7 +10,7 @@ public class Dealer extends Player {
 	
 	private boolean visibleHand=false;
 
-	public boolean isVisibleHand() {
+	public boolean hasVisibleHand() {
 		return visibleHand;
 	}
 
