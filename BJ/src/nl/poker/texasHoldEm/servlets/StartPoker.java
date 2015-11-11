@@ -1,52 +1,3 @@
-<<<<<<< HEAD
-package nl.poker.texasHoldEm.servlets;
-
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import nl.poker.texasHoldEm.game.Game;
-
-/**
- * Servlet implementation class StartPoker
- */
-@WebServlet("/StartPoker")
-public class StartPoker extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public StartPoker() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		new Game(null);
-		getServletContext().getRequestDispatcher("/StartPage.jsp").forward(request, response);	
-		
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
-}
-=======
 package nl.poker.texasHoldEm.servlets;
 
 import java.io.IOException;
@@ -110,4 +61,3 @@ public class StartPoker extends HttpServlet {
 	}
 
 }
->>>>>>> 760fdb9f96561f2483b2ddfe282e1636ff3496f7
