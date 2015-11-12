@@ -78,6 +78,10 @@ public class Game {
 		return endTime != -1;
 	}
 	
+	public int getDealerScore(){
+		return dealer.getScore();
+	}
+	
 	public boolean isFinished(){
 		for (Player p: players){
 			if (!p.getStand())

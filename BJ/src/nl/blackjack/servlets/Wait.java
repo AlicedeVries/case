@@ -54,15 +54,16 @@ public class Wait extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
-		Game game = (Game) context.getAttribute("game");
+		Game game = (Game)context.getAttribute("BJgame");
 
 		if (session==null){
-			context.getRequestDispatcher("/Start").forward(request, response);
+			context.getRequestDispatcher("/Blackjack/Start").forward(request, response);
 		}
 		
 		else if (game!= null){
 		//if a game already exists
 			if (game.getHasFinished()){
+				System.out.println("has finished");
 			//if game has finished
 				addToWaitingPlayerList(getPlayer(session));
 				if (System.currentTimeMillis()- game.endTime>= MAX_TIME_AFTER_GAME)
@@ -73,10 +74,12 @@ public class Wait extends HttpServlet {
 			}
 			else{
 			//if game is still going
+				System.out.println("still going");
 				if (game.getPlayers().contains(getPlayer(session)))
 				//if player is in game
 					forwardToGame(request, response);
 				else {
+					System.out.println("not in game");
 					addToWaitingPlayerList(getPlayer(session));
 					if (System.currentTimeMillis()-game.startTime >= MAX_TIME_FOR_GAME)
 					//if game has lasted to long
@@ -88,6 +91,7 @@ public class Wait extends HttpServlet {
 		} 
 		else{
 		//if no game exists yet
+			System.out.println("no game");
 			addToWaitingPlayerList(getPlayer(session));
 			if (context.getAttribute("timer")==null){ 
 			//if there is no wait timer: start wait timer
@@ -131,8 +135,8 @@ public class Wait extends HttpServlet {
 		List<Player> players = (List<Player>) context.getAttribute("waitingPlayers");
 		Game game = new Game(players);
 		context.setAttribute("nextPlayers",null);
-		context.setAttribute("game",game);
-		context.getRequestDispatcher("/Play").forward(request, response);					
+		context.setAttribute("BJgame",game);
+		context.getRequestDispatcher("/Blackjack/Play").forward(request, response);					
 	}
 	
 	private void waitSomeMore(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -142,6 +146,6 @@ public class Wait extends HttpServlet {
 
 	private void forwardToGame(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
-		context.getRequestDispatcher("/Play").forward(request, response);					
+		context.getRequestDispatcher("/Blackjack/Play").forward(request, response);	 //TODO
 	}
 }

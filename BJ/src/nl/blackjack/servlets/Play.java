@@ -50,22 +50,22 @@ public class Play extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		
 		if (session==null){
-			getServletContext().getRequestDispatcher("/Start").forward(request, response);
+			getServletContext().getRequestDispatcher("/Blackjack/Start").forward(request, response);
 		}
 		
 //		getServletContext().getRequestDispatcher("/Game.jsp").forward(request, response);
 //		List<Player> players = (List<Player>) context.getAttribute("nextPlayers");
 //		
-		Game game = (Game) context.getAttribute("game");
+		Game game = (Game) context.getAttribute("BJgame");
 		Player p = (Player) session.getAttribute("player");
 		
 		if (game==null){
-			getServletContext().getRequestDispatcher("/Wait").forward(request, response);
+			getServletContext().getRequestDispatcher("/Blackjack/Wait").forward(request, response);  //////TODO  
 		}
 		else { 
 			if (game.hasBlackjack(p)){
 				request.setAttribute("msg", "You won! You have blackjack!!");
-				getServletContext().getRequestDispatcher("/Stand").forward(request, response);
+				getServletContext().getRequestDispatcher("/Blackjack/Stand").forward(request, response);
 			}
 			else
 				getServletContext().getRequestDispatcher("/BlackJack/Game.jsp").forward(request, response);
