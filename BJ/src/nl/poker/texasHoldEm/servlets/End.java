@@ -37,7 +37,13 @@ public class End extends HttpServlet {
 	
 		@SuppressWarnings("unchecked")
 		List<Player> players = (List<Player>) context.getAttribute("players");
+		int potsize = game.getPotSize();
 		
+		Player winner = game.winnerOfHand(players.get(0), players.get(1));
+		winner.setStackBijWinstHand(potsize);
+		context.setAttribute("winner", winner) ;
+				
+		context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);	
 		
 	}
 

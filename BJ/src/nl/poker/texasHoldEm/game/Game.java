@@ -48,6 +48,10 @@ public class Game  {
 	}
 
 	public Player winnerOfHand(Player p1, Player p2) {
+		if (p1.getHasFolded())
+			return p2;
+		if (p2.getHasFolded())
+			return p1;
 		if(p1.getScore(table) > p2.getScore(table))
 			return p1;
 		if(p1.getScore(table) < p2.getScore(table))

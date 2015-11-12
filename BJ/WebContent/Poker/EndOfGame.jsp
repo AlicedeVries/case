@@ -10,8 +10,8 @@
 <body>
 <h1 style="color:#f67f00">Welcome to Poker Online</h1>
 	<c:import url="/Poker/Display.jsp"></c:import>
-		<form method="post" action="/BJ/StartPoker">
-			<input type="submit" value="Start New Game" style="width: 150px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
+		<form method="post" action="/BJ/PlayPoker">
+			<input type="submit" name="restart" value="Start New Game" style="width: 150px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
 		</form>
 	
 </body>

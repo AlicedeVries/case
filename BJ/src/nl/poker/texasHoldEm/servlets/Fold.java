@@ -43,7 +43,10 @@ public class Fold extends HttpServlet {
 		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
 		Player player1 = players.get(0);
 		player1.fold(game);
-		context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);		
+		
+		//players.remove(0);
+		
+		context.getRequestDispatcher("/End").forward(request, response);		
 		
 	}
 

@@ -34,9 +34,20 @@ public class PlayPoker extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
+		
+		if (request.getParameter("restart")!=null){
+			List<Player> players = (List<Player>) context.getAttribute("players");
+			players.get(0).clearHand();
+			players.get(0).setHasFolded(false);
+			players.get(1).clearHand();			
+			players.get(1).setHasFolded(false);
+			context.setAttribute("winner", null);
+		}
+		
 
 		if (session==null){
 			context.getRequestDispatcher("/StartPoker").forward(request, response);
@@ -48,14 +59,19 @@ public class PlayPoker extends HttpServlet {
 					p = new Player((String) session.getAttribute("name"));
 					session.setAttribute("player", p);
 			}
-			ComputerPlayer computerPlayer = new ComputerPlayer("AI player");
 			
-			List<Player> players = new ArrayList<Player>();		
-			players.add(p);
-			players.add(computerPlayer);
+			ComputerPlayer computerPlayer;
+			
+			List<Player> players = (List<Player>) context.getAttribute("players");
+			if (players==null){
+				computerPlayer = new ComputerPlayer("AI player");
+				players = new ArrayList<Player>();		
+				players.add(p);
+				players.add(computerPlayer);
+				context.setAttribute("players", players);
+			}
 			Game game = new Game(players);
 			context.setAttribute("game", game);
-			context.setAttribute("players", players);
 			context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
 		}
 	}

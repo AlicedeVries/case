@@ -50,6 +50,10 @@ public class Check extends HttpServlet {
 		else if(game.getTableCards().size() == 4)
 			game.river();
 		else {
+			Player winner = game.winnerOfHand(players.get(0), players.get(1));
+			winner.setStackBijWinstHand(game.getPotSize());
+			context.setAttribute("winner", winner) ;
+			
 			context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);
 			return;
 		}

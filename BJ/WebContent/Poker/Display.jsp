@@ -29,7 +29,13 @@
 			<c:if test="${p.name==player.name}">
 				<h3> Your hand:</h3> 
 			</c:if>		
-			<h4> Chips: ${p.stack} </h4>
+			<h4> 
+				Chips: ${p.stack}
+				<c:if test="${p.name==winner.name}">
+					(${p.stack-game.potSize} + ${game.potSize})
+				</c:if>		
+			
+			</h4>
 			</td>
 			<c:forEach items="${p.hand}" var="card">
 			<td>

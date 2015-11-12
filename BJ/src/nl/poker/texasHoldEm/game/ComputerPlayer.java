@@ -18,7 +18,7 @@ public class ComputerPlayer extends Player {
 			else
 				check(game);
 		if(facingBetOrRaise)
-			if(getScore(table) < 200)
+			if(getScore(table) < 0)
 				fold(game);
 			else if(getScore(table) > 200 || getScore(table) < 400)
 				call(game);

@@ -13,6 +13,7 @@ import general.Kleur;
 public class Player extends HandHolder{
 
 	private int stack = 100;
+	private boolean hasFolded = false;
 	
 	public Player(String name) {
 		super(name);	
@@ -88,10 +89,23 @@ public class Player extends HandHolder{
 	
 	public void fold(Game game){
 		clearHand();
+		hasFolded=true;
 	}
 	
+	public boolean getHasFolded() {
+		return hasFolded;
+	}
+
+	public void setHasFolded(boolean hasFolded) {
+		this.hasFolded = hasFolded;
+	}
+
 	public int getStack(){
 		return stack;
+	}
+	
+	public void setStackBijWinstHand(int potsize){
+		stack = stack + potsize;
 	}
 	
 
