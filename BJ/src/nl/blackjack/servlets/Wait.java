@@ -18,7 +18,7 @@ import nl.blackjack.game.Player;
 /**
  * Servlet implementation class Wait
  */
-@WebServlet("/Wait")
+@WebServlet("/Blackjack/Wait")
 public class Wait extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

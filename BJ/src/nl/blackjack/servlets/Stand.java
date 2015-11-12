@@ -16,7 +16,7 @@ import nl.blackjack.game.Player;
 /**
  * Servlet implementation class Stand
  */
-@WebServlet("/Stand")
+@WebServlet("/Blackjack/Stand")
 public class Stand extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
