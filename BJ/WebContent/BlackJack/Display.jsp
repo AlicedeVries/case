@@ -17,7 +17,7 @@
 			</td>
 			</c:forEach>
 		</tr>
-		<c:forEach items="${players}" var="p">
+		<c:forEach items="${game.players}" var="p">
 		<tr> 
 			<td> 
 			<c:if test="${p.name!=player.name}">

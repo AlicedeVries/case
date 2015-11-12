@@ -56,29 +56,22 @@ public class Stand extends HttpServlet {
 			if (p1==null|| game==null)
 				context.getRequestDispatcher("/Start").forward(request, response);
 			else{		
-				p1.setStand(true);
-				if(game.isFinished() && session.getAttribute("msg")==null){
-					if (game.dealerPlayerDraw(p1)){
-//						System.out.println("draw");
-						session.setAttribute("msg", "You have a draw with Dealer!");
-					}
-					else if (game.dealerHasBlackjack()){
-//						System.out.println("dealer blackjack");
-						session.setAttribute("msg", "You lost! Dealer has blackjack");
-					}
-					else if (!game.dealerHasValidScore()){
-//						System.out.println("dealer bust");
-						session.setAttribute("msg", "You won! Dealer went bust");
-					}
-					else if (game.dealerBeatsPlayer(p1)){
-//						System.out.println("dealer beats " +p1.getName());
-						session.setAttribute("msg", "You lost!");
-					}
-					else{
-//						System.out.println(p1.getName()+"beats dealer");
-						session.setAttribute("msg", "You won!");
-						
-					}
+				p1.stand();
+				if(game.isFinished()){
+					if (game.hasBlackjack(p1))
+						request.setAttribute("msg", "You won! You have blackjack!");					
+					else if (!game.hasValidScore(p1))
+						request.setAttribute("msg", "You lost! You went bust");											
+					else if (game.dealerPlayerDraw(p1))
+						request.setAttribute("msg", "You have a draw with Dealer!");
+					else if (game.dealerHasBlackjack())
+						request.setAttribute("msg", "You lost! Dealer has blackjack");
+					else if (!game.dealerHasValidScore())
+						request.setAttribute("msg", "You won! Dealer went bust");
+					else if (game.dealerBeatsPlayer(p1))
+						request.setAttribute("msg", "You lost!");
+					else
+						request.setAttribute("msg", "You won!");
 				}
 				getServletContext().getRequestDispatcher("/BlackJack/Stand.jsp").forward(request, response);
 			}

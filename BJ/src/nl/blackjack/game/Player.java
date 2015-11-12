@@ -13,6 +13,13 @@ public class Player extends HandHolder{
 	}
 	
 	@Override
+	public void clearHand(){
+		super.clearHand();
+		stand = false;
+		
+	}
+	
+	@Override
 	public boolean ask(Deck deck){
 		if (stand==true)
 			return false;
@@ -37,8 +44,8 @@ public class Player extends HandHolder{
 		return sum;
 	}
 
-	public void setStand(boolean b) {
-		stand = b;		
+	public void stand() {
+		stand = true;		
 	}
 	
 	public boolean getStand(){

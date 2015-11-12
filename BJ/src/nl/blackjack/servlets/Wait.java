@@ -2,7 +2,6 @@ package nl.blackjack.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -51,95 +50,98 @@ public class Wait extends HttpServlet {
 		// TODO Auto-generated method stub
 		processRequest(request,response);
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
+		Game game = (Game) context.getAttribute("game");
 
 		if (session==null){
 			context.getRequestDispatcher("/Start").forward(request, response);
 		}
 		
-		else {
-			Player p = (Player) session.getAttribute("player");
-			if (p==null){
-					p = new Player((String) session.getAttribute("name"));
-					session.setAttribute("player", p);
+		else if (game!= null){
+		//if a game already exists
+			if (game.getHasFinished()){
+			//if game has finished
+				addToWaitingPlayerList(getPlayer(session));
+				if (System.currentTimeMillis()- game.endTime>= MAX_TIME_AFTER_GAME)
+				//if game has finished a while ago
+					startNewGame(request, response);
+				else 
+					waitSomeMore(request, response);					
 			}
-			
-			if (context.getAttribute("game") == null){
-//				System.out.println("game is null");
-	
-				if (context.getAttribute("timer")==null){
-//					System.out.println("timer is null");
-					List<Player> players = new ArrayList<Player>();		
-					players.add(p);						
-					context.setAttribute("timer", System.currentTimeMillis());
-					context.setAttribute("nextPlayers",players);
-					context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);	
-				}
-				else{
-					List<Player> players = (List<Player>) context.getAttribute("nextPlayers");
-					if (!players.contains(p)){
-//						System.out.println("other players are waiting");
-						players.add(p);						
-						context.setAttribute("nextPlayers",players);
-					}
-									
-					if (System.currentTimeMillis()- (long) context.getAttribute("timer") >= WAIT_TIME_FOR_NEW_GAME){
-//						System.out.println("wait is over"+ players.size());						
-						Game game = new Game(players);
-						context.setAttribute("game", game);
-						context.setAttribute("timer", null);
-						context.setAttribute("players",players);
-						context.setAttribute("nextPlayers",null);
-						context.getRequestDispatcher("/Play").forward(request, response);
-					}
-					else{
-//						System.out.println("player is waiting");
-						context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);
-					}
-				}
-			}
-			else {
-//				System.out.println("game exists");
-				Game game = (Game) context.getAttribute("game");
-				if (game.getHasFinished()){
-//					System.out.println("game finished");
-					p.clearHand();
-					p.setStand(false);
-					if (System.currentTimeMillis()- game.endTime>= MAX_TIME_AFTER_GAME){
-//						System.out.println("game ended long time ago");
-						context.setAttribute("game", null);
-						context.setAttribute("timer", System.currentTimeMillis()-WAIT_TIME_FOR_NEW_GAME);
-						List<Player>players = new ArrayList<Player>();		
-						players.add(p);						
-						context.setAttribute("nextPlayers",players);
-					}					
-					context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);	
-				}
-				else if (System.currentTimeMillis()- game.startTime>= MAX_TIME_FOR_GAME){
-//					System.out.println("game started long time ago");
-					context.setAttribute("game", null);
-					context.setAttribute("game", null);
-					context.setAttribute("timer", System.currentTimeMillis()-WAIT_TIME_FOR_NEW_GAME);
-					List<Player>players = new ArrayList<Player>();		
-					players.add(p);						
-					context.setAttribute("nextPlayers",players);
-					context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);	
-				}
-				else{
-					List<Player> players = (List<Player>) context.getAttribute("players");
-					if (players.contains(p)){
-//						System.out.println("player of game");
-						context.getRequestDispatcher("/Play").forward(request, response);	
-					}
+			else{
+			//if game is still going
+				if (game.getPlayers().contains(getPlayer(session)))
+				//if player is in game
+					forwardToGame(request, response);
+				else {
+					addToWaitingPlayerList(getPlayer(session));
+					if (System.currentTimeMillis()-game.startTime >= MAX_TIME_FOR_GAME)
+					//if game has lasted to long
+						startNewGame(request, response);
 					else
-						context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);						
+						waitSomeMore(request, response);					
 				}
 			}
+		} 
+		else{
+		//if no game exists yet
+			addToWaitingPlayerList(getPlayer(session));
+			if (context.getAttribute("timer")==null){ 
+			//if there is no wait timer: start wait timer
+				context.setAttribute("timer", System.currentTimeMillis());
+				waitSomeMore(request, response);					
+			}
+			else if (System.currentTimeMillis()- (long) context.getAttribute("timer") >= WAIT_TIME_FOR_NEW_GAME)
+			//if the wait time is over: start new game	
+				startNewGame(request, response);
+			else
+				waitSomeMore(request, response);
 		}
 	}
+			
 	
+	private Player getPlayer (HttpSession session){
+		Player p = (Player) session.getAttribute("player");
+		if (p==null){
+				p = new Player((String) session.getAttribute("name"));
+				session.setAttribute("player", p);
+		}
+		return p;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void addToWaitingPlayerList(Player p){
+		ServletContext context = getServletContext();
+		List<Player> players = (List<Player>) context.getAttribute("waitingPlayers") ;
+		if (players == null) {
+			players = new ArrayList<Player>();		
+			players.add(p);						
+			context.setAttribute("waitingPlayers",players);
+		}
+		else if (!players.contains(p))
+			players.add(p);
+	}
+
+	@SuppressWarnings("unchecked")
+	private void startNewGame(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletContext context = getServletContext();
+		List<Player> players = (List<Player>) context.getAttribute("waitingPlayers");
+		Game game = new Game(players);
+		context.setAttribute("nextPlayers",null);
+		context.setAttribute("game",game);
+		context.getRequestDispatcher("/Play").forward(request, response);					
+	}
+	
+	private void waitSomeMore(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletContext context = getServletContext();
+		context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);							
+	}
+
+	private void forwardToGame(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletContext context = getServletContext();
+		context.getRequestDispatcher("/Play").forward(request, response);					
+	}
 }

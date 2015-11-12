@@ -1,8 +1,6 @@
 package nl.blackjack.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,9 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import nl.blackjack.game.Game;
 import nl.blackjack.game.Player;
-
-//import game.Game;
-//import game.Player;
 
 /**
  * Servlet implementation class Play
@@ -49,7 +44,7 @@ public class Play extends HttpServlet {
 		processRequest(request,response);
 	}
 
-	@SuppressWarnings("unchecked") //TODO
+
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
@@ -69,7 +64,7 @@ public class Play extends HttpServlet {
 		}
 		else { 
 			if (game.hasBlackjack(p)){
-				session.setAttribute("msg", "You won! You have blackjack!!");
+				request.setAttribute("msg", "You won! You have blackjack!!");
 				getServletContext().getRequestDispatcher("/Stand").forward(request, response);
 			}
 			else

@@ -20,6 +20,7 @@ public class Game {
 		deck.shuffle();
 		
 		for (Player p : players){
+			p.clearHand();			
 			p.ask(deck);			
 		}
 		dealer.ask(deck);		
@@ -79,15 +80,17 @@ public class Game {
 	
 	public boolean isFinished(){
 		for (Player p: players){
-			if (!p.getStand()){
-				System.out.println(p.getName());
+			if (!p.getStand())
 				return false;
-			}
 		}
 		if (!dealer.hasVisibleHand())
 			playDealer();
 		endTime = System.currentTimeMillis();
 		return true;
+	}
+
+	public List<Player> getPlayers() {
+		return players;
 	}
 }
 
