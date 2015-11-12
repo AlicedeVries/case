@@ -15,7 +15,7 @@ public class Game  {
 	private Deck deck;
 	private Card bovensteKaart;
 	private HandHolder table = new Player("table");
-	private double potSize = 0;
+	private int potSize = 0;
 
 	public Game(List<Player> players) {
 		deck = new Deck();
@@ -75,33 +75,14 @@ public class Game  {
 		return bovensteKaart;
 	}
 	
-	public double getPotSize() {
+	public int getPotSize() {
 		return potSize;
 	}
 	
-	public void check(Player p){
+	public void addToPot(int chips){
+		potSize+=chips;
+	}
 
-	}
-	
-	public void call(Player p){
-		p.call();
-		potSize+=5;
-	}
-	
-	public void bet(Player p){
-		p.bet();
-		potSize+=5;
-	}
-	
-	public void raise(Player p){
-		p.raise();
-		potSize+=10;
-	}
-	
-	public void fold(Player p){
-
-	}
-	
 	public void printBoard(){
 		System.out.println();
 		table.printHand();

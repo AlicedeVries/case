@@ -12,7 +12,7 @@ import general.Kleur;
 
 public class Player extends HandHolder{
 
-	private double stack = 100;
+	private int stack = 100;
 	
 	public Player(String name) {
 		super(name);	
@@ -67,24 +67,31 @@ public class Player extends HandHolder{
 	}
 	
 	
-	public void check(){
+	public void check(Game game){
 		
 	}
 	
-	public void bet(){
+	public void bet(Game game){
 		stack -= 5;	
+		game.addToPot(5);
 	}
 	
-	public void call(){
-		stack -= 5;
+	public void call(Game game){
+		stack -= 5;	
+		game.addToPot(5);
 	}
 	
-	public void raise(){
-		stack -= 10;
+	public void raise(Game game){
+		stack -= 5;	
+		game.addToPot(10);
 	}
 	
-	public void fold(){
-		
+	public void fold(Game game){
+		clearHand();
+	}
+	
+	public int getStack(){
+		return stack;
 	}
 	
 

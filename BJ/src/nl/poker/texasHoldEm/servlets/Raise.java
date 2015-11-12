@@ -10,23 +10,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import general.Card;
 import nl.poker.texasHoldEm.game.ComputerPlayer;
 import nl.poker.texasHoldEm.game.Game;
 import nl.poker.texasHoldEm.game.Player;
 
 /**
- * Servlet implementation class PlayPoker
+ * Servlet implementation class Check
  */
-@WebServlet("/PlayPoker")
-public class PlayPoker extends HttpServlet {
+@WebServlet("/Raise")
+public class Raise extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlayPoker() {
+    public Raise() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,30 +34,28 @@ public class PlayPoker extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
-		HttpSession session = request.getSession(false);
-
-		if (session==null){
-			context.getRequestDispatcher("/StartPoker").forward(request, response);
-		}
+		Game game = (Game) context.getAttribute("game");
 		
+		List<Player> players = (List<Player>) context.getAttribute("players");
+		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
+		Player player1 = players.get(0);
+		computerPlayer.actie(game, true);
+				
+		if(game.getTableCards().size() == 0)
+			game.flop();
+		else if(game.getTableCards().size() == 3)
+			game.turn();
+		else if(game.getTableCards().size() == 4)
+			game.river();
 		else {
-			Player p = (Player) session.getAttribute("player");
-			if (p==null){
-					p = new Player((String) session.getAttribute("name"));
-					session.setAttribute("player", p);
-			}
-			ComputerPlayer computerPlayer = new ComputerPlayer("AI player");
-			
-			List<Player> players = new ArrayList<Player>();		
-			players.add(p);
-			players.add(computerPlayer);
-			Game game = new Game(players);
-			context.setAttribute("game", game);
-			context.setAttribute("players", players);
-			context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+			context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);
+			return;
 		}
+		context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);		
+		
 	}
 
 	/**

@@ -10,9 +10,9 @@
 <body>
 	<table>
 		<tr> 
-			<td> <h4>Table:</h4></td> 
+			<td> <h3>Table: </h3> <h4> PotSize: ${game.potSize}  </h4> </td> 
 			<td> 
-				<img src="<c:url value="${game.stack.image}" />" width="84pt"  height="122pt" >			
+				<img src="<c:url value="${game.bovensteKaart.image}" />" width="84pt"  height="122pt" >			
 			</td>
 			<c:forEach items="${game.tableCards}" var="card">
 			<td>	
@@ -24,11 +24,12 @@
 		<tr> 
 			<td> 
 			<c:if test="${p.name!=player.name}">
-				<h4> ${p.name} 's hand:</h4> 
+				<h3> ${p.name} 's hand:</h3> 
 			</c:if>
 			<c:if test="${p.name==player.name}">
-				<h4> Your hand:</h4> 
+				<h3> Your hand:</h3> 
 			</c:if>		
+			<h4> Chips: ${p.stack} </h4>
 			</td>
 			<c:forEach items="${p.hand}" var="card">
 			<td>

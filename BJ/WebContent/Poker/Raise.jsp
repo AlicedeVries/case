@@ -13,17 +13,17 @@
 	<table>
 	<tr>
 		<td>
-		<form method="post" action="/BJ/Check">
-			<input type="submit" value="Check" style="width: 90px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
+		<form method="post" action="/BJ/Call">
+			<input type="submit" value="Call" style="width: 90px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
 		</form>
 		</td>
 		<td>
-		<form method="post" action="/BJ/Bet">
-			<input type="submit" value="Bet" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
+		<form method="post" action="/BJ/Raise">
+			<input type="submit" value="Raise" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>
 				<td>
-		<form method="post" action="/BJ/Fold">
+		<form method="post" action="/Poker/Fold">
 			<input type="submit" value="Fold" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>
