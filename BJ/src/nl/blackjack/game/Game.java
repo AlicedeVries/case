@@ -16,7 +16,7 @@ public class Game {
 	public Game(List<Player> players) {
 		this.players=players;
 		dealer = new Dealer("Deler");
-		deck = new Deck();
+		deck = new Deck(6);
 		deck.shuffle();
 		
 		for (Player p : players){
