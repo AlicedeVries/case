@@ -135,7 +135,8 @@ public class Wait extends HttpServlet {
 //						System.out.println("player of game");
 						context.getRequestDispatcher("/Play").forward(request, response);	
 					}
-					context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);						
+					else
+						context.getRequestDispatcher("/BlackJack/Wait.jsp").forward(request, response);						
 				}
 			}
 		}
