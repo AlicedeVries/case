@@ -15,6 +15,8 @@ public class ComputerPlayer extends Player {
 		if(!facingBetOrRaise)
 			if(getScore(table) > 200)
 				bet();
+			else
+				check();
 		if(facingBetOrRaise)
 			if(getScore(table) < 200)
 				fold();
@@ -22,5 +24,34 @@ public class ComputerPlayer extends Player {
 				call();
 			else
 				raise();
-	}	
+	}
+	
+	public void setFacingBetOrRaiseTrue() {
+		facingBetOrRaise = true;
+	}
+	
+	public void check(){
+		System.out.println("AI player checkt");
+	}
+	
+	public void bet(){
+		stack -= 5;	
+		System.out.println("AI player bet €5");
+	}
+	
+	public void call(){
+		stack -= 5;
+		System.out.println("AI player callt €5");
+	}
+	
+	public void raise(){
+		stack -= 10;
+		System.out.println("AI player raist €10");
+	}
+	
+	public void fold(){
+		System.out.println("AI player folds");
+	}
+	
+	
 }

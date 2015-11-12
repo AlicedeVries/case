@@ -14,7 +14,7 @@
 			<td> 
 				<img src="<c:url value="${game.stack.image}" />" width="84pt"  height="122pt" >			
 			</td>
-			<c:forEach items="${game.table}" var="card">
+			<c:forEach items="${game.tableCards}" var="card">
 			<td>	
 			<img src="<c:url value="${card.image}" />" width="84pt"  height="122pt"  alt="${card.waarde} ${card.kleur}">			
 			</td>

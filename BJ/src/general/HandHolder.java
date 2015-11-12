@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class HandHolder {
 
-	private String name;
+	protected String name;
 	private List<Card> hand = new ArrayList<Card>();
 	
 	public HandHolder(String name) {

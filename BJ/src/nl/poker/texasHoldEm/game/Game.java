@@ -63,7 +63,11 @@ public class Game  {
 			return false;
 	}
 	
-	public List<Card> getTable() {
+	public HandHolder getTable() {
+		return table;
+	}
+	
+	public List<Card> getTableCards() {
 		return table.getHand();
 	}
 	
@@ -75,9 +79,32 @@ public class Game  {
 		return potSize;
 	}
 	
+	public void check(Player p){
+
+	}
+	
+	public void call(Player p){
+		p.call();
+		potSize+=5;
+	}
+	
 	public void bet(Player p){
 		p.bet();
 		potSize+=5;
+	}
+	
+	public void raise(Player p){
+		p.raise();
+		potSize+=10;
+	}
+	
+	public void fold(Player p){
+
+	}
+	
+	public void printBoard(){
+		System.out.println();
+		table.printHand();
 	}
 	
 }

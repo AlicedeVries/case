@@ -64,19 +64,6 @@ public class Player extends HandHolder{
 		else
 			return 100 + hasHighCard(combine);
 		
-		
-//		System.out.println("Has RoyalFlush:"+ (hasRoyalFlush(combine) != -1));
-//		System.out.println("Has StraightFlush:"+ (hasStraightFlush(combine) != -1));
-//		System.out.println("Has Flush:"+ (hasFlush(combine) != -1));
-//		System.out.println("Has Straight:"+ (hasStraight(combine) != -1));
-//		System.out.println("Has 4 of a kind:"+ (hasFourOfaKind(combine) != -1));
-//		System.out.println("Has 3 of a kind:" + (hasThreeOfaKind(combine) != -1));
-//		System.out.println("Has pair:" + (hasPair(combine) != -1));
-//		System.out.println("Has Full House:" + (hasFullHouse(combine) != -1));
-//		System.out.println("Has Two Pair:" + (hasTwoPair(combine) != -1));
-//		System.out.println("Has High Card" + (hasHighCard(combine)));
-		
-
 	}
 	
 	
@@ -318,6 +305,12 @@ public class Player extends HandHolder{
 		else
 			return combine.get(0).getGetal();
 		}
+	
+	public String toString(){
+		return "" + super.name;
+	}
+	
+	
 }
 	
 	
