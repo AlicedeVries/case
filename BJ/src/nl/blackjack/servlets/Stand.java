@@ -16,7 +16,7 @@ import nl.blackjack.game.Player;
 /**
  * Servlet implementation class Stand
  */
-@WebServlet("/Stand")
+@WebServlet("/Blackjack/Stand")
 public class Stand extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,13 +48,13 @@ public class Stand extends HttpServlet {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
 		if (session==null){
-			context.getRequestDispatcher("/Start").forward(request, response);
+			context.getRequestDispatcher("/Blackjack/Start").forward(request, response);
 		}
 		else{
 			Player p1 = (Player) session.getAttribute("player");
-			Game game = (Game) context.getAttribute("game");
+			Game game = (Game) context.getAttribute("BJgame");
 			if (p1==null|| game==null)
-				context.getRequestDispatcher("/Start").forward(request, response);
+				context.getRequestDispatcher("/Blackjack/Start").forward(request, response);
 			else{		
 				p1.stand();
 				if(game.isFinished()){

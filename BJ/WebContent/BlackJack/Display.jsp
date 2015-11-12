@@ -10,22 +10,23 @@
 <body>
 	<table>
 		<tr> 
-			<td> <h4>Dealers hand:</h4></td> 
-			<c:forEach items="${game.dealerHand}" var="card">
+			<td> <h3>Dealers hand:</h3> <h4>score: ${BJgame.dealerScore}</h4></td> 
+			<c:forEach items="${BJgame.dealerHand}" var="card">
 			<td>	
 			<img src="<c:url value="${card.image}" />" width="84pt"  height="122pt"  alt="${card.waarde} ${card.kleur}">			
 			</td>
 			</c:forEach>
 		</tr>
-		<c:forEach items="${game.players}" var="p">
+		<c:forEach items="${BJgame.players}" var="p">
 		<tr> 
 			<td> 
 			<c:if test="${p.name!=player.name}">
-				<h4> ${p.name} 's hand:</h4> 
+				<h3> ${p.name} 's hand:</h3> 
 			</c:if>
 			<c:if test="${p.name==player.name}">
-				<h4> Your hand:</h4> 
+				<h3> Your hand:</h3> 
 			</c:if>		
+			<h4>score: ${p.score}</h4>
 			</td>
 			<c:forEach items="${p.hand}" var="card">
 			<td>

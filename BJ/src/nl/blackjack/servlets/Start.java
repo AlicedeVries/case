@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Start
  */
-@WebServlet("/Start")
+@WebServlet("/Blackjack/Start")
 public class Start extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -55,7 +55,7 @@ public class Start extends HttpServlet {
 		else{
 			session.setMaxInactiveInterval(600);
 			session.setAttribute("name", name);
-			context.getRequestDispatcher("/Wait").forward(request, response);	
+			context.getRequestDispatcher("/Blackjack/Wait").forward(request, response);	
 		}
 		
 		

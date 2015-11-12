@@ -16,7 +16,7 @@ import nl.blackjack.game.Player;
 /**
  * Servlet implementation class Draw
  */
-@WebServlet("/Hit")
+@WebServlet("/Blackjack/Hit")
 public class Hit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,15 +48,15 @@ public class Hit extends HttpServlet {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
 		if (session==null){
-			getServletContext().getRequestDispatcher("/Start").forward(request, response);
+			getServletContext().getRequestDispatcher("/Blackjack/Start").forward(request, response);
 		}
 		else{			
 			Player p = (Player) session.getAttribute("player");
-			Game game = (Game) context.getAttribute("game");
+			Game game = (Game) context.getAttribute("BJgame");
 			if (p==null)
-				getServletContext().getRequestDispatcher("/Start").forward(request, response);
+				getServletContext().getRequestDispatcher("/Blackjack/Start").forward(request, response);
 			else if (game==null)
-				getServletContext().getRequestDispatcher("/Start").forward(request, response);
+				getServletContext().getRequestDispatcher("/Blackjack/Start").forward(request, response);
 			
 			else {
 				game.drawCard(p);
@@ -64,7 +64,7 @@ public class Hit extends HttpServlet {
 				if (!game.hasValidScore(p)){
 					p.stand();
 					request.setAttribute("msg", "You lost! You went bust!!");
-					getServletContext().getRequestDispatcher("/Stand").forward(request, response);			
+					getServletContext().getRequestDispatcher("/Blackjack/Stand").forward(request, response);			
 				}
 				else
 					getServletContext().getRequestDispatcher("/BlackJack/Game.jsp").forward(request, response);
