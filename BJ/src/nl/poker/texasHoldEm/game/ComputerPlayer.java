@@ -19,7 +19,7 @@ public class ComputerPlayer extends Player {
 			System.out.println("player bluff yoloness: " + bluff + " bluff getal: " + a + " handscore moet hoger zijn dan: " + b + " handscore is: " + (getScore(table)));
 			if((getScore(table) > b) || bluff > a) {
 				bet(game);
-			}
+				}
 		} else
 			check(game);
 		if(facingBetOrRaise)

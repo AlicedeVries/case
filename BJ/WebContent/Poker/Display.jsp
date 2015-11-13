@@ -39,7 +39,7 @@
 			</td>
 			<c:forEach items="${p.hand}" var="card">
 			<td>
-			<img src="<c:url value="${card.image}" />" height="122" width="84"alt="${card.waarde} ${card.kleur}">			
+			<img src="<c:url value="${card.image}" />" height="122" width="84"alt="${card.getal} ${card.kleur}">			
 			</td>
 			</c:forEach>
 		</tr>
