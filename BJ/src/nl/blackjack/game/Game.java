@@ -2,7 +2,6 @@ package nl.blackjack.game;
 
 import java.util.List;
 
-import general.Card;
 import general.Deck;
 
 public class Game {
@@ -56,7 +55,7 @@ public class Game {
 		return ( p.getScore()==dealer.getScore() );
 	}
 	
-		
+	//checkt als finished player is finished
 	public boolean isFinished(){
 		for (Player p: players){
 			if (!p.getStand())

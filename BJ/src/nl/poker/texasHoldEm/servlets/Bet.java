@@ -1,7 +1,6 @@
 package nl.poker.texasHoldEm.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import general.Card;
 import nl.poker.texasHoldEm.game.ComputerPlayer;
 import nl.poker.texasHoldEm.game.Game;
 import nl.poker.texasHoldEm.game.Player;
@@ -50,24 +48,26 @@ public class Bet extends HttpServlet {
 		
 		//check of AI player raist
 		if((potsizeVoorActie + 10) == potsizeNaActie) {
-			request.setAttribute("msg", "AI Player raiset €10");
+			request.setAttribute("msg", "AI Player raised 10");
 			context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response);
 			return;
 		}
 		
 		//check of AI player fold
 		if(potsizeVoorActie == potsizeNaActie) {
-			request.setAttribute("msg", "AI Player fold. Jij wint!");
+			request.setAttribute("msg", "AI Player folded. You won!");
 			
 			Player winner = game.winnerOfHand(players.get(0), players.get(1));
 			winner.setStackBijWinstHand(game.getPotSize());
 			context.setAttribute("winner", winner) ;
+			request.setAttribute("gain", game.getPotSize());
 			
 			context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);
 			return;
 		}
 		
 		//als AI player callt, dan het volgende:		
+		request.setAttribute("msg", "AI Player called");
 		if(game.getTableCards().size() == 0)
 			game.flop();
 		else if(game.getTableCards().size() == 3)
@@ -75,16 +75,7 @@ public class Bet extends HttpServlet {
 		else if(game.getTableCards().size() == 4)
 			game.river();
 		else {
-			if (game.isItAdraw(players.get(0), players.get(1))){
-				players.get(0).setStackBijWinstHand(game.getPotSize()/2);
-				players.get(1).setStackBijWinstHand(game.getPotSize()/2);
-				context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response); return;
-			}
-			Player winner = game.winnerOfHand(players.get(0), players.get(1));
-			winner.setStackBijWinstHand(game.getPotSize());
-			context.setAttribute("winner", winner) ;
-			
-			context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);
+			context.getRequestDispatcher("/End").forward(request, response);
 			return;
 		}
 		context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);		

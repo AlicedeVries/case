@@ -4,10 +4,9 @@ import general.HandHolder;
 
 public class ComputerPlayer extends Player {
 
-	private boolean facingBetOrRaise;
-	
 	public ComputerPlayer(String name) {
 		super(name);
+		setVisibleHand(false);
 	}
 	
 	public void actie(Game game, boolean facingBetOrRaise){
@@ -23,14 +22,17 @@ public class ComputerPlayer extends Player {
 		} else
 			check(game);
 		if(facingBetOrRaise)
-			if(getScore(table) < 200)
+			if(getScore(table) < 200){
+				System.out.println("ai player folded");
 				fold(game);
+			}
 			else if(getScore(table) > 200 || getScore(table) < 400)
 				call(game);
 			else {
 				raise(game);
 			}
 	}
+	
 	
 //	public void setFacingBetOrRaiseTrue() {
 //		facingBetOrRaise = true;

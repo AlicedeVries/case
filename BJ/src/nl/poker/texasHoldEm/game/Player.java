@@ -15,7 +15,9 @@ public class Player extends HandHolder{
 	private int stack = 100;
 	private boolean hasFolded = false;
 	private boolean winner = false;
+	private boolean visibleHand = true;
 	
+
 	public Player(String name) {
 		super(name);	
 	}
@@ -160,7 +162,6 @@ public class Player extends HandHolder{
 	}
 	
 	public int hasPair(ArrayList<Card> combine) {
-		int teller = 1;
 		// loop door de lijst en zie of er 2 kaarten van dezelfde waarde inzitten
 		for(int k = 0; k < combine.size()-1; k++) {
 			if(combine.get(k).getGetal() == combine.get(k+1).getGetal()) {
@@ -170,6 +171,7 @@ public class Player extends HandHolder{
 		return -1;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public int hasFullHouse(ArrayList<Card> combine) {
 		int waardeTOK;
 		int waardePair;
@@ -196,6 +198,7 @@ public class Player extends HandHolder{
 			return waardeTOK;
 	}
 
+	@SuppressWarnings("unchecked")
 	public int hasTwoPair(ArrayList<Card> combine) {
 		int waardePair;
 		int waardePair2;
@@ -339,6 +342,14 @@ public class Player extends HandHolder{
 	
 	public String toString(){
 		return "" + super.name;
+	}
+
+	public boolean isVisibleHand() {
+		return visibleHand;
+	}
+
+	public void setVisibleHand(boolean visibleHand) {
+		this.visibleHand = visibleHand;
 	}
 	
 	

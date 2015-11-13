@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import nl.poker.texasHoldEm.game.ComputerPlayer;
 import nl.poker.texasHoldEm.game.Game;
 import nl.poker.texasHoldEm.game.Player;
 
@@ -37,11 +38,20 @@ public class End extends HttpServlet {
 	
 		@SuppressWarnings("unchecked")
 		List<Player> players = (List<Player>) context.getAttribute("players");
-		int potsize = game.getPotSize();
 		
-		Player winner = game.winnerOfHand(players.get(0), players.get(1));
-		winner.setStackBijWinstHand(potsize);
-		context.setAttribute("winner", winner) ;
+		if (game.isItAdraw(players.get(0), players.get(1))){
+			players.get(0).setStackBijWinstHand(game.getPotSize()/2);
+			players.get(1).setStackBijWinstHand(game.getPotSize()/2);
+			request.setAttribute("gain", game.getPotSize()/2);
+		}
+		else{
+			Player winner = game.winnerOfHand(players.get(0), players.get(1));
+			winner.setStackBijWinstHand(game.getPotSize());
+			request.setAttribute("gain", game.getPotSize());
+		}
+		
+		ComputerPlayer ai = (ComputerPlayer) players.get(1);
+		ai.setVisibleHand(true);
 				
 		context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);	
 		

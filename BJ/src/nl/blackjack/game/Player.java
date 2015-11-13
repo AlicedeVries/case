@@ -1,7 +1,6 @@
 package nl.blackjack.game;
 
 import general.Card;
-import general.Deck;
 import general.HandHolder;
 
 public class Player extends HandHolder{
@@ -11,21 +10,12 @@ public class Player extends HandHolder{
 	public Player(String name) {
 		super(name);	
 	}
-	
+
 	@Override
 	public void clearHand(){
 		super.clearHand();
 		stand = false;
-		
 	}
-	
-//	@Override
-//	public boolean askCard(Deck deck){
-//		if (stand==true)
-//			return false;
-//		super.getHand().add(deck.draw());
-//		return true;
-//	}
 	
 	public int getWaarde(Card c){
 		if (c.getGetal() == 1)
@@ -33,7 +23,6 @@ public class Player extends HandHolder{
 		if (c.getGetal() > 10)
 			return 10;
 		return c.getGetal();
-		
 	}
 	
 	public int getScore(){

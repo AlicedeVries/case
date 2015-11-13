@@ -1,11 +1,8 @@
 package nl.poker.texasHoldEm.game;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import general.Card;
-import general.CardComparator;
 import general.Deck;
 import general.HandHolder;
 import general.Kleur;

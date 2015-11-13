@@ -1,14 +1,11 @@
 package nl.poker.texasHoldEm.test;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import general.Card;
 import general.Deck;
 import general.HandHolder;
 import general.Kleur;
-import nl.poker.texasHoldEm.game.Game;
 import nl.poker.texasHoldEm.game.Player;
 
 public class TestScores {

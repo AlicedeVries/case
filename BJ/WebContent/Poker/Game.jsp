@@ -22,7 +22,7 @@
 		</td>
 		<td>
 		<form method="post" action="/BJ/Bet">
-			<input type="submit" value="Bet" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
+			<input type="submit" value="Bet 5" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>
 				<td>

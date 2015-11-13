@@ -32,14 +32,19 @@
 			<h4> 
 				Chips: ${p.stack}
 				<c:if test="${p.winner==true}">
-					(${p.stack-game.potSize} + ${game.potSize})
+					(+ ${gain})
 				</c:if>		
 			
 			</h4>
 			</td>
 			<c:forEach items="${p.hand}" var="card">
 			<td>
-			<img src="<c:url value="${card.image}" />" height="122" width="84"alt="${card.getal} ${card.kleur}">			
+			<c:if test="${p.visibleHand==true}">
+				<img src="<c:url value="${card.image}" />" height="122" width="84"alt="${card.getal} ${card.kleur}">			
+			</c:if>
+			<c:if test="${p.visibleHand==false}">
+				<img src="<c:url value="/IMAGES/backWithYCP.svg"/>" height="122" width="84"alt="${card.getal} ${card.kleur}">			
+			</c:if>			
 			</td>
 			</c:forEach>
 		</tr>

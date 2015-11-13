@@ -41,12 +41,15 @@ public class PlayPoker extends HttpServlet {
 		
 		if (request.getParameter("restart")!=null){
 			List<Player> players = (List<Player>) context.getAttribute("players");
-			players.get(0).clearHand();
-			players.get(0).setHasFolded(false);
-			players.get(0).setWinner(false);
-			players.get(1).clearHand();			
-			players.get(1).setHasFolded(false);
-			players.get(1).setWinner(false);
+			Player p = players.get(0);
+			p.clearHand();
+			p.setHasFolded(false);
+			p.setWinner(false);
+			ComputerPlayer ai = (ComputerPlayer) players.get(1);
+			ai.clearHand();			
+			ai.setHasFolded(false);
+			ai.setWinner(false);
+			ai.setVisibleHand(false);
 			context.setAttribute("winner", null);
 		}
 		

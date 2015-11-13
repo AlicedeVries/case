@@ -17,12 +17,12 @@
 	<tr>
 		<td>
 		<form method="post" action="/BJ/Call">
-			<input type="submit" value="Call" style="width: 90px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
+			<input type="submit" value="Call 5" style="width: 90px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
 		</form>
 		</td>
 		<td>
 		<form method="post" action="/BJ/Raise">
-			<input type="submit" value="Raise" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
+			<input type="submit" value="Raise 10" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>
 				<td>

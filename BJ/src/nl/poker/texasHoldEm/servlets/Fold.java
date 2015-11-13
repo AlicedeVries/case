@@ -1,7 +1,6 @@
 package nl.poker.texasHoldEm.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import general.Card;
 import nl.poker.texasHoldEm.game.ComputerPlayer;
 import nl.poker.texasHoldEm.game.Game;
 import nl.poker.texasHoldEm.game.Player;
@@ -40,15 +38,16 @@ public class Fold extends HttpServlet {
 		Game game = (Game) context.getAttribute("game");
 		
 		List<Player> players = (List<Player>) context.getAttribute("players");
-		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
 		Player player1 = players.get(0);
 		player1.fold(game);
 		
 		players.get(1).setStackBijWinstHand(game.getPotSize());
+		request.setAttribute("gain", game.getPotSize());
 		
-		//players.remove(0);
+		ComputerPlayer ai = (ComputerPlayer) players.get(1);
+		ai.setVisibleHand(true);
 		
-		context.getRequestDispatcher("/End").forward(request, response);		
+		context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);		
 		
 	}
 
