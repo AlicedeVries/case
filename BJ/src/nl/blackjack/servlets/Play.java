@@ -63,7 +63,7 @@ public class Play extends HttpServlet {
 			getServletContext().getRequestDispatcher("/Blackjack/Wait").forward(request, response);  //////TODO  
 		}
 		else { 
-			if (game.hasBlackjack(p)){
+			if (p.hasBlackjack()){
 				request.setAttribute("msg", "You won! You have blackjack!!");
 				getServletContext().getRequestDispatcher("/Blackjack/Stand").forward(request, response);
 			}

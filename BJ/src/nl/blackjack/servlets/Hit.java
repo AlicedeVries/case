@@ -61,7 +61,7 @@ public class Hit extends HttpServlet {
 			else {
 				game.drawCard(p);
 				
-				if (!game.hasValidScore(p)){
+				if (!p.hasValidScore()){
 					p.stand();
 					request.setAttribute("msg", "You lost! You went bust!!");
 					getServletContext().getRequestDispatcher("/Blackjack/Stand").forward(request, response);			

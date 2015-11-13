@@ -62,13 +62,15 @@ public class Wait extends HttpServlet {
 		
 		else if (game!= null){
 		//if a game already exists
-			if (game.getHasFinished()){
+			if (game.isFinished()){
 				System.out.println("has finished");
 			//if game has finished
 				addToWaitingPlayerList(getPlayer(session));
-				if (System.currentTimeMillis()- game.endTime>= MAX_TIME_AFTER_GAME)
-				//if game has finished a while ago
+				if (System.currentTimeMillis()- game.endTime>= MAX_TIME_AFTER_GAME){
+					//if game has finished a while ago
+					System.out.println("while ago");
 					startNewGame(request, response);
+				}
 				else 
 					waitSomeMore(request, response);					
 			}
@@ -134,7 +136,7 @@ public class Wait extends HttpServlet {
 		ServletContext context = getServletContext();
 		List<Player> players = (List<Player>) context.getAttribute("waitingPlayers");
 		Game game = new Game(players);
-		context.setAttribute("nextPlayers",null);
+		context.setAttribute("waitingPlayers",null);
 		context.setAttribute("BJgame",game);
 		context.getRequestDispatcher("/Blackjack/Play").forward(request, response);					
 	}

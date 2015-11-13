@@ -10,10 +10,10 @@
 <body>
 	<table>
 		<tr> 
-			<td> <h3>Dealers hand:</h3> <h4>score: ${BJgame.dealerScore}</h4></td> 
-			<c:forEach items="${BJgame.dealerHand}" var="card">
+			<td> <h3>Dealers hand:</h3> <h4>score: ${BJgame.dealer.score}</h4></td> 
+			<c:forEach items="${BJgame.dealer.hand}" var="card">
 			<td>	
-			<img src="<c:url value="${card.image}" />" width="84pt"  height="122pt"  alt="${card.waarde} ${card.kleur}">			
+			<img src="<c:url value="${card.image}" />" width="84pt"  height="122pt"  alt="${card.getal} ${card.kleur}">			
 			</td>
 			</c:forEach>
 		</tr>
@@ -30,7 +30,7 @@
 			</td>
 			<c:forEach items="${p.hand}" var="card">
 			<td>
-			<img src="<c:url value="${card.image}" />" height="122" width="84"alt="${card.waarde} ${card.kleur}">			
+			<img src="<c:url value="${card.image}" />" height="122" width="84"alt="${card.getal} ${card.kleur}">			
 			</td>
 			</c:forEach>
 		</tr>

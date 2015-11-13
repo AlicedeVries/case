@@ -31,16 +31,8 @@ public class Card {
 		return getal;
 	}
 	
-	public int getWaarde() {
-		if (getal == 1)
-			return 11;
-		if (getal > 10)
-			return 10;
-		return getal;
-	}
-
 	public String getImage() {
-		if (this.kleur==Kleur.SECRET)
+		if (getal==0)
 			return "/IMAGES/backWithYCP.svg";
 		String img = "/IMAGES/";
 		switch (this.kleur){

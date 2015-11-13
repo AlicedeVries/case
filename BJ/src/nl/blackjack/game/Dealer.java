@@ -28,7 +28,7 @@ public class Dealer extends Player {
 			return super.getHand();
 		List<Card> hand =new ArrayList<Card>();
 		hand.add(super.getHand().get(0));
-		hand.add(new Card(0, Kleur.SECRET));
+		hand.add(new Card(0, Kleur.HARTEN));
 		return hand;
 	}
 

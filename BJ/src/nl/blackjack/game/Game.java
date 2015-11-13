@@ -11,7 +11,7 @@ public class Game {
 	private Dealer dealer;
 	private List<Player> players;
 	public long startTime;
-	public long endTime = -1;
+	public long endTime;
 
 	public Game(List<Player> players) {
 		this.players=players;
@@ -21,75 +21,47 @@ public class Game {
 		
 		for (Player p : players){
 			p.clearHand();			
-			p.ask(deck);			
+			p.askCard(deck);			
 		}
-		dealer.ask(deck);		
+		dealer.askCard(deck);		
 		for (Player p : players){
-			p.ask(deck);			
+			p.askCard(deck);			
 		}
-		dealer.ask(deck);
+		dealer.askCard(deck);
 		startTime = System.currentTimeMillis();
 	}
 	
-	public List<Card> getDealerHand(){
-		return dealer.getHand();
+	public Dealer getDealer(){
+		return dealer;
 	}
 
 	public void playDealer(){
-		dealer.setVisibleHand(true);
-		while (dealer.getScore()<17)
-			dealer.ask(deck);
-	}
-
-	public void dealerHandVisible(boolean visible){
-		dealer.setVisibleHand(visible);
+		if (!dealer.hasVisibleHand()){
+			dealer.setVisibleHand(true);
+			while (dealer.getScore()<17)
+				dealer.askCard(deck);			
+			endTime = System.currentTimeMillis();
+		}
 	}
 
 	public void drawCard(Player p){
-		p.ask(deck);
-	}
-		
-	public boolean hasValidScore (Player p){
-		return (p.getScore()<=21);
+		p.askCard(deck);
 	}
 
-	public boolean hasBlackjack (Player p){
-		return (p.getScore()==21);
-	}
-	
-
-	public boolean dealerHasBlackjack (){
-		return (dealer.getScore()==21 && dealer.getHand().size()==2);
-	}
-
-	public boolean dealerHasValidScore (){
-		return (dealer.getScore()<=21);
-	}
-	
 	public boolean dealerBeatsPlayer(Player p) {
 		return ( p.getScore()<dealer.getScore() );
 	}
 
-	public boolean dealerPlayerDraw(Player p) {
+	public boolean dealerDrawsPlayer(Player p) {
 		return ( p.getScore()==dealer.getScore() );
 	}
 	
-	public boolean getHasFinished (){
-		return endTime != -1;
-	}
-	
-	public int getDealerScore(){
-		return dealer.getScore();
-	}
-	
+		
 	public boolean isFinished(){
 		for (Player p: players){
 			if (!p.getStand())
 				return false;
 		}
-		if (!dealer.hasVisibleHand())
-			playDealer();
-		endTime = System.currentTimeMillis();
 		return true;
 	}
 
