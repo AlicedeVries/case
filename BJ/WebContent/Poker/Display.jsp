@@ -16,7 +16,7 @@
 			</td>
 			<c:forEach items="${game.tableCards}" var="card">
 			<td>	
-			<img src="<c:url value="${card.image}" />" width="84pt"  height="122pt"  alt="${card.waarde} ${card.kleur}">			
+			<img src="<c:url value="${card.image}" />" width="84pt"  height="122pt"  alt="${card.getal} ${card.kleur}">			
 			</td>
 			</c:forEach>
 		</tr>
@@ -31,7 +31,7 @@
 			</c:if>		
 			<h4> 
 				Chips: ${p.stack}
-				<c:if test="${p.name==winner.name}">
+				<c:if test="${p.winner==true}">
 					(${p.stack-game.potSize} + ${game.potSize})
 				</c:if>		
 			

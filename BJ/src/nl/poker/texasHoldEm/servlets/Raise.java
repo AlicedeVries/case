@@ -42,6 +42,7 @@ public class Raise extends HttpServlet {
 		List<Player> players = (List<Player>) context.getAttribute("players");
 		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
 		Player player1 = players.get(0);
+		player1.raise(game);
 		computerPlayer.actie(game, true);
 				
 		if(game.getTableCards().size() == 0)
@@ -51,6 +52,15 @@ public class Raise extends HttpServlet {
 		else if(game.getTableCards().size() == 4)
 			game.river();
 		else {
+			if (game.isItAdraw(players.get(0), players.get(1))){
+				players.get(0).setStackBijWinstHand(game.getPotSize()/2);
+				players.get(1).setStackBijWinstHand(game.getPotSize()/2);
+				context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response); return;
+			}
+			Player winner = game.winnerOfHand(players.get(0), players.get(1));
+			winner.setStackBijWinstHand(game.getPotSize());
+			context.setAttribute("winner", winner) ;
+			
 			context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);
 			return;
 		}

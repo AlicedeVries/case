@@ -19,14 +19,14 @@ import nl.poker.texasHoldEm.game.Player;
 /**
  * Servlet implementation class Check
  */
-@WebServlet("/Check")
-public class Check extends HttpServlet {
+@WebServlet("/Call")
+public class Call extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Check() {
+    public Call() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,21 +41,9 @@ public class Check extends HttpServlet {
 		
 		List<Player> players = (List<Player>) context.getAttribute("players");
 		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
-		
-		int potsizeVoorActie = game.getPotSize();
-		
-		computerPlayer.actie(game, false);
-		
-		int potsizeNaActie = game.getPotSize();
-		
-	
-		if(potsizeVoorActie != potsizeNaActie) {
-			request.setAttribute("msg", "AI Player bet €5");
-			context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response);
-			return;
-		}
-		
-		
+		Player player1 = players.get(0);
+		player1.call(game);
+				
 		if(game.getTableCards().size() == 0)
 			game.flop();
 		else if(game.getTableCards().size() == 3)

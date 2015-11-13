@@ -14,6 +14,7 @@ public class Player extends HandHolder{
 
 	private int stack = 100;
 	private boolean hasFolded = false;
+	private boolean winner = false;
 	
 	public Player(String name) {
 		super(name);	
@@ -78,12 +79,12 @@ public class Player extends HandHolder{
 	}
 	
 	public void call(Game game){
-		stack -= 5;	
-		game.addToPot(5);
+			stack -= 5;	
+			game.addToPot(5);
 	}
 	
 	public void raise(Game game){
-		stack -= 5;	
+		stack -= 10;	
 		game.addToPot(10);
 	}
 	
@@ -92,6 +93,14 @@ public class Player extends HandHolder{
 		hasFolded=true;
 	}
 	
+	public boolean isWinner() {
+		return winner;
+	}
+
+	public void setWinner(boolean winner) {
+		this.winner = winner;
+	}
+
 	public boolean getHasFolded() {
 		return hasFolded;
 	}
@@ -106,6 +115,7 @@ public class Player extends HandHolder{
 	
 	public void setStackBijWinstHand(int potsize){
 		stack = stack + potsize;
+		winner= true;
 	}
 	
 

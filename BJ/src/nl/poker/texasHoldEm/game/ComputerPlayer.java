@@ -12,18 +12,24 @@ public class ComputerPlayer extends Player {
 	
 	public void actie(Game game, boolean facingBetOrRaise){
 		HandHolder table = game.getTable();
-		if(!facingBetOrRaise)
-			if(getScore(table) > 200)
+		if(!facingBetOrRaise){
+			int a = (int)(Math.random()*100);
+			int b = (int)((Math.random()*100)+150);
+			int bluff = (int)(Math.random()*100);
+			System.out.println("player bluff yoloness: " + bluff + " bluff getal: " + a + " handscore moet hoger zijn dan: " + b + " handscore is: " + (getScore(table)));
+			if((getScore(table) > b) || bluff > a) {
 				bet(game);
-			else
-				check(game);
+			}
+		} else
+			check(game);
 		if(facingBetOrRaise)
-			if(getScore(table) < 0)
+			if(getScore(table) < 200)
 				fold(game);
 			else if(getScore(table) > 200 || getScore(table) < 400)
 				call(game);
-			else
+			else {
 				raise(game);
+			}
 	}
 	
 //	public void setFacingBetOrRaiseTrue() {

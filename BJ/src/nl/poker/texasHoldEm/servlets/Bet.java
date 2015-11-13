@@ -43,8 +43,31 @@ public class Bet extends HttpServlet {
 		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
 		Player player1 = players.get(0);
 		player1.bet(game);
+		
+		int potsizeVoorActie = game.getPotSize();
 		computerPlayer.actie(game, true);
-				
+		int potsizeNaActie = game.getPotSize();
+		
+		//check of AI player raist
+		if((potsizeVoorActie + 10) == potsizeNaActie) {
+			request.setAttribute("msg", "AI Player raiset €10");
+			context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response);
+			return;
+		}
+		
+		//check of AI player fold
+		if(potsizeVoorActie == potsizeNaActie) {
+			request.setAttribute("msg", "AI Player fold. Jij wint!");
+			
+			Player winner = game.winnerOfHand(players.get(0), players.get(1));
+			winner.setStackBijWinstHand(game.getPotSize());
+			context.setAttribute("winner", winner) ;
+			
+			context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);
+			return;
+		}
+		
+		//als AI player callt, dan het volgende:		
 		if(game.getTableCards().size() == 0)
 			game.flop();
 		else if(game.getTableCards().size() == 3)
@@ -52,6 +75,15 @@ public class Bet extends HttpServlet {
 		else if(game.getTableCards().size() == 4)
 			game.river();
 		else {
+			if (game.isItAdraw(players.get(0), players.get(1))){
+				players.get(0).setStackBijWinstHand(game.getPotSize()/2);
+				players.get(1).setStackBijWinstHand(game.getPotSize()/2);
+				context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response); return;
+			}
+			Player winner = game.winnerOfHand(players.get(0), players.get(1));
+			winner.setStackBijWinstHand(game.getPotSize());
+			context.setAttribute("winner", winner) ;
+			
 			context.getRequestDispatcher("/Poker/EndOfGame.jsp").forward(request, response);
 			return;
 		}

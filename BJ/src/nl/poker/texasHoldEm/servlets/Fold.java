@@ -44,6 +44,8 @@ public class Fold extends HttpServlet {
 		Player player1 = players.get(0);
 		player1.fold(game);
 		
+		players.get(1).setStackBijWinstHand(game.getPotSize());
+		
 		//players.remove(0);
 		
 		context.getRequestDispatcher("/End").forward(request, response);		

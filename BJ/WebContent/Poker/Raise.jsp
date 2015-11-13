@@ -10,6 +10,9 @@
 <body>
 <h1 style="color:#f67f00">Welcome to Poker Online</h1>
 	<c:import url="/Poker/Display.jsp"></c:import>
+	
+	<h4>${msg}</h4>
+	
 	<table>
 	<tr>
 		<td>
@@ -23,7 +26,7 @@
 		</form>
 		</td>
 				<td>
-		<form method="post" action="/Poker/Fold">
+		<form method="post" action="/BJ/Fold">
 			<input type="submit" value="Fold" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>

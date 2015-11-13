@@ -56,8 +56,7 @@ public class Game  {
 			return p1;
 		if(p1.getScore(table) < p2.getScore(table))
 			return p2;
-		else
-			return null;
+		return null;
 	}	
 	
 	public boolean isItAdraw(Player p1, Player p2) {
