@@ -18,6 +18,8 @@ public class Player extends HandHolder{
 	}
 	
 	public int getWaarde(Card c){
+		if (!c.isVisible())
+			return 0;
 		if (c.getGetal() == 1)
 			return 11;
 		if (c.getGetal() > 10)
@@ -27,7 +29,7 @@ public class Player extends HandHolder{
 	
 	public int getScore(){
 		int sum=0;
-		int azen  = 0;
+		int azen=0;
 		for (Card c: getHand()){
 			sum+=getWaarde(c);
 			if (c.getGetal()==1)
@@ -58,6 +60,9 @@ public class Player extends HandHolder{
 		return stand;
 	}
 
+	public void setSecondCardVisible(boolean visible) {
+		getHand().get(1).setVisible(visible);
+	}
 
 	
 }

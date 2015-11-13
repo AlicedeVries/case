@@ -4,12 +4,14 @@ public class Card {
 	
 	private int getal;
 	private Kleur kleur;
+	private boolean visible;
 
 	
 	public Card(int getal, Kleur kleur)
 	{
 		this.getal = getal;
 		this.kleur = kleur;		
+		this.visible = true;
 	}
 	
 	@Override
@@ -31,8 +33,16 @@ public class Card {
 		return getal;
 	}
 	
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
 	public String getImage() {
-		if (getal==0)
+		if (!visible)
 			return "/IMAGES/backWithYCP.svg";
 		String img = "/IMAGES/";
 		switch (this.kleur){

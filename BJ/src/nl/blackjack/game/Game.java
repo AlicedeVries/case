@@ -7,14 +7,15 @@ import general.Deck;
 public class Game {
 	
 	private Deck deck;
-	private Dealer dealer;
+	private Player dealer;
 	private List<Player> players;
 	public long startTime;
 	public long endTime;
 
 	public Game(List<Player> players) {
 		this.players=players;
-		dealer = new Dealer("Deler");
+		dealer = new Player("Dealer");
+
 		deck = new Deck(6);
 		deck.shuffle();
 		
@@ -27,16 +28,19 @@ public class Game {
 			p.askCard(deck);			
 		}
 		dealer.askCard(deck);
+		dealer.setSecondCardVisible(false);
+		
 		startTime = System.currentTimeMillis();
 	}
 	
-	public Dealer getDealer(){
+	public Player getDealer(){
 		return dealer;
 	}
 
 	public void playDealer(){
-		if (!dealer.hasVisibleHand()){
-			dealer.setVisibleHand(true);
+		if (!dealer.getStand()){
+			dealer.stand();
+			dealer.setSecondCardVisible(true);
 			while (dealer.getScore()<17)
 				dealer.askCard(deck);			
 			endTime = System.currentTimeMillis();

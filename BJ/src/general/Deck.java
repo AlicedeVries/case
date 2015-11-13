@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Deck {
 	
-	private List<Card> deck = new ArrayList<Card>();
+	protected List<Card> deck = new ArrayList<Card>();
 	
 	public Deck() {
 		createFullDeck();				
@@ -18,18 +18,9 @@ public class Deck {
 	}
 	
 	private void createFullDeck() {
-		for (int i=0; i<13;i++){
-			deck.add(new Card(i+1,Kleur.HARTEN)); 
-		}
-		for (int i=0; i<13;i++){
-			deck.add(new Card(i+1,Kleur.SCHOPPEN)); 
-		}
-		for (int i=0; i<13;i++){
-			deck.add(new Card(i+1,Kleur.RUITEN)); 
-		}		
-		for (int i=0; i<13;i++){
-			deck.add(new Card(i+1,Kleur.KLAVEREN)); 
-		}
+		for (Kleur k: Kleur.values())
+			for (int i=0; i<13;i++)
+				deck.add(new Card(i+1,k));
 	}
 	
 	public void shuffle()
