@@ -70,6 +70,20 @@ public class Player extends HandHolder{
 		
 	}
 	
+	//TODO: deze functie afmaken
+	public int getScorePreflop() {
+		ArrayList<Card> preflopHand = (ArrayList<Card>) getHand();
+		int getal1 = preflopHand.get(0).getGetal();
+		int getal2 = preflopHand.get(1).getGetal();
+		int preflopHandScore;
+		
+		if(getal1 == getal2) { }
+		
+		return 1;
+	}
+	
+	
+	
 	
 	public void check(Game game){
 		

@@ -17,7 +17,7 @@ import nl.poker.texasHoldEm.game.Player;
 /**
  * Servlet implementation class Check
  */
-@WebServlet("/Raise")
+@WebServlet("/Poker/Raise")
 public class Raise extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -75,7 +75,7 @@ public class Raise extends HttpServlet {
 		else if(game.getTableCards().size() == 4)
 			game.river();
 		else {
-			context.getRequestDispatcher("/End").forward(request, response);
+			context.getRequestDispatcher("/Poker/End").forward(request, response);
 			return;
 		}
 		context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);		

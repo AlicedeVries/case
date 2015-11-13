@@ -17,7 +17,7 @@ import nl.poker.texasHoldEm.game.Player;
 /**
  * Servlet implementation class End
  */
-@WebServlet("/End")
+@WebServlet("/Poker/End")
 public class End extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
