@@ -1,6 +1,8 @@
 package nl.blackjack.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,8 +29,12 @@ public class Logout extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
-
+		ServletContext context = getServletContext();
+		HttpSession session = request.getSession(false);
+		if (session!= null)
+			session.setAttribute("player", null);
+		context.getRequestDispatcher("/Blackjack/Start").forward(request, response);
+		
 	}
 
 	/**

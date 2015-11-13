@@ -21,7 +21,7 @@ public class Player extends HandHolder{
 	}
 	
 	@Override
-	public boolean ask(Deck deck){
+	public boolean askCard(Deck deck){
 		getHand().add(deck.draw());
 		return true;
 	}

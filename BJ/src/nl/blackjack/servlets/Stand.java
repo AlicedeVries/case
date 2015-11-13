@@ -51,24 +51,25 @@ public class Stand extends HttpServlet {
 			context.getRequestDispatcher("/Blackjack/Start").forward(request, response);
 		}
 		else{
-			Player p1 = (Player) session.getAttribute("player");
+			Player p = (Player) session.getAttribute("player");
 			Game game = (Game) context.getAttribute("BJgame");
-			if (p1==null|| game==null)
+			if (p==null|| game==null)
 				context.getRequestDispatcher("/Blackjack/Start").forward(request, response);
 			else{		
-				p1.stand();
+				p.stand();
 				if(game.isFinished()){
-					if (game.hasBlackjack(p1))
+					game.playDealer();
+					if (p.hasBlackjack())
 						request.setAttribute("msg", "You won! You have blackjack!");					
-					else if (!game.hasValidScore(p1))
+					else if (!p.hasValidScore())
 						request.setAttribute("msg", "You lost! You went bust");											
-					else if (game.dealerPlayerDraw(p1))
+					else if (game.dealerDrawsPlayer(p))
 						request.setAttribute("msg", "You have a draw with Dealer!");
-					else if (game.dealerHasBlackjack())
+					else if (game.getDealer().hasBlackjack())
 						request.setAttribute("msg", "You lost! Dealer has blackjack");
-					else if (!game.dealerHasValidScore())
+					else if (!game.getDealer().hasValidScore())
 						request.setAttribute("msg", "You won! Dealer went bust");
-					else if (game.dealerBeatsPlayer(p1))
+					else if (game.dealerBeatsPlayer(p))
 						request.setAttribute("msg", "You lost!");
 					else
 						request.setAttribute("msg", "You won!");

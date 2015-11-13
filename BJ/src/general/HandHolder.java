@@ -12,7 +12,7 @@ public abstract class HandHolder {
 		this.name = name;	
 	}
 	
-	public boolean ask(Deck deck){
+	public boolean askCard(Deck deck){
 		hand.add(deck.draw());
 		return true;
 	}

@@ -1,4 +1,4 @@
 package general;
 
-public enum Kleur{ KLAVEREN, SCHOPPEN, HARTEN, RUITEN, SECRET}
+public enum Kleur{ KLAVEREN, SCHOPPEN, HARTEN, RUITEN}
 

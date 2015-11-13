@@ -22,29 +22,29 @@ public class Game  {
 		deck.shuffle();
 		
 		for (Player p : players){
-			p.ask(deck);			
+			p.askCard(deck);			
 		}	
 		for (Player p : players){
-			p.ask(deck);			
+			p.askCard(deck);			
 		}
-		bovensteKaart = new Card(0, Kleur.SECRET);
+		bovensteKaart = new Card(0, Kleur.HARTEN);
 	}
 	
 	public void flop(){ 
 		deck.draw();
-		table.ask(deck);
-		table.ask(deck);
-		table.ask(deck);
+		table.askCard(deck);
+		table.askCard(deck);
+		table.askCard(deck);
 	}
 	
 	public void turn(){
 		deck.draw();
-		table.ask(deck);
+		table.askCard(deck);
 	}
 	
 	public void river(){
 		deck.draw();
-		table.ask(deck);
+		table.askCard(deck);
 	}
 
 	public Player winnerOfHand(Player p1, Player p2) {

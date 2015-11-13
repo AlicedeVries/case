@@ -44,10 +44,6 @@ public class Start extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(true);
-		if (request.getParameter("logout")!=null){
-			session.setAttribute("player", null);
-		}
-		
 		String name = (String) request.getParameter("name");
 		if (name==null || name==""){
 			context.getRequestDispatcher("/BlackJack/StartPage.jsp").forward(request, response);	
