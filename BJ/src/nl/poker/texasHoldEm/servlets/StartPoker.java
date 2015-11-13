@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class StartPoker
  */
-@WebServlet("/StartPoker")
+@WebServlet("/Poker/StartPoker")
 public class StartPoker extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,13 +40,8 @@ public class StartPoker extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setMaxInactiveInterval(600);
 			session.setAttribute("name", name);
-			context.getRequestDispatcher("/PlayPoker").forward(request, response);	
+			context.getRequestDispatcher("/Poker/PlayPoker").forward(request, response);	
 		}
-
-		
-		
-		
-		
 		
 	}
 

@@ -17,7 +17,7 @@ import nl.poker.texasHoldEm.game.Player;
 /**
  * Servlet implementation class Check
  */
-@WebServlet("/Fold")
+@WebServlet("/Poker/Fold")
 public class Fold extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

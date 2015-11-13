@@ -10,55 +10,40 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public void actie(Game game, boolean facingBetOrRaise){
+		//preflop actie	
 		HandHolder table = game.getTable();
-		if(!facingBetOrRaise){
-			int a = (int)(Math.random()*100);
-			int b = (int)((Math.random()*100)+150);
-			int bluff = (int)(Math.random()*100);
-			System.out.println("player bluff yoloness: " + bluff + " bluff getal: " + a + " handscore moet hoger zijn dan: " + b + " handscore is: " + (getScore(table)));
-			if((getScore(table) > b) || bluff > a) {
-				bet(game);
-				}
-		} else
-			check(game);
-		if(facingBetOrRaise)
-			if(getScore(table) < 200){
-				System.out.println("ai player folded");
-				fold(game);
-			}
-			else if(getScore(table) > 200 || getScore(table) < 400)
-				call(game);
-			else {
-				raise(game);
-			}
+		if(game.getTableCards().size() == 0) {
+			if(!facingBetOrRaise){
+				int bluff = (int)(Math.random()*100);
+				if((getScore(table) > 108) || bluff > 75)
+					bet(game);			
+			} else
+				check(game);
+			if(facingBetOrRaise)
+				if(getScore(table) < 108)
+					fold(game);
+				else if(getScore(table) > 108 || getScore(table) < 11)
+					call(game);
+				else
+					raise(game);
+		}
+		
+		//postflop actie
+		if(game.getTableCards().size() > 0) {
+
+			if(!facingBetOrRaise){
+				int bluff = (int)(Math.random()*100);
+				if((getScore(table) > 200) || bluff > 75)
+					bet(game);
+			} else
+				check(game);
+			if(facingBetOrRaise)
+				if(getScore(table) < 200)
+					fold(game);
+				else if(getScore(table) > 200 || getScore(table) < 400)
+					call(game);
+				else
+					raise(game);
+		}
 	}
-	
-	
-//	public void setFacingBetOrRaiseTrue() {
-//		facingBetOrRaise = true;
-//	}
-//	
-//	public void check(Game game){
-//		System.out.println("AI player checkt");
-//	}
-//	
-//	public void bet(Game game){
-//		super.bet(game);	
-//		System.out.println("AI player bet €5");
-//	}
-//	public void call(Game game){
-//		super.call(game);	
-//		System.out.println("AI player callt €5");
-//	}
-//	
-//	public void raise(Game game){
-//		super.raise(game);	
-//		System.out.println("AI player raist €10");
-//	}
-//	
-//	public void fold(Game game){
-//		System.out.println("AI player folds");
-//	}
-	
-	
 }

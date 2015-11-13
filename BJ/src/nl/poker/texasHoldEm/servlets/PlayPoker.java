@@ -19,7 +19,7 @@ import nl.poker.texasHoldEm.game.Player;
 /**
  * Servlet implementation class PlayPoker
  */
-@WebServlet("/PlayPoker")
+@WebServlet("/Poker/PlayPoker")
 public class PlayPoker extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
