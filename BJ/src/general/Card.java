@@ -5,6 +5,7 @@ public class Card {
 	private int getal;
 	private Kleur kleur;
 	private boolean visible;
+	private boolean clickable;
 
 	
 	public Card(int getal, Kleur kleur)
@@ -12,6 +13,7 @@ public class Card {
 		this.getal = getal;
 		this.kleur = kleur;		
 		this.visible = true;
+		this.clickable=true;
 	}
 	
 	@Override
@@ -39,6 +41,14 @@ public class Card {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+
+	public boolean isClickable() {
+		return clickable;
+	}
+
+	public void setClickable(boolean clickable) {
+		this.clickable = clickable;
 	}
 
 	public String getImage() {

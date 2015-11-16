@@ -4,6 +4,7 @@ import java.util.List;
 
 import general.Card;
 import general.Deck;
+import general.FullDeck;
 import general.HandHolder;
 import general.Kleur;
 
@@ -15,7 +16,7 @@ public class Game  {
 	private int potSize = 0;
 
 	public Game(List<Player> players) {
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		
 		for (Player p : players){

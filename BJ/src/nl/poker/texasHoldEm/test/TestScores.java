@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import general.Card;
 import general.Deck;
+import general.FullDeck;
 import general.HandHolder;
 import general.Kleur;
 import nl.poker.texasHoldEm.game.Player;
@@ -17,7 +18,7 @@ public class TestScores {
 	@Test
 	public void testRoyalFlush() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(1, Kleur.KLAVEREN));
 		p.add(new Card(1, Kleur.RUITEN));
@@ -34,7 +35,7 @@ public class TestScores {
 	@Test
 	public void testStraightFlush() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(6, Kleur.KLAVEREN));
 		p.add(new Card(9, Kleur.KLAVEREN));
@@ -50,7 +51,7 @@ public class TestScores {
 	@Test
 	public void testFlush() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(6, Kleur.RUITEN));
 		p.add(new Card(9, Kleur.KLAVEREN));
@@ -67,7 +68,7 @@ public class TestScores {
 	@Test
 	public void testStraight() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(6, Kleur.RUITEN));
 		p.add(new Card(9, Kleur.KLAVEREN));
@@ -84,7 +85,7 @@ public class TestScores {
 	@Test
 	public void testFourOfaKind() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(7, Kleur.KLAVEREN));
 		p.add(new Card(5, Kleur.RUITEN));
@@ -101,7 +102,7 @@ public class TestScores {
 	@Test
 	public void testThreeOfaKind() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(5, Kleur.KLAVEREN));
 		p.add(new Card(5, Kleur.RUITEN));
@@ -119,7 +120,7 @@ public class TestScores {
 	@Test
 	public void testPair() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(7, Kleur.KLAVEREN));
 		p.add(new Card(5, Kleur.RUITEN));
@@ -137,7 +138,7 @@ public class TestScores {
 	@Test
 	public void testFullHouse() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(7, Kleur.KLAVEREN));
 		p.add(new Card(7, Kleur.RUITEN));
@@ -155,7 +156,7 @@ public class TestScores {
 	@Test
 	public void testTwoPair() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(2, Kleur.KLAVEREN));
 		p.add(new Card(2, Kleur.RUITEN));
@@ -172,7 +173,7 @@ public class TestScores {
 	@Test
 	public void testHighCard() {
 		Player p = new Player("lennart");
-		deck = new Deck();
+		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(2, Kleur.KLAVEREN));
 		p.add(new Card(3, Kleur.RUITEN));

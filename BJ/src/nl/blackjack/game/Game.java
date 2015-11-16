@@ -3,6 +3,7 @@ package nl.blackjack.game;
 import java.util.List;
 
 import general.Deck;
+import general.FullDeck;
 
 public class Game {
 	
@@ -16,7 +17,7 @@ public class Game {
 		this.players=players;
 		dealer = new Player("Dealer");
 
-		deck = new Deck(6);
+		deck = new FullDeck(6);
 		deck.shuffle();
 		
 		for (Player p : players){
