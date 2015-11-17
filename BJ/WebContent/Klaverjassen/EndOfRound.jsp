@@ -1,15 +1,13 @@
-<!DOCTYPE html >
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>        
-<meta charset="UTF-8">
-<title>Game</title>
+<title>Card Played</title>
 </head>
 <body>
 <h1 style="color:#f67f00">Welcome to Klaverjassen Online</h1>
-	<form method="post" action="/BJ/Klaverjassen/Play" > 
 	<table>
 		<c:forEach items="${KJgame.players}" var="p">
 		<tr> 
@@ -38,27 +36,27 @@
 			</td>
 			<c:forEach items="${player.hand}" var="card">
 			<td>
-				<c:if test="${card.clickable==false}">
-					<img class="playerCard" src="<c:url value="${card.image}" />" height="122" width="84">			
-				</c:if>
-				<c:if test="${card.clickable==true}">
-					<input class="playerCard" type="image" src="<c:url value="${card.image}"/>" name="card" height="122" width="84" id="card"/>
-				</c:if>
+				<img class="playerCard" src="<c:url value="${card.image}" />" height="122" width="84">			
 			</td>
 			</c:forEach>
 		</tr>
 	</table>
-	</form>	
-		
-	<script>
-		window.onload = function(){
-			var images = document.getElementsByClassName('playerCard');
-			
-			for ( var i =0; i<images.length;i++)
-				images[i].value = i;
+	<br>
 
-		}
-	</script>
-
+	<c:if test="${game.roundFinished!=true}">
+	helloo!!
+	</c:if>
+	
+	
+	
+	<c:if test="${game.roundFinished==null}">
+		<form method="post" action="/BJ/Klaverjassen/Play" > 
+			<input type="submit" value="Next Round" style="width: 100px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">			
+		</form>	
+	</c:if>
+	
+	<c:if test="${game.roundFinished==false}">
+		<h5>Wait for other players to make a move</h5>
+	</c:if>
 </body>
 </html>
