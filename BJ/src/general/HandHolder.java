@@ -22,6 +22,11 @@ public abstract class HandHolder {
 		return true;
 	}
 	
+	public boolean remove(Card c){
+		hand.remove(c);
+		return true;
+	}
+
 	public String getName() {
 		return name;
 	}

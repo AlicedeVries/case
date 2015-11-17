@@ -11,6 +11,7 @@ public class Game {
 	
 	private Deck deck;
 	private Kleur troef;
+	private Kleur volgkleur;
 	private List<Player> players;
 	private boolean roundFinished;
 	
@@ -46,9 +47,28 @@ public class Game {
 		else if (Math.random()<0.5)
 			this.troef = Kleur.RUITEN;
 		else if (Math.random()<0.75)
-			this.troef = Kleur.KLAVEREN;
-		else 
 			this.troef = Kleur.SCHOPPEN;
+		else 
+			this.troef = Kleur.KLAVEREN;
+	}
+	
+	public Kleur getVolgkleur() {
+		return volgkleur;
+	}
+
+	public void setVolgkleur(Kleur volgkleur) {
+		this.volgkleur = volgkleur;
+	}
+
+	public void setRandomVolgkleur(Kleur volgkleur) {
+		if (Math.random()<0.25)
+			this.troef = Kleur.HARTEN;
+		else if (Math.random()<0.5)
+			this.troef = Kleur.RUITEN;
+		else if (Math.random()<0.75)
+			this.troef = Kleur.SCHOPPEN;
+		else 
+			this.troef = Kleur.KLAVEREN;
 	}
 	
 	public List<Player> getPlayers() {
@@ -59,7 +79,7 @@ public class Game {
 		return false;
 	}
 	
-	public boolean isRoundFinished() {
+	public boolean getRoundFinished() {
 		return roundFinished;
 	}
 
@@ -68,8 +88,10 @@ public class Game {
 	}
 
 	public void rotatePlayers(Player p){
-		int rotation = players.indexOf(p);
+		int rotation = 4-players.indexOf(p);
+		System.out.println("location before "+players.indexOf(p));
 		Collections.rotate(players, rotation);
+		System.out.println("location after" + players.indexOf(p));
 	}
 
 
