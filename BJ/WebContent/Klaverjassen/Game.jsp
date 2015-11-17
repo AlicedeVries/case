@@ -17,13 +17,11 @@
 			<c:if test="${p.name!=player.name}">
 				<td> 
 					<h3>${p.name} 's hand:</h3> 	
-					<h4>team: ${p.team}</h4>
+					<h4>team: <span class="team">${p.team}</span></h4>
+					<h4>score: ${p.teamScore}</h4>
 				</td>
 				<c:forEach items="${p.hand}" var="card">
 					<td>
-					<c:if test="${card == p.playCard}">
-						<img src="<c:url value="${card.image}" />" height="122" width="84">			
-					</c:if>
 					<c:if test="${card != p.playCard }">
 						<img src="<c:url value="/IMAGES/backWithYCP.svg" />" height="122" width="84">							
 					</c:if>
@@ -34,7 +32,8 @@
 			<c:if test="${p.name==player.name}">
 				<td> 
 					<h3> Your hand:</h3> 	
-					<h4>team: ${player.team}</h4>
+					<h4>team: <span class="team">${p.team}</span></h4>
+					<h4>score: ${p.teamScore}</h4>
 				</td>
 				<c:forEach items="${player.hand}" var="card">
 				<td>
@@ -47,6 +46,15 @@
 				</td>
 				</c:forEach>			
 			</c:if>
+			
+			<c:if test="${p.playCard!=null}">
+				<td>
+					<p style="color:#ffffff">-----------------</p>
+				</td>
+				<td>
+					 <img src="<c:url value="${p.playCard.image}" />" height="122" width="84" >			
+				</td>
+			</c:if>
 		</tr>
 		</c:forEach>		
 		<tr> 
@@ -57,10 +65,12 @@
 	<script>
 		window.onload = function(){
 			var images = document.getElementsByClassName('playerCard');
-			
 			for ( var i =0; i<images.length;i++)
 				images[i].value = i;
-
+			
+			var teams = document.getElementsByClassName("team")
+			for (var i=0; i<teams.length;i++)
+					teams[i].style.color = teams[i].innerHTML;
 		}
 	</script>
 

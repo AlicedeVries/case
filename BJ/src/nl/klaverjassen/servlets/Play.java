@@ -77,25 +77,26 @@ public class Play extends HttpServlet {
 		}
 		
 		else {
-//		while (!player.getHand().isEmpty()){			
-//			Scanner in = new Scanner(System.in);
-//			int cardIndex;
-//			do {
-//				System.out.print("Your turn: ");
-//				cardIndex = in.nextInt();
-//			} while (!player.getHand().get(cardIndex).isClickable());
-			
 			int cardIndex = Integer.parseInt(request.getParameter("card"));
 			player.setPlayCard(game, player.getHand().get(cardIndex));
 			game.rotatePlayers();
 			game.playAI();
 			
 			game.setWinnerOfRound();
-			System.out.println( "You won " + (game.getWinnerOfRound()==player));
+			int score = game.getRoundScore();
+			game.addScoreToWinningTeam(score);
+			request.setAttribute("msg",game.getWinnerOfRound().getName() + " wint de slag. Team "+ game.getWinnerOfRound().getTeam()+ " heeft "+ score +" punten verdiend.");
+			System.out.println( game.getWinnerOfRound().getName() + " won "+ score +" points");
+			
+			game.rotatePlayers(player);
+			
+			if (player.getHand().size()==1)
+			{
+				game.addScoreToWinningTeam(10);
+				request.setAttribute("msg2","Team "+ game.getWinnerOfRound().getTeam()+ " heeft de laatste slag gewonnen en krijgt 10 bonus punten ");
+			}
 
 			getServletContext().getRequestDispatcher("/Klaverjassen/EndOfRound.jsp").forward(request, response);	return;	
-
-//		}
 		}
 		
 		

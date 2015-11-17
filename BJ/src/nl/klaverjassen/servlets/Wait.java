@@ -2,6 +2,7 @@ package nl.klaverjassen.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -116,6 +117,7 @@ public class Wait extends HttpServlet {
 				p = new Player((String) session.getAttribute("name"));
 				session.setAttribute("player", p);
 		}
+		p.setTeamScore(0);
 		return p;
 	}
 	
@@ -141,8 +143,6 @@ public class Wait extends HttpServlet {
 			Player ai = new AIPlayer("AI player"+ aiNumber++);
 			players.add(ai);
 		}
-		for (Player p: players)
-			System.out.println(p.getName());
 		Game game = new Game(players);
 		context.setAttribute("waitingPlayers",null);
 		context.setAttribute("KJgame",game);
