@@ -40,6 +40,7 @@ public class PlayPoker extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		
 		if (request.getParameter("restart")!=null){
+			Game game = (Game) context.getAttribute("game");
 			List<Player> players = (List<Player>) context.getAttribute("players");
 			Player p = players.get(0);
 			p.clearHand();
@@ -55,7 +56,7 @@ public class PlayPoker extends HttpServlet {
 		
 
 		if (session==null){
-			context.getRequestDispatcher("/StartPoker").forward(request, response);
+			context.getRequestDispatcher("/Poker/StartPoker").forward(request, response);
 		}
 		
 		else {
@@ -65,7 +66,7 @@ public class PlayPoker extends HttpServlet {
 					session.setAttribute("player", p);
 			}
 			
-			ComputerPlayer computerPlayer;
+			ComputerPlayer computerPlayer;  
 			
 			List<Player> players = (List<Player>) context.getAttribute("players");
 			if (players==null){
@@ -75,9 +76,35 @@ public class PlayPoker extends HttpServlet {
 				players.add(computerPlayer);
 				context.setAttribute("players", players);
 			}
+			else 
+				computerPlayer = (ComputerPlayer) players.get(1);
+			
 			Game game = new Game(players);
+			p.setSmallOrBigBlind(game);
+			computerPlayer.setSmallOrBigBlind(game);
 			context.setAttribute("game", game);
-			context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+			if(computerPlayer.getDealer() == true) {
+				//de AI speler is de dealer, en mag dus preflop als eerst. 
+				int potsizeVoorActie = game.getPotSize();
+				computerPlayer.actie(game, false);
+				int potsizeNaActie = game.getPotSize();
+				
+				//als de AI speler preflop slechts callt, dan gaan we naar Game.jsp
+				if(potsizeVoorActie + 3 == potsizeNaActie) {
+					System.out.println("de AI speler callt");
+					context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response); return;
+				}
+				//als de AI speler preflop raist (2bet), dan gaan we naar raise.jsp
+				if(potsizeVoorActie + 8 == potsizeNaActie) {
+					System.out.println("de AI speler raist");
+					context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response); return;
+				}
+				//computerPlayer.actie(game, true);
+				//context.getRequestDispatcher("/Poker/Check").forward(request, response);
+				}
+			else
+				System.out.println("nu zijn wij de dealer en mogen wij eerst preflop");
+				context.getRequestDispatcher("/Poker/PreflopActie.jsp").forward(request, response);
 		}
 	}
 

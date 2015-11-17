@@ -134,3 +134,22 @@
 //	}
 //
 //}
+
+//package nl.poker.texasHoldEm.game;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//import java.util.Scanner;
+//
+//import general.Deck;
+//import general.HandHolder;
+//
+//public class OpstartKlasse {
+//
+//	public static void main(String[] args) {
+//		Player speler1 = new Player("Sjaak");
+//		
+//		speler1.testEquals();
+//	}
+//
+//}
