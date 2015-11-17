@@ -67,13 +67,19 @@ public class Bet extends HttpServlet {
 		}
 		
 		//als AI player callt, dan het volgende:		
-		request.setAttribute("msg", "AI Player called");
-		if(game.getTableCards().size() == 0)
+		
+		if(game.getTableCards().size() == 0) {
+			request.setAttribute("msg", "AI Player called. Flop is dealt. Your turn.");
 			game.flop();
-		else if(game.getTableCards().size() == 3)
+		}
+		else if(game.getTableCards().size() == 3) {
+			request.setAttribute("msg", "AI Player called. Turn is dealt. Your turn.");
 			game.turn();
-		else if(game.getTableCards().size() == 4)
+		}
+		else if(game.getTableCards().size() == 4) {
+			request.setAttribute("msg", "AI Player called. River is dealt. Your turn.");
 			game.river();
+		}
 		else {
 			context.getRequestDispatcher("/Poker/End").forward(request, response);
 			return;

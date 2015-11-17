@@ -40,32 +40,64 @@ public class Check extends HttpServlet {
 		List<Player> players = (List<Player>) context.getAttribute("players");
 		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
 		
-		int potsizeVoorActie = game.getPotSize();
+		//de actie na check van human player als de computerplayer de dealer is
+		if(computerPlayer.getDealer() == true) {
 		
-		computerPlayer.actie(game, false);
+			//indien het preflop is, en de human player checkt, dan heeft de computerplayer de smallblind gecallt en kunnen we naar de flop
+			if(game.getTableCards().size() == 0) {
+				game.flop();
+				request.setAttribute("msg", "Flop dealt. Your turn. Check or bet?");
+				context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);	
+				return;
+			}
+			
+			int potsizeVoorActie = game.getPotSize();
+			
+			computerPlayer.actie(game, false);
+			
+			int potsizeNaActie = game.getPotSize();
+			
 		
-		int potsizeNaActie = game.getPotSize();
-		
-	
-		if(potsizeVoorActie != potsizeNaActie) {
-			request.setAttribute("msg", "AI Player bet 5");
-			context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response);
-			return;
+			if(potsizeVoorActie != potsizeNaActie) {
+				request.setAttribute("msg", "AI Player bet 5");
+				context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response);
+				return;
+			}
+			
+			if(game.getTableCards().size() == 0) {
+				request.setAttribute("msg", "AI Player checks preflop. Flop is dealt. Your turn.");
+				game.flop();
+			}
+			else if(game.getTableCards().size() == 3) {
+				request.setAttribute("msg", "AI Player checks flop. Turn is dealt. Your turn.");
+				game.turn();
+			}
+				
+			else if(game.getTableCards().size() == 4) {
+				request.setAttribute("msg", "AI Player checks turn. River is dealt. Your turn.");
+				game.river();
+			}
+			else {
+				context.getRequestDispatcher("/Poker/End").forward(request, response);
+				return;
+			}
+			context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);		
 		}
 		
-		
-		if(game.getTableCards().size() == 0)
-			game.flop();
-		else if(game.getTableCards().size() == 3)
-			game.turn();
-		else if(game.getTableCards().size() == 4)
-			game.river();
-		else {
-			context.getRequestDispatcher("/Poker/End").forward(request, response);
-			return;
+		//de actie na check van human player als human player de dealer is
+		if(computerPlayer.getDealer() != true) {
+			if(game.getTableCards().size() == 0)
+				game.flop();
+			else if(game.getTableCards().size() == 3)
+				game.turn();
+			else if(game.getTableCards().size() == 4)
+				game.river();
+			else {
+				context.getRequestDispatcher("/Poker/End").forward(request, response);
+				return;
+			}
+			context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);	
 		}
-		context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);		
-		
 	}
 
 	/**

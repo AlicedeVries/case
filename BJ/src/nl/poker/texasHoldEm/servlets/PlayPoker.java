@@ -92,18 +92,19 @@ public class PlayPoker extends HttpServlet {
 				//als de AI speler preflop slechts callt, dan gaan we naar Game.jsp
 				if(potsizeVoorActie + 3 == potsizeNaActie) {
 					System.out.println("de AI speler callt");
+					request.setAttribute("msg", "AI Player called the Big Blind. Your turn.");
 					context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response); return;
 				}
 				//als de AI speler preflop raist (2bet), dan gaan we naar raise.jsp
 				if(potsizeVoorActie + 8 == potsizeNaActie) {
-					System.out.println("de AI speler raist");
+					request.setAttribute("msg", "AI Player raised preflop. Your turn");
 					context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response); return;
 				}
 				//computerPlayer.actie(game, true);
 				//context.getRequestDispatcher("/Poker/Check").forward(request, response);
 				}
 			else
-				System.out.println("nu zijn wij de dealer en mogen wij eerst preflop");
+				request.setAttribute("msg", "Preflop. We are first to act. Fold, call or raise?");
 				context.getRequestDispatcher("/Poker/PreflopActie.jsp").forward(request, response);
 		}
 	}

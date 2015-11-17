@@ -48,8 +48,6 @@ public class Raise extends HttpServlet {
 		
 		//indien preflop
 		if(game.getTableCards().size() == 0) {
-			System.out.println("dit doet ie nog");
-			
 			int potsizeVoorPreflopActie = game.getPotSize();
 			computerPlayer.actie(game, true);
 			int potsizeNaPreflopActie = game.getPotSize();
@@ -69,26 +67,32 @@ public class Raise extends HttpServlet {
 			//als AI player niet fold dan heeft ie gecallt:
 			game.flop();
 			
-			//nu laten we de AI player meteen een actie doen op de flop
+			//nu laten we de AI player meteen een actie doen op de flop, mits hij niet de dealer is
+			if(computerPlayer.getDealer() == true) {
+				System.out.println("de AI speler callt jouw preflop 3bet");
+				request.setAttribute("msg", "AI Player called your preflop reraise. The flop is dealt. Your turn. Check or bet?");
+				context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+				return;
+			}
+			
 			int potsizeVoorFlopActie = game.getPotSize();
 			computerPlayer.actie(game, false);
 			int potsizeNaFlopActie = game.getPotSize();
 			
 			//indien de AI player niet bet gaan we naar:
 			if(potsizeVoorFlopActie == potsizeNaFlopActie) {
-				System.out.println("de AI speler heeft gecheckt op de flop");
+				request.setAttribute("msg", "AI Player checks flop");
 				context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
 				return;
 			}
 			if(potsizeVoorFlopActie != potsizeNaFlopActie) {
-				System.out.println("de AI speler heeft gebet op de flop");
+				request.setAttribute("msg", "AI Player bets flop");
 				context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response);
 				return;
 			}
 		}
 		//indien postflop
 		else {
-			System.out.println("hier komt ie niet");
 			int potsizeVoorActie = game.getPotSize();
 			computerPlayer.actie(game, true);
 			int potsizeNaActie = game.getPotSize();
@@ -113,14 +117,18 @@ public class Raise extends HttpServlet {
 			}
 			
 			//als AI player callt, dan het volgende:	
-			request.setAttribute("msg", "AI Player called");
-	
-			if(game.getTableCards().size() == 0)
+			if(game.getTableCards().size() == 0) {
+				request.setAttribute("msg", "AI Player called your raise. Flop is dealt. Your turn.");
 				game.flop();
-			else if(game.getTableCards().size() == 3)
+			}
+			else if(game.getTableCards().size() == 3) {
+				request.setAttribute("msg", "AI Player called your raise. Turn is dealt. Your turn.");
 				game.turn();
-			else if(game.getTableCards().size() == 4)
+			}
+			else if(game.getTableCards().size() == 4) {
+				request.setAttribute("msg", "AI Player called your raise. River is dealt. Your turn.");
 				game.river();
+			}
 			else {
 				context.getRequestDispatcher("/Poker/End").forward(request, response);
 				return;

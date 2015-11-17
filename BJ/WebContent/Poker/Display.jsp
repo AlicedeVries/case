@@ -39,6 +39,7 @@
 					(+ ${gain})
 				</c:if>
 				
+			
 				
 			</h4>
 			</td>
@@ -55,5 +56,7 @@
 		</tr>
 		</c:forEach>		
 	</table>
+	<h4>${msg}</h4>	
 </body>
+
 </html>
