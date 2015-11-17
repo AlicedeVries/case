@@ -245,7 +245,10 @@ public class Player extends HandHolder{
 		// loop door de lijst en zie of er 2 kaarten van dezelfde waarde inzitten
 		for(int k = 0; k < combine.size()-1; k++) {
 			if(combine.get(k).getGetal() == combine.get(k+1).getGetal()) {
-				return combine.get(k).getGetal();
+				if(combine.get(k).getGetal() == 1)
+					return combine.get(k).getGetal() + 13;
+				else
+					return combine.get(k).getGetal();
 			}
 		}
 		return -1;
@@ -289,10 +292,20 @@ public class Player extends HandHolder{
 		//remove three of a kind from copy of combine
 		ArrayList<Card> copy = (ArrayList<Card>) combine.clone();
 		for(int k = 0; k < copy.size(); k++) {
-			if (copy.get(k).getGetal()==waardePair){ 
-				copy.remove(k);
-				copy.remove(k);
-				break;
+			if (waardePair == 14){
+				if (copy.get(k).getGetal()==1){ 
+					copy.remove(k);
+					copy.remove(k);
+					break;
+				}
+				
+			}
+			else{
+				if (copy.get(k).getGetal()==waardePair){ 
+					copy.remove(k);
+					copy.remove(k);
+					break;
+				}
 			}
 		}
 		

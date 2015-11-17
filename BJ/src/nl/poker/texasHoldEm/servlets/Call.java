@@ -45,23 +45,98 @@ public class Call extends HttpServlet {
 			player1.callSmallBlindPreflop(game);
 		else
 			player1.call(game);
-				
+		
+		//de flop
 		if(game.getTableCards().size() == 0) {
 			game.flop();
-//			if(computerPlayer.getDealer() != true)
-//				computerPlayer.actie(game, false);
-//		
+			//Als de humanplayer de dealer is, mag de computerplayer na de human call meteen een actie doen:
+			if(computerPlayer.getDealer() != true) {
+				int potsizeVoorActie = game.getPotSize();
+				computerPlayer.actie(game, false);
+				int potsizeNaActie = game.getPotSize();
+				//Als de actie van de computerplayer een bet is gaan we naar Raise.jsp, is het een check gaan we naar Game.jsp
+				if(potsizeNaActie == potsizeVoorActie){
+					request.setAttribute("msg", "AI Player checks flop");
+					context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+					return;
+				}
+				if(potsizeNaActie != potsizeVoorActie){
+					request.setAttribute("msg", "AI Player bets flop");
+					context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response);
+					return;
+				}	
+			}
+			//Als de computerplayer de dealer is, mag de humanplayer de eerste actie doen na een human call:
+			if(computerPlayer.getDealer() == true) {
+				request.setAttribute("msg", "Flop dealt. You are first to act. Check or bet?");
+				context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+				return;
+			}
+			
 		}
-		else if(game.getTableCards().size() == 3)
+		//de turn
+		else if(game.getTableCards().size() == 3) {
 			game.turn();
-		else if(game.getTableCards().size() == 4)
+			//Als de humanplayer de dealer is, mag de computerplayer na de human call meteen een actie doen:
+			if(computerPlayer.getDealer() != true) {
+				int potsizeVoorActie = game.getPotSize();
+				computerPlayer.actie(game, false);
+				int potsizeNaActie = game.getPotSize();
+				//Als de actie van de computerplayer een bet is gaan we naar Raise.jsp, is het een check gaan we naar Game.jsp
+				if(potsizeNaActie == potsizeVoorActie){
+					request.setAttribute("msg", "AI Player checks turn");
+					context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+					return;
+				}
+				if(potsizeNaActie != potsizeVoorActie){
+					request.setAttribute("msg", "AI Player bets turn");
+					context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response);
+					return;
+				}
+			}
+			//Als de computerplayer de dealer is, mag de humanplayer de eerste actie doen na een human call:
+			if(computerPlayer.getDealer() == true) {
+				request.setAttribute("msg", "Turn dealt. You are first to act. Check or bet?");
+				context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+				return;
+			}
+		}
+			
+		//de river
+		else if(game.getTableCards().size() == 4) {
+			System.out.println("CODE uit Call.java");
 			game.river();
+			//Als de humanplayer de dealer is, mag de computerplayer na de human call meteen een actie doen:
+			if(computerPlayer.getDealer() != true) {
+				int potsizeVoorActie = game.getPotSize();
+				computerPlayer.actie(game, false);
+				int potsizeNaActie = game.getPotSize();
+				//Als de actie van de computerplayer een bet is gaan we naar Raise.jsp, is het een check gaan we naar Game.jsp
+				if(potsizeNaActie == potsizeVoorActie){
+					request.setAttribute("msg", "AI Player checks river");
+					context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+					return;
+				}
+				if(potsizeNaActie != potsizeVoorActie){
+					request.setAttribute("msg", "AI Player bets river");
+					context.getRequestDispatcher("/Poker/Raise.jsp").forward(request, response);
+					return;
+				}	
+			}
+			//Als de computerplayer de dealer is, mag de humanplayer de eerste actie doen na een human call:
+			if(computerPlayer.getDealer() == true) {
+				request.setAttribute("msg", "River dealt. You are first to act. Check or bet?");
+				context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);
+				return;
+			}
+		}	
+		//na de river
 		else {
 			context.getRequestDispatcher("/Poker/End").forward(request, response);
 			return;
 		}
 		context.getRequestDispatcher("/Poker/Game.jsp").forward(request, response);		
-		
+		return;
 	}
 
 	/**

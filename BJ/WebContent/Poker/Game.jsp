@@ -11,8 +11,6 @@
 <h1 style="color:#f67f00">Welcome to Poker Online</h1>
 	<c:import url="/Poker/Display.jsp"></c:import>
 	
-	<h4>${msg}</h4>
-	
 	<table>
 	<tr>
 		<td>
