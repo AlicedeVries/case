@@ -25,9 +25,15 @@ public class Player extends HandHolder {
 		return playCard;
 	}
 
-	public void setPlayCard(Card playCard) {
-		this.playCard = playCard;
+	public void setPlayCard(Game game, Card card) {
+		game.getSlag().add(card);
+		playCard = card;			
+		System.out.println(name+ " played "+ playCard);
 	}	
+	
+	public void clearPlayCard(){
+		playCard = null;
+	}
 	
 	public boolean hasVolgKleur(Kleur volgKleur) {
 		boolean hasVolgKleur = false;

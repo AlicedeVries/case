@@ -61,7 +61,7 @@ public class Wait extends HttpServlet {
 			context.getRequestDispatcher("/Klaverjassen/Start").forward(request, response);
 		}
 		
-		else if (game!= null){
+/*		else if (game!= null){
 		//if a game already exists
 			if (game.isFinished()){
 				System.out.println("has finished");
@@ -92,7 +92,7 @@ public class Wait extends HttpServlet {
 				}
 			}
 		} 
-		else{
+*/		else{
 		//if no game exists yet
 			System.out.println("no game");
 			addToWaitingPlayerList(getPlayer(session));
@@ -136,17 +136,17 @@ public class Wait extends HttpServlet {
 	private void startNewGame(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
 		List<Player> players = (List<Player>) context.getAttribute("waitingPlayers");
+		int aiNumber = 1;
 		while (players.size()<4){
-			Player ai = new AIPlayer("AI player");
+			Player ai = new AIPlayer("AI player"+ aiNumber++);
 			players.add(ai);
 		}
+		for (Player p: players)
+			System.out.println(p.getName());
 		Game game = new Game(players);
-		AIPlayer ai = (AIPlayer) players.get(3);
-		game.rotatePlayers(ai);
-		ai.makeMove(game);
 		context.setAttribute("waitingPlayers",null);
 		context.setAttribute("KJgame",game);
-		context.getRequestDispatcher("/Klaverjassen/Game.jsp").forward(request, response);					
+		context.getRequestDispatcher("/Klaverjassen/Play").forward(request, response);					
 	}
 	
 	private void waitSomeMore(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

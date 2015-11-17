@@ -1,8 +1,10 @@
 package nl.klaverjassen.game;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import general.Card;
 import general.Deck;
 import general.HalfDeck;
 import general.Kleur;
@@ -11,7 +13,8 @@ public class Game {
 	
 	private Deck deck;
 	private Kleur troef;
-	private Kleur volgkleur;
+	private Player winnerOfRound;
+	private List<Card> slag;
 	private List<Player> players;
 	private boolean roundFinished;
 	
@@ -31,6 +34,9 @@ public class Game {
 		players.get(3).setTeam("blue");
 		this.players = players;
 		startTime = System.currentTimeMillis();
+		troef = Kleur.KLAVEREN;
+		winnerOfRound=null;
+		slag = new ArrayList<Card>();
 	}
 
 	public Kleur getTroef() {
@@ -53,11 +59,9 @@ public class Game {
 	}
 	
 	public Kleur getVolgkleur() {
-		return volgkleur;
-	}
-
-	public void setVolgkleur(Kleur volgkleur) {
-		this.volgkleur = volgkleur;
+		if (slag.isEmpty())
+			return null;
+		return slag.get(0).getKleur();
 	}
 
 	public void setRandomVolgkleur(Kleur volgkleur) {
@@ -75,24 +79,51 @@ public class Game {
 		return players;
 	}
 
-	public boolean isFinished() {
-		return false;
+	public void rotatePlayers(Player p){
+		if (p==null)
+			return;
+		int rotation = 4-players.indexOf(p);
+		Collections.rotate(players, rotation);
+	}
+
+	public void rotatePlayers(){
+		Collections.rotate(players,3);
+	}
+
+	public void playAI(){
+		while (players.get(0) instanceof AIPlayer && slag.size()<4){
+			AIPlayer ai = (AIPlayer) players.get(0);
+			Card c = ai.pickCard(getVolgkleur());
+			ai.setPlayCard(this, c);
+			rotatePlayers();
+		}
+	}
+
+	public Player setWinnerOfRound() {
+		Collections.sort(slag, new KlaverjasComparator(troef, getVolgkleur()));
+		for (Player p : players)
+			if (p.getPlayCard()==slag.get(0))
+				winnerOfRound= p;
+		return winnerOfRound;
+		
+	}
+
+	public Player getWinnerOfRound() {
+		return winnerOfRound;
+	}
+
+	public List<Card> getSlag() {
+		return slag;
 	}
 	
-	public boolean getRoundFinished() {
-		return roundFinished;
+	public void startNewRound(){
+		for (Player p : players){
+			p.getHand().remove(p.getPlayCard());
+			p.clearPlayCard();
+		}
+		rotatePlayers(winnerOfRound);
+		System.out.println(players.get(0).getName());
+		winnerOfRound=null;
+		slag.clear();
 	}
-
-	public void setRoundFinished(boolean roundFinished) {
-		this.roundFinished = roundFinished;
-	}
-
-	public void rotatePlayers(Player p){
-		int rotation = 4-players.indexOf(p);
-		System.out.println("location before "+players.indexOf(p));
-		Collections.rotate(players, rotation);
-		System.out.println("location after" + players.indexOf(p));
-	}
-
-
 }
