@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import nl.poker.texasHoldEm.game.ComputerPlayer;
 import nl.poker.texasHoldEm.game.Game;
 import nl.poker.texasHoldEm.game.Player;
 
@@ -38,10 +39,19 @@ public class Call extends HttpServlet {
 		
 		List<Player> players = (List<Player>) context.getAttribute("players");
 		Player player1 = players.get(0);
-		player1.call(game);
-				
+		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
+		
 		if(game.getTableCards().size() == 0)
+			player1.callSmallBlindPreflop(game);
+		else
+			player1.call(game);
+				
+		if(game.getTableCards().size() == 0) {
 			game.flop();
+//			if(computerPlayer.getDealer() != true)
+//				computerPlayer.actie(game, false);
+//		
+		}
 		else if(game.getTableCards().size() == 3)
 			game.turn();
 		else if(game.getTableCards().size() == 4)

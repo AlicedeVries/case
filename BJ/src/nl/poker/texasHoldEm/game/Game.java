@@ -26,6 +26,7 @@ public class Game  {
 			p.askCard(deck);			
 		}
 		bovensteKaart = new Card(0, Kleur.HARTEN);
+		bovensteKaart.setVisible(false);
 	}
 	
 	public void flop(){ 

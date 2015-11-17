@@ -29,12 +29,17 @@
 			<c:if test="${p.name==player.name}">
 				<h3> Your hand:</h3> 
 			</c:if>		
-			<h4> 
+
+				<c:if test="${p.dealer==true}">
+					<h4 style="color:#f67f00"> Dealer </h4>	
+				</c:if>
+			<h4> 	
 				Chips: ${p.stack}
 				<c:if test="${p.winner==true}">
 					(+ ${gain})
-				</c:if>		
-			
+				</c:if>
+				
+				
 			</h4>
 			</td>
 			<c:forEach items="${p.hand}" var="card">

@@ -14,7 +14,7 @@ public class TestScores {
 	private Deck deck;
 	private HandHolder table = new Player("table");
 
-	
+
 	@Test
 	public void testRoyalFlush() {
 		Player p = new Player("lennart");
@@ -173,6 +173,9 @@ public class TestScores {
 	@Test
 	public void testHighCard() {
 		Player p = new Player("lennart");
+//		p.add(new Card(12, Kleur.RUITEN));
+//		p.add(new Card(6, Kleur.RUITEN));
+//		System.out.println(p.getScorePreflop());
 		deck = new FullDeck();
 		deck.shuffle();
 		p.add(new Card(2, Kleur.KLAVEREN));

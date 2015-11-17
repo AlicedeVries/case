@@ -16,6 +16,7 @@ public class Player extends HandHolder{
 	private boolean hasFolded = false;
 	private boolean winner = false;
 	private boolean visibleHand = true;
+	private int smallOrBigBlind = 2;
 	
 
 	public Player(String name) {
@@ -70,18 +71,51 @@ public class Player extends HandHolder{
 		
 	}
 	
-	//TODO: deze functie afmaken
+	
 	public int getScorePreflop() {
+		
+		
 		ArrayList<Card> preflopHand = (ArrayList<Card>) getHand();
 		int getal1 = preflopHand.get(0).getGetal();
 		int getal2 = preflopHand.get(1).getGetal();
-		int preflopHandScore;
 		
-		if(getal1 == getal2) { }
+		//sorteer deze lijst van hoog naar laag
+		Collections.sort(preflopHand,new CardComparator());
 		
-		return 1;
+		int preflopHandScore = 0;
+		
+		//Geef aas de waarde 14
+		if(preflopHand.get(0).getGetal() == 1)
+			preflopHandScore += 13;
+		if(preflopHand.get(1).getGetal() == 1)
+			preflopHandScore += 13;
+		
+		// voeg waarde toe aan paren
+		if(getal1 == getal2)
+			preflopHandScore += 40;
+		
+		// voeg waarde toe aan suited
+		if(preflopHand.get(0).getKleur().equals(preflopHand.get(1).getKleur()))
+			preflopHandScore += 10;
+		
+		// voeg waarde toe aan connectors
+		if((preflopHand.get(0).getGetal() -1) == preflopHand.get(1).getGetal())
+			preflopHandScore += 7;	
+		if((preflopHand.get(0).getGetal() -2) == preflopHand.get(1).getGetal())
+			preflopHandScore += 5;
+		if((preflopHand.get(0).getGetal() -3) == preflopHand.get(1).getGetal())
+			preflopHandScore += 3;
+		if(preflopHand.get(1).getGetal() == 1 && preflopHand.get(0).getGetal() == 13)
+			preflopHandScore += 7;
+			
+		// geef preflopHandScore de waarde van de hoogte van de kaarten
+		if(getal1 == getal2)
+			preflopHandScore = preflopHandScore + preflopHand.get(0).getGetal();
+		else
+			preflopHandScore = preflopHandScore + preflopHand.get(0).getGetal() + preflopHand.get(1).getGetal();
+		
+		return preflopHandScore;
 	}
-	
 	
 	
 	
@@ -95,8 +129,8 @@ public class Player extends HandHolder{
 	}
 	
 	public void call(Game game){
-			stack -= 5;	
-			game.addToPot(5);
+		stack -= 5;	
+		game.addToPot(5);
 	}
 	
 	public void raise(Game game){
@@ -108,6 +142,38 @@ public class Player extends HandHolder{
 		clearHand();
 		hasFolded=true;
 	}
+	
+	public void _2betPreflop(Game game){
+		stack -= 8;	
+		game.addToPot(8);
+	}
+	
+	public void callSmallBlindPreflop(Game game){
+		stack -= 3;	
+		game.addToPot(3);
+	}
+	
+	public void call2betPreflop(Game game){
+		stack -= 5;
+		game.addToPot(5);
+	}
+	
+	public void _3betPreflop(Game game){
+		stack -= 10;
+		game.addToPot(10);
+	}
+	
+	
+	public void postBigBlind(Game game){	
+		stack -= 5;	
+		game.addToPot(5);
+	}
+	
+	public void postSmallBlind(Game game){	
+		stack -= 2;	
+		game.addToPot(2);
+	}
+	
 	
 	public boolean isWinner() {
 		return winner;
@@ -366,7 +432,25 @@ public class Player extends HandHolder{
 		this.visibleHand = visibleHand;
 	}
 	
+	public void setSmallOrBigBlind(Game game){
+		if(smallOrBigBlind % 2 == 0) {
+			//wel deelbaar door 2, dan zijn we smallBlind
+			postSmallBlind(game);
+		}
+		else {
+			//niet deelbaar door 2, dan zijn we bigblind
+			postBigBlind(game);
+		}
+		smallOrBigBlind++;
+	}
 	
+	public boolean getDealer(){
+		if(smallOrBigBlind % 2 != 0)
+			return true;
+		else
+			return false;
+	}
+
 }
 	
 	
