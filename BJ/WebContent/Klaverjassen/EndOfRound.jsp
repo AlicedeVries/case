@@ -8,55 +8,59 @@
 </head>
 <body>
 <h1 style="color:#f67f00">Welcome to Klaverjassen Online</h1>
+	<h3>Troef is ${KJgame.troef} </h3>
 	<table>
 		<c:forEach items="${KJgame.players}" var="p">
 		<tr> 
 			<c:if test="${p.name!=player.name}">
-			<td> 
-				<h3>${p.name} 's hand:</h3> 	
-				<h4>team: ${p.team}</h4>
-			</td>
-			<c:forEach items="${p.hand}" var="card">
-				<td>
-				<c:if test="${card == p.playCard}">
-					<img src="<c:url value="${card.image}" />" height="122" width="84">			
-				</c:if>
-				<c:if test="${card != p.playCard }">
-					<img src="<c:url value="/IMAGES/backWithYCP.svg" />" height="122" width="84">							
-				</c:if>
+				<td> 
+					<h3>${p.name} 's hand:</h3> 	
+					<h4>team: ${p.team}</h4>
 				</td>
-			</c:forEach>
+				<c:forEach items="${p.hand}" var="card">
+					<td>
+					<c:if test="${card != p.playCard }">
+						<img src="<c:url value="/IMAGES/backWithYCP.svg" />" height="122" width="84">							
+					</c:if>
+					</td>
+				</c:forEach>
 			</c:if>	
+			<c:if test="${p.name==player.name}">
+				<td> 
+					<h3> Your hand:</h3> 	
+					<h4>team: ${player.team}</h4>
+				</td>
+				<c:forEach items="${player.hand}" var="card">
+				<td>
+					<c:if test="${card!=player.playCard}">
+						<img src="<c:url value="${card.image}" />" height="122" width="84" >			
+					</c:if>
+				</td>
+				</c:forEach>			
+			</c:if>
+			
+			<td>
+				----------------->
+			</td>
+			<td>
+				<c:if test="${p==KJgame.winnerOfRound}">
+				 	<img id="winner" src="<c:url value="${p.playCard.image}" />" height="122" width="84" >			
+				</c:if>
+				<c:if test="${p!=KJgame.winnerOfRound}">
+				 	<img src="<c:url value="${p.playCard.image}" />" height="122" width="84" >			
+				</c:if>
+			</td>
+
 		</tr>
 		</c:forEach>		
-		<tr> 
-			<td> 
-				<h3> Your hand:</h3> 	
-				<h4>team: ${player.team}</h4>
-			</td>
-			<c:forEach items="${player.hand}" var="card">
-			<td>
-				<img class="playerCard" src="<c:url value="${card.image}" />" height="122" width="84">			
-			</td>
-			</c:forEach>
-		</tr>
 	</table>
 	<br>
-
-	<c:if test="${game.roundFinished!=true}">
-	helloo!!
-	</c:if>
-	
-	
-	
-	<c:if test="${game.roundFinished==null}">
-		<form method="post" action="/BJ/Klaverjassen/Play" > 
+		<form method="post" action="/BJ/Klaverjassen/EndOfRound" > 
 			<input type="submit" value="Next Round" style="width: 100px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">			
 		</form>	
-	</c:if>
-	
-	<c:if test="${game.roundFinished==false}">
-		<h5>Wait for other players to make a move</h5>
-	</c:if>
+		
+	<script type="text/javascript">
+		window.onload = function(){	document.getElementById("winner").style.border = "5px solid #000000";}
+	</script>
 </body>
 </html>

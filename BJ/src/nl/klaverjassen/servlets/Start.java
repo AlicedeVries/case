@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import nl.klaverjassen.game.Player;
 
 /**
  * Servlet implementation class Start
@@ -40,7 +39,6 @@ public class Start extends HttpServlet {
 		else{
 			HttpSession session = request.getSession(true);
 			session.setMaxInactiveInterval(600);
-//			Player p= new Player(name);
 			session.setAttribute("name",name);
 			context.getRequestDispatcher("/Klaverjassen/Wait").forward(request, response);	
 		}
