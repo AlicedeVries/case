@@ -4,36 +4,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<meta http-equiv="refresh" content="10 url=/BJ/Blackjack/Stand">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Game</title>
 </head>
 <body>
 <h1 style="color:#f67f00">Welcome to Blackjack Online</h1>
 	<c:import url="/BlackJack/Display.jsp"></c:import>
-	<form method="post" action="/BJ/Klaverjassen/Play" > 
 	<table>
-		<tr> 
-			<td> 
-				<h3> Your hand:</h3> 	
-				<h4>team: ${player.team}</h4>
-			</td>
-			<c:forEach items="${player.hand}" var="card">
-			<td class='card'>
-				<input type="image" src="<c:url value="${card.image}"/>"  name="card" height="122" width="84"/>
-			</td>
-			</c:forEach>
-		</tr>
+	<tr>
+		<td>
+		<form method="post" action="/BJ/Blackjack/Hit">
+			<input type="submit" value="Hit" style="width: 90px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
+		</form>
+		</td>
+		<td>
+		<form method="post" action="/BJ/Blackjack/Stand">
+			<input type="submit" value="Stand" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
+		</form>
+		</td>
+	</tr>
 	</table>
-	</form>	
-		
-	<script>
-		window.onload = function(){
-			var images = document.getElementsByTagName('input');
-
-			for (var i=0; i<images.length; i++){
-					images[i].value=i;
-			}
-		}
-	</script>
 </body>
 </html>
