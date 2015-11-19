@@ -10,6 +10,18 @@
 <body>
 <h1 style="color:#f67f00">Welcome to Klaverjassen Online</h1>
 	<h3>Troef is ${KJgame.troef} </h3>
+	<script>
+		window.onload = function(){
+			var images = document.getElementsByClassName('playerCard');
+			for ( var i =0; i<images.length;i++)
+				images[i].value = i;
+			
+			var teams = document.getElementsByClassName("team")
+			for (var i=0; i<teams.length;i++)
+					teams[i].style.color = teams[i].innerHTML;
+		}
+	</script>
+	
 	<form method="post" action="/BJ/Klaverjassen/Play" > 
 	<table>
 		<c:forEach items="${KJgame.players}" var="p">
@@ -62,17 +74,6 @@
 	</table>
 	</form>	
 		
-	<script>
-		window.onload = function(){
-			var images = document.getElementsByClassName('playerCard');
-			for ( var i =0; i<images.length;i++)
-				images[i].value = i;
-			
-			var teams = document.getElementsByClassName("team")
-			for (var i=0; i<teams.length;i++)
-					teams[i].style.color = teams[i].innerHTML;
-		}
-	</script>
 
 </body>
 </html>
