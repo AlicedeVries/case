@@ -62,38 +62,7 @@ public class Wait extends HttpServlet {
 			context.getRequestDispatcher("/Klaverjassen/Start").forward(request, response);
 		}
 		
-/*		else if (game!= null){
-		//if a game already exists
-			if (game.isFinished()){
-				System.out.println("has finished");
-			//if game has finished
-				addToWaitingPlayerList(getPlayer(session));
-				if (System.currentTimeMillis()- game.endTime>= MAX_TIME_AFTER_GAME){
-					//if game has finished a while ago
-					System.out.println("while ago");
-					startNewGame(request, response);
-				}
-				else 
-					waitSomeMore(request, response);					
-			}
-			else{
-			//if game is still going
-				System.out.println("still going");
-				if (game.getPlayers().contains(getPlayer(session)))
-				//if player is in game
-					forwardToGame(request, response);
-				else {
-					System.out.println("not in game");
-					addToWaitingPlayerList(getPlayer(session));
-					if (System.currentTimeMillis()-game.startTime >= MAX_TIME_FOR_GAME)
-					//if game has lasted to long
-						startNewGame(request, response);
-					else
-						waitSomeMore(request, response);					
-				}
-			}
-		} 
-*/		else{
+		else{
 		//if no game exists yet
 			System.out.println("no game");
 			addToWaitingPlayerList(getPlayer(session));
@@ -112,10 +81,10 @@ public class Wait extends HttpServlet {
 			
 	
 	private Player getPlayer (HttpSession session){
-		Player p = (Player) session.getAttribute("player");
+		Player p = (Player) session.getAttribute("KJplayer");
 		if (p==null){
 				p = new Player((String) session.getAttribute("name"));
-				session.setAttribute("player", p);
+				session.setAttribute("KJplayer", p);
 		}
 		p.setTeamScore(0);
 		p.getSlagen().clear();
@@ -125,11 +94,11 @@ public class Wait extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	private void addToWaitingPlayerList(Player p){
 		ServletContext context = getServletContext();
-		List<Player> players = (List<Player>) context.getAttribute("waitingPlayers") ;
+		List<Player> players = (List<Player>) context.getAttribute("KJwaitingPlayers") ;
 		if (players == null) {
 			players = new ArrayList<Player>();		
 			players.add(p);						
-			context.setAttribute("waitingPlayers",players);
+			context.setAttribute("KJwaitingPlayers",players);
 		}
 		else if (!players.contains(p) && players.size()<4)
 			players.add(p);
@@ -138,14 +107,14 @@ public class Wait extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	private void startNewGame(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
-		List<Player> players = (List<Player>) context.getAttribute("waitingPlayers");
+		List<Player> players = (List<Player>) context.getAttribute("KJwaitingPlayers");
 		int aiNumber = 1;
 		while (players.size()<4){
 			Player ai = new AIPlayer("AI player"+ aiNumber++);
 			players.add(ai);
 		}
 		Game game = new Game(players);
-		context.setAttribute("waitingPlayers",null);
+		context.setAttribute("KJwaitingPlayers",null);
 		context.setAttribute("KJgame",game);
 		context.getRequestDispatcher("/Klaverjassen/Play").forward(request, response);					
 	}

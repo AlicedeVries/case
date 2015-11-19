@@ -21,10 +21,10 @@
 		<c:forEach items="${BJgame.players}" var="p">
 		<tr> 
 			<td> 
-			<c:if test="${p.name!=player.name}">
+			<c:if test="${p.name!=BJplayer.name}">
 				<h3> ${p.name} 's hand:</h3> 
 			</c:if>
-			<c:if test="${p.name==player.name}">
+			<c:if test="${p.name==BJplayer.name}">
 				<h3> Your hand:</h3> 
 			</c:if>		
 			<h4>score: ${p.score}</h4>

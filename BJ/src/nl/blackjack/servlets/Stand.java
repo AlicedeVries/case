@@ -51,7 +51,7 @@ public class Stand extends HttpServlet {
 			context.getRequestDispatcher("/Blackjack/Start").forward(request, response);
 		}
 		else{
-			Player p = (Player) session.getAttribute("player");
+			Player p = (Player) session.getAttribute("BJplayer");
 			Game game = (Game) context.getAttribute("BJgame");
 			if (p==null|| game==null)
 				context.getRequestDispatcher("/Blackjack/Start").forward(request, response);

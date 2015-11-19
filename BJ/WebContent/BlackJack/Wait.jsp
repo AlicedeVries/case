@@ -5,10 +5,12 @@
 <head>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <link type="text/css" rel="stylesheet" href="<c:url value="/opmaak.css"/>" />
-<meta http-equiv="refresh" content="10; url=/Kaartspellen/Blackjack/Wait">
 <title>Waiting</title>
 </head>
 <body>
+<script>
+setTimeout( function() {window.location.href='<c:url value="/Blackjack/Wait"/>'},5000)
+</script>
 <h1>Welcome to Blackjack Online</h1>
 <div class=login>
 <h3>Waiting for game to start... </h3>

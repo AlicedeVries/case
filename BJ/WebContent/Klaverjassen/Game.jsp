@@ -28,7 +28,7 @@
 	<table>
 		<c:forEach items="${KJgame.players}" var="p">
 		<tr> 
-			<c:if test="${p.name!=player.name}">
+			<c:if test="${p.name!=KJplayer.name}">
 				<td> 
 					<h3>${p.name} 's hand:</h3> 	
 					<h4>team: <span class="team">${p.team}</span></h4>
@@ -43,13 +43,13 @@
 				</c:forEach>
 			</c:if>	
 			
-			<c:if test="${p.name==player.name}">
+			<c:if test="${p.name==KJplayer.name}">
 				<td> 
 					<h3> Your hand:</h3> 	
 					<h4>team: <span class="team">${p.team}</span></h4>
 					<h4>score: ${p.teamScore}</h4>
 				</td>
-				<c:forEach items="${player.hand}" var="card">
+				<c:forEach items="${KJplayer.hand}" var="card">
 				<td>
 					<c:if test="${card.clickable==false}">
 						<img class="playerCard" src="<c:url value="${card.image}" />" height="122" width="84">			
