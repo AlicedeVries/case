@@ -9,7 +9,7 @@
 <title>Game</title>
 </head>
 <body>
-<h1>Poker Online</h1>
+<h2>Poker Online</h2>
 <div class=page>
 	<c:import url="/Poker/Display.jsp"></c:import>
 	
