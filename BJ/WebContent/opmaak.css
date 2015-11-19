@@ -1,0 +1,42 @@
+@CHARSET "ISO-8859-1";
+body{
+	font-family:arial;
+}
+
+.plaatje{
+	position:absolute;
+    bottom:0;
+    right:0;
+    height:60%
+}
+
+h1{
+	position:relative;
+	left: 5%;
+	width:90%;
+	text-align: left;
+	color:#f67f00;
+	font-size:4em;
+}
+
+h2{
+	position:relative;
+	left: 2%;
+	width:90%;
+	text-align: left;
+	color:#f67f00;
+	font-size:3em;
+}
+
+.page{
+	position:relative;
+	left: 2%;
+	width: 90%;
+}
+
+.login{
+	position:relative;
+	left: 7%;
+	width:80%;
+	font-size:1.5em;
+}

@@ -7,7 +7,8 @@
 <title>Card Played</title>
 </head>
 <body>
-<h1 style="color:#f67f00">Welcome to Klaverjassen Online</h1>
+<h2>Welcome to Klaverjassen Online</h2>
+<div class=page>
 	<h3>Troef is ${KJgame.troef} </h3>
 	<table>
 		<c:forEach items="${KJgame.players}" var="p">
@@ -63,6 +64,7 @@
 		<form method="post" action="/BJ/Klaverjassen/EndOfRound" > 
 			<input type="submit" value="Next Round" style="width: 100px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">			
 		</form>	
+</div>	
 		
 	<script type="text/javascript">
 		window.onload = function(){	
@@ -73,6 +75,6 @@
 					teams[i].style.color = teams[i].innerHTML;
 		}
 	</script>
-	
+
 </body>
 </html>

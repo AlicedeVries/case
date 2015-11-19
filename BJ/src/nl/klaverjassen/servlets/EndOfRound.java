@@ -48,7 +48,6 @@ public class EndOfRound extends HttpServlet {
 			getServletContext().getRequestDispatcher("/Klaverjassen/Wait").forward(request, response); return;
 		}
 		
-		System.out.println(game.getWinnerOfRound().getName() + " win(t) de slag");
 		game.startNewRound();
 		
 		if (p.getHand().isEmpty()){

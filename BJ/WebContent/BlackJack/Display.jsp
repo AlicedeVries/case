@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<link type="text/css" rel="stylesheet" href="<c:url value="/opmaak.css"/>" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Display Game</title>
 </head>

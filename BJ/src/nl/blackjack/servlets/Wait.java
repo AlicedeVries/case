@@ -22,7 +22,7 @@ import nl.blackjack.game.Player;
 public class Wait extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private static int WAIT_TIME_FOR_NEW_GAME = 30*1000;
+	private static int WAIT_TIME_FOR_NEW_GAME = 10*1000;
 	private static int MAX_TIME_FOR_GAME = 300*1000;
 	private static int MAX_TIME_AFTER_GAME = 20*1000;
 	

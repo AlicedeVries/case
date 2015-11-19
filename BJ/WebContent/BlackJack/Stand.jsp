@@ -4,13 +4,15 @@
 <html>
 <head>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<link type="text/css" rel="stylesheet" href="<c:url value="/opmaak.css"/>" />
 <meta http-equiv="refresh" content="10 url=/BJ/Blackjack/Stand">
 <title>Stand</title>
 </head>
 <body>
-<h1 style="color:#f67f00">Welcome to Blackjack Online</h1>
+<h2>Welcome to Blackjack Online</h2>
+<div class=page>
 <c:import url="/BlackJack/Display.jsp"></c:import>
-<h2>${msg}</h2>  
+<h3>${msg}</h3>  
 <c:if test="${game.Finished!=false}">
 	<table>
 	<tr>
@@ -31,6 +33,6 @@
 <c:if test="${game.Finished==false}">
 	<h2>Wait for other players to finish</h2>
 </c:if>
-
+</div>
 </body>
 </html>

@@ -10,6 +10,11 @@
 <h1 style="color:#f67f00">Welcome to Klaverjassen Online</h1>
 	<h3>Spel afgelopen</h3>
 	<h3>Team <span class="team">${KJgame.winningTeam}</span> has won</h3>
+	
+	<form method="post" action="/BJ/Klaverjassen/Wait" > 
+		<input type="submit" value="Start new game" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">			
+	</form>	
+	
 	<table>
 		<tr>
 		<c:forEach items="${KJgame.players}" var="p">
@@ -39,10 +44,6 @@
 		</c:forEach>		
 		</tr>
 	</table>
-	
-	<form method="post" action="/BJ/Klaverjassen/Wait" > 
-		<input type="submit" value="Start new game" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">			
-	</form>	
 	
 	<script>
 	window.onload = function (){
