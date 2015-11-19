@@ -118,6 +118,7 @@ public class Wait extends HttpServlet {
 				session.setAttribute("player", p);
 		}
 		p.setTeamScore(0);
+		p.getSlagen().clear();
 		return p;
 	}
 	
