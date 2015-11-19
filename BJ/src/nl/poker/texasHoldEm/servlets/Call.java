@@ -35,9 +35,9 @@ public class Call extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
-		Game game = (Game) context.getAttribute("game");
+		Game game = (Game) context.getAttribute("Pokergame");
 		
-		List<Player> players = (List<Player>) context.getAttribute("players");
+		List<Player> players = (List<Player>) context.getAttribute("Pokerplayers");
 		Player player1 = players.get(0);
 		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
 		

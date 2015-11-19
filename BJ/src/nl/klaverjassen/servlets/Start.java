@@ -1,6 +1,7 @@
 package nl.klaverjassen.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import nl.poker.texasHoldEm.game.ComputerPlayer;
+import nl.poker.texasHoldEm.game.Player;
 
 
 /**
@@ -31,13 +35,13 @@ public class Start extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
+		HttpSession session = request.getSession(true);
 		
 		String name = (String) request.getParameter("name");
 		if (name==null || name==""){
-			context.getRequestDispatcher("/Klaverjassen/StartPage.jsp").forward(request, response);	
+			context.getRequestDispatcher("/Klaverjassen/StartPage.jsp").forward(request, response);	return;
 		}
 		else{
-			HttpSession session = request.getSession(true);
 			session.setMaxInactiveInterval(600);
 			session.setAttribute("name",name);
 			context.getRequestDispatcher("/Klaverjassen/Wait").forward(request, response);	

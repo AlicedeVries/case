@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import nl.poker.texasHoldEm.game.Player;
+
 
 /**
  * Servlet implementation class StartPoker
@@ -31,18 +33,20 @@ public class StartPoker extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
+		HttpSession session = request.getSession(true);
 		
 		String name = (String) request.getParameter("name");
 		if (name==null || name==""){
 			context.getRequestDispatcher("/Poker/StartPage.jsp").forward(request, response);	
 		}
-		else{
-			HttpSession session = request.getSession(true);
-			session.setMaxInactiveInterval(600);
-			session.setAttribute("name", name);
-			context.getRequestDispatcher("/Poker/PlayPoker").forward(request, response);	
+		Player p = (Player) session.getAttribute("Pokerplayer");
+		if (p!=null){
+			request.setAttribute("restart", "Hallo");
 		}
-		
+		session.setMaxInactiveInterval(600);
+		request.setAttribute("name", name);
+		context.getRequestDispatcher("/Poker/PlayPoker").forward(request, response);	
+				
 	}
 
 	/**

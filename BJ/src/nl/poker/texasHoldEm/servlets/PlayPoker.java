@@ -39,9 +39,8 @@ public class PlayPoker extends HttpServlet {
 		ServletContext context = getServletContext();
 		HttpSession session = request.getSession(false);
 		
-		if (request.getParameter("restart")!=null){
-			Game game = (Game) context.getAttribute("game");
-			List<Player> players = (List<Player>) context.getAttribute("players");
+		if (request.getParameter("restart")!=null || request.getAttribute("restart")!=null){
+			List<Player> players = (List<Player>) context.getAttribute("Pokerplayers");
 			Player p = players.get(0);
 			p.clearHand();
 			p.setHasFolded(false);
@@ -60,21 +59,21 @@ public class PlayPoker extends HttpServlet {
 		}
 		
 		else {
-			Player p = (Player) session.getAttribute("player");
+			Player p = (Player) session.getAttribute("Pokerplayer");
 			if (p==null){
-					p = new Player((String) session.getAttribute("name"));
-					session.setAttribute("player", p);
+					p = new Player((String) request.getAttribute("name"));
+					session.setAttribute("Pokerplayer", p);
 			}
 			
 			ComputerPlayer computerPlayer;  
 			
-			List<Player> players = (List<Player>) context.getAttribute("players");
+			List<Player> players = (List<Player>) context.getAttribute("Pokerplayers");
 			if (players==null){
 				computerPlayer = new ComputerPlayer("AI player");
 				players = new ArrayList<Player>();		
 				players.add(p);
 				players.add(computerPlayer);
-				context.setAttribute("players", players);
+				context.setAttribute("Pokerplayers", players);
 			}
 			else 
 				computerPlayer = (ComputerPlayer) players.get(1);
@@ -82,7 +81,7 @@ public class PlayPoker extends HttpServlet {
 			Game game = new Game(players);
 			p.setSmallOrBigBlind(game);
 			computerPlayer.setSmallOrBigBlind(game);
-			context.setAttribute("game", game);
+			context.setAttribute("Pokergame", game);
 			if(computerPlayer.getDealer() == true) {
 				//de AI speler is de dealer, en mag dus preflop als eerst. 
 				int potsizeVoorActie = game.getPotSize();

@@ -35,9 +35,9 @@ public class Check extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
-		Game game = (Game) context.getAttribute("game");
+		Game game = (Game) context.getAttribute("Pokergame");
 		
-		List<Player> players = (List<Player>) context.getAttribute("players");
+		List<Player> players = (List<Player>) context.getAttribute("Pokerplayers");
 		ComputerPlayer computerPlayer = (ComputerPlayer) players.get(1);
 		
 		//de actie na check van human player als de computerplayer de dealer is

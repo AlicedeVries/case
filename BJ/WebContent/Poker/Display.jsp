@@ -10,23 +10,23 @@
 <body>
 	<table>
 		<tr> 
-			<td> <h3>Table: </h3> <h4> PotSize: ${game.potSize}  </h4> </td> 
+			<td> <h3>Table: </h3> <h4> PotSize: ${Pokergame.potSize}  </h4> </td> 
 			<td> 
-				<img src="<c:url value="${game.bovensteKaart.image}" />" width="84pt"  height="122pt" >			
+				<img src="<c:url value="${Pokergame.bovensteKaart.image}" />" width="84pt"  height="122pt" >			
 			</td>
-			<c:forEach items="${game.tableCards}" var="card">
+			<c:forEach items="${Pokergame.tableCards}" var="card">
 			<td>	
 			<img src="<c:url value="${card.image}" />" width="84pt"  height="122pt"  alt="${card.getal} ${card.kleur}">			
 			</td>
 			</c:forEach>
 		</tr>
-		<c:forEach items="${players}" var="p">
+		<c:forEach items="${Pokerplayers}" var="p">
 		<tr> 
 			<td> 
-			<c:if test="${p.name!=player.name}">
+			<c:if test="${p.name!=Pokerplayer.name}">
 				<h3> ${p.name} 's hand:</h3> 
 			</c:if>
-			<c:if test="${p.name==player.name}">
+			<c:if test="${p.name==Pokerplayer.name}">
 				<h3> Your hand:</h3> 
 			</c:if>		
 
