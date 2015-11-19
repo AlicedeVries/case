@@ -9,7 +9,7 @@
 <title>Game</title>
 </head>
 <body>
-<h2>Welcome to Blackjack Online</h2>
+<h2>Blackjack Online</h2>
 <div class=page>
 	<c:import url="/BlackJack/Display.jsp"></c:import>
 	<table>

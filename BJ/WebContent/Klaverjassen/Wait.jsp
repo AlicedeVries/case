@@ -5,9 +5,11 @@
 <head>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>        
 <title>Waiting</title>
+<link type="text/css" rel="stylesheet" href="<c:url value="/opmaak.css"/>" />
 </head>
 <body>
-<h1 style="color:#f67f00">Welcome to Klaverjassen Online</h1>
+<h1>Welcome to Klaverjassen Online</h1>
+<div class=login>
 
 
 <h3>Waiting for game to start... </h3>
@@ -15,6 +17,7 @@
 <script>
 setTimeout( function() {window.location.href='<c:url value="/Klaverjassen/Wait"/>'},5000)
 </script>
-
+</div>
+<img src="<c:url value="/IMAGES/klaverjas90.svg"/>" class="plaatje">
 </body>
 </html>
