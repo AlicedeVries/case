@@ -57,7 +57,7 @@ public class Play extends HttpServlet {
 		}
 		
 		Game game = (Game) context.getAttribute("KJgame");
-		Player player = (Player) session.getAttribute("player");
+		Player player = (Player) session.getAttribute("KJplayer");
 		
 		if (game==null){
 			getServletContext().getRequestDispatcher("/Klaverjassen/Wait").forward(request, response); return;

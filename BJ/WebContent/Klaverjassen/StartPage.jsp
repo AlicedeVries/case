@@ -15,6 +15,6 @@
 <h3>Enter your name to start klaverjassen: </h3><input name="name" type="text" style="width: 200px; height: 35px; font-size: 14px; text-indent: 10px">
 <input type="submit" value="Start game" style="width: 100px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00"></form>
 </div>
-<img src="<c:url value="/IMAGES/klaverjas90.svg"/>" class="plaatje">							
+<img src="<c:url value="/IMAGES/klaverjas.svg"/>" class="plaatje">							
 </body>
 </html>

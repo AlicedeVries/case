@@ -71,11 +71,11 @@ public class Card {
 		if(getal==1)
 			return img+"(A).svg";
 		if(getal==11)
-			return img+"(J1).svg"; 
+			return img+"(J).svg"; 
 		else if(getal==12)
-			return img+"(Q1).svg";
+			return img+"(Q).svg";
 		else if(getal==13)
-			return img+"(K1).svg";
+			return img+"(K).svg";
 		else
 			return img+"("+getal+").svg";
 	}

@@ -93,14 +93,14 @@ public class Wait extends HttpServlet {
 		} 
 		else{
 		//if no game exists yet
-			System.out.println("no game");
+			System.out.println("no BJ game");
 			addToWaitingPlayerList(getPlayer(session));
-			if (context.getAttribute("timer")==null){ 
+			if (context.getAttribute("BJtimer")==null){ 
 			//if there is no wait timer: start wait timer
-				context.setAttribute("timer", System.currentTimeMillis());
+				context.setAttribute("BJtimer", System.currentTimeMillis());
 				waitSomeMore(request, response);					
 			}
-			else if (System.currentTimeMillis()- (long) context.getAttribute("timer") >= WAIT_TIME_FOR_NEW_GAME)
+			else if (System.currentTimeMillis()- (long) context.getAttribute("BJtimer") >= WAIT_TIME_FOR_NEW_GAME)
 			//if the wait time is over: start new game	
 				startNewGame(request, response);
 			else
@@ -110,10 +110,10 @@ public class Wait extends HttpServlet {
 			
 	
 	private Player getPlayer (HttpSession session){
-		Player p = (Player) session.getAttribute("player");
+		Player p = (Player) session.getAttribute("BJplayer");
 		if (p==null){
 				p = new Player((String) session.getAttribute("name"));
-				session.setAttribute("player", p);
+				session.setAttribute("BJplayer", p);
 		}
 		return p;
 	}
@@ -121,11 +121,11 @@ public class Wait extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	private void addToWaitingPlayerList(Player p){
 		ServletContext context = getServletContext();
-		List<Player> players = (List<Player>) context.getAttribute("waitingPlayers") ;
+		List<Player> players = (List<Player>) context.getAttribute("BJwaitingPlayers") ;
 		if (players == null) {
 			players = new ArrayList<Player>();		
 			players.add(p);						
-			context.setAttribute("waitingPlayers",players);
+			context.setAttribute("BJwaitingPlayers",players);
 		}
 		else if (!players.contains(p))
 			players.add(p);
@@ -134,9 +134,9 @@ public class Wait extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	private void startNewGame(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
-		List<Player> players = (List<Player>) context.getAttribute("waitingPlayers");
+		List<Player> players = (List<Player>) context.getAttribute("BJwaitingPlayers");
 		Game game = new Game(players);
-		context.setAttribute("waitingPlayers",null);
+		context.setAttribute("BJwaitingPlayers",null);
 		context.setAttribute("BJgame",game);
 		context.getRequestDispatcher("/Blackjack/Play").forward(request, response);					
 	}

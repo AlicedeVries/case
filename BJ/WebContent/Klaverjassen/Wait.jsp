@@ -18,6 +18,6 @@
 setTimeout( function() {window.location.href='<c:url value="/Klaverjassen/Wait"/>'},5000)
 </script>
 </div>
-<img src="<c:url value="/IMAGES/klaverjas90.svg"/>" class="plaatje">
+<img src="<c:url value="/IMAGES/klaverjas.svg"/>" class="plaatje">
 </body>
 </html>

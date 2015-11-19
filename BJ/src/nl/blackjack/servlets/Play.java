@@ -57,7 +57,7 @@ public class Play extends HttpServlet {
 //		List<Player> players = (List<Player>) context.getAttribute("nextPlayers");
 //		
 		Game game = (Game) context.getAttribute("BJgame");
-		Player p = (Player) session.getAttribute("player");
+		Player p = (Player) session.getAttribute("BJplayer");
 		
 		if (game==null){
 			getServletContext().getRequestDispatcher("/Blackjack/Wait").forward(request, response);  //////TODO  

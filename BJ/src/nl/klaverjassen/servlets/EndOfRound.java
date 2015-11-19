@@ -42,7 +42,7 @@ public class EndOfRound extends HttpServlet {
 		}
 		
 		Game game = (Game) context.getAttribute("KJgame");
-		Player p = (Player) session.getAttribute("player");
+		Player p = (Player) session.getAttribute("KJplayer");
 		
 		if (game==null){
 			getServletContext().getRequestDispatcher("/Klaverjassen/Wait").forward(request, response); return;

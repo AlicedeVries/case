@@ -5,15 +5,17 @@
 <head>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <link type="text/css" rel="stylesheet" href="<c:url value="/opmaak.css"/>" />
-<meta http-equiv="refresh" content="10 url=/Kaartspellen/Blackjack/Stand">
 <title>Stand</title>
 </head>
 <body>
+<script>
+setTimeout( function() {window.location.href='<c:url value="/Blackjack/Stand"/>'},5000)
+</script>
 <h2>Blackjack Online</h2>
 <div class=page>
 <c:import url="/BlackJack/Display.jsp"></c:import>
 <h3>${msg}</h3>  
-<c:if test="${game.Finished!=false}">
+<c:if test="${BJgame.finished!=false}">
 	<table>
 	<tr>
 		<td>
@@ -30,7 +32,7 @@
 	</table>
 </c:if>
 
-<c:if test="${game.Finished==false}">
+<c:if test="${BJgame.finished==false}">
 	<h2>Wait for other players to finish</h2>
 </c:if>
 </div>

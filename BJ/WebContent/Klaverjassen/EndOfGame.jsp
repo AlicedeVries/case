@@ -30,13 +30,13 @@
 		<tr>
 		<c:forEach items="${KJgame.players}" var="p">
 			<td valign="top"> 
-			<c:if test="${p.name!=player.name}">
+			<c:if test="${p.name!=KJplayer.name}">
 				<h3>${p.name}</h3> 	
 					<h4>team: <span class="team">${p.team}</span></h4>
 					<h4>score: ${p.teamScore}</h4>
 					
 			</c:if>	
-			<c:if test="${p.name==player.name}">
+			<c:if test="${p.name==KJplayer.name}">
 					<h3> You</h3> 	
 					<h4>team: <span class="team">${p.team}</span> </h4>
 					<h4>score: ${p.teamScore}</h4>
