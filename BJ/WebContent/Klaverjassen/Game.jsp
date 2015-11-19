@@ -24,7 +24,7 @@
 		}
 	</script>
 	
-	<form method="post" action="/BJ/Klaverjassen/Play" > 
+	<form method="post" action="/Kaartspellen/Klaverjassen/Play" > 
 	<table>
 		<c:forEach items="${KJgame.players}" var="p">
 		<tr> 

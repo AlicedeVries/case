@@ -12,10 +12,21 @@
 <h2>Poker Online</h2>
 <div class=page>
 	<c:import url="/Poker/Display.jsp"></c:import>
-
-		<form method="post" action="/BJ/Poker/PlayPoker">
+	<table>
+	<tr>
+		<td>
+		<form method="post" action="/Kaartspellen/Poker/PlayPoker">
 			<input type="submit" name="restart" value="Start New Game" style="width: 150px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
 		</form>
+		</td>
+		<td>
+		<form method="post" action="/Kaartspellen/">
+			<input type="submit" value="Play other kaartspel" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal">
+		</form>
+		</td>
+	</tr>
+	</table>	
+
 </div>
 </body>
 </html>

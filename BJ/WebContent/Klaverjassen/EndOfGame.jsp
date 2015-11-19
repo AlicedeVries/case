@@ -12,11 +12,20 @@
 <div class=page>
 	<h3>Spel afgelopen</h3>
 	<h3>Team <span class="team">${KJgame.winningTeam}</span> has won</h3>
-	
-	<form method="post" action="/BJ/Klaverjassen/Wait" > 
+	<table>
+	<tr>
+		<td>
+		<form method="post" action="/Kaartspellen/Klaverjassen/Wait" > 
 		<input type="submit" value="Start new game" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">			
-	</form>	
-	
+		</form>	
+		</td>
+		<td>
+		<form method="post" action="/Kaartspellen/">
+			<input type="submit" value="Play other kaartspel" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal">
+		</form>
+		</td>
+	</tr>
+	</table>	
 	<table>
 		<tr>
 		<c:forEach items="${KJgame.players}" var="p">

@@ -5,7 +5,7 @@
 <head>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <link type="text/css" rel="stylesheet" href="<c:url value="/opmaak.css"/>" />
-<meta http-equiv="refresh" content="10 url=/BJ/Blackjack/Stand">
+<meta http-equiv="refresh" content="10 url=/Kaartspellen/Blackjack/Stand">
 <title>Stand</title>
 </head>
 <body>
@@ -17,13 +17,13 @@
 	<table>
 	<tr>
 		<td>
-		<form method="post" action="/BJ/Blackjack/Wait">
+		<form method="post" action="/Kaartspellen/Blackjack/Wait">
 			<input type="submit" value="Start new game" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>
 		<td>
-		<form method="post" action="/BJ/Blackjack/Logout">
-			<input type="submit" name="logout" value="Logout" style="width: 75px; color: #000000; height: 40px; font-size: 14px; font-weight: normal">
+		<form method="post" action="/Kaartspellen/">
+			<input type="submit" value="Play other kaartspel" style="width: 150px; color: #000000; height: 40px; font-size: 14px; font-weight: normal">
 		</form>
 		</td>
 	</tr>

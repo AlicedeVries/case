@@ -11,7 +11,7 @@
 <body>
 <h1>Welcome to Poker Online</h1>
 <div class=login>
-<form method="post" action="/BJ/Poker/StartPoker">
+<form method="post" action="/Kaartspellen/Poker/StartPoker">
 <h3>Enter your name to start Poker: </h3><input name="name" type="text" style="width: 200px; height: 35px; font-size: 14px; text-indent: 10px">
 <input type="submit" value="Start game" style="width: 100px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00"></form>
 </div>

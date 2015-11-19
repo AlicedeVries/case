@@ -15,12 +15,12 @@
 	<table>
 	<tr>
 		<td>
-		<form method="post" action="/BJ/Blackjack/Hit">
+		<form method="post" action="/Kaartspellen/Blackjack/Hit">
 			<input type="submit" value="Hit" style="width: 90px; color: #000000; height: 40px; font-weight: normal; font-size: 14px; background-color: #f67f00">
 		</form>
 		</td>
 		<td>
-		<form method="post" action="/BJ/Blackjack/Stand">
+		<form method="post" action="/Kaartspellen/Blackjack/Stand">
 			<input type="submit" value="Stand" style="width: 90px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">
 		</form>
 		</td>

@@ -62,7 +62,7 @@
 	
 	<h3> ${msg} ${msg2}</h3>
 	
-		<form method="post" action="/BJ/Klaverjassen/EndOfRound" > 
+		<form method="post" action="/Kaartspellen/Klaverjassen/EndOfRound" > 
 			<input type="submit" value="Next Round" style="width: 100px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">			
 		</form>	
 </div>	

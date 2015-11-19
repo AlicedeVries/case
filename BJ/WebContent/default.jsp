@@ -13,13 +13,13 @@
 <div class=login>
 <h3>Which game do you want to play? </h3>
 <div class=gameButtons>
-<form method="post" action="/BJ/Blackjack/Start">
+<form method="post" action="/Kaartspellen/Blackjack/Start">
 	<input type="submit" value="Blackjack" style="width: 200px; color: #000000; height: 40px; font-size: 18px; font-weight: normal; background-color: #f67f00">
 </form> <br>
-<form method="post" action="/BJ/Poker/StartPoker">
+<form method="post" action="/Kaartspellen/Poker/StartPoker">
 	<input type="submit" value="Poker" style="width: 200px; color: #000000; height: 40px; font-size: 18px; font-weight: normal; background-color: #f67f00">
 </form> <br>
-<form method="post" action="/BJ/Klaverjassen/Start">
+<form method="post" action="/Kaartspellen/Klaverjassen/Start">
 	<input type="submit" value="Klaverjassen" style="width: 200px; color: #000000; height: 40px; font-size: 18px; font-weight: normal; background-color: #f67f00">
 </form>
 </div>

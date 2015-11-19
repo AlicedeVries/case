@@ -5,7 +5,7 @@
 <head>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <link type="text/css" rel="stylesheet" href="<c:url value="/opmaak.css"/>" />
-<meta http-equiv="refresh" content="10; url=/BJ/Blackjack/Wait">
+<meta http-equiv="refresh" content="10; url=/Kaartspellen/Blackjack/Wait">
 <title>Waiting</title>
 </head>
 <body>
