@@ -195,6 +195,10 @@ public class Player extends HandHolder{
 		return stack;
 	}
 	
+	public void resetStack(){
+		stack = 100;
+	}
+	
 	public void setStackBijWinstHand(int potsize){
 		stack = stack + potsize;
 		winner= true;

@@ -1,6 +1,7 @@
 package nl.poker.texasHoldEm.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -41,7 +42,10 @@ public class StartPoker extends HttpServlet {
 		}
 		Player p = (Player) session.getAttribute("Pokerplayer");
 		if (p!=null){
-			request.setAttribute("restart", "Hallo");
+			List<Player> players = (List<Player>) context.getAttribute("Pokerplayers");
+			players.get(0).resetStack();
+			players.get(1).resetStack();
+			request.setAttribute("restart", true);
 		}
 		session.setMaxInactiveInterval(600);
 		request.setAttribute("name", name);

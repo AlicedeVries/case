@@ -55,7 +55,7 @@ public class PlayPoker extends HttpServlet {
 		
 
 		if (session==null){
-			context.getRequestDispatcher("/Poker/StartPoker").forward(request, response);
+			context.getRequestDispatcher("/Poker/StartPoker").forward(request, response); return;
 		}
 		
 		else {
