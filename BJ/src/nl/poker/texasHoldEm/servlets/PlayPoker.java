@@ -73,7 +73,7 @@ public class PlayPoker extends HttpServlet {
 				players = new ArrayList<Player>();		
 				players.add(p);
 				players.add(computerPlayer);
-				context.setAttribute("Pokerplayers", players);
+				session.setAttribute("Pokerplayers", players);
 			}
 			else 
 				computerPlayer = (ComputerPlayer) players.get(1);
