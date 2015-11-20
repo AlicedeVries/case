@@ -11,7 +11,6 @@
 <body>
 <h2>Klaverjassen Online</h2>
 <div class=page>
-	<h3>Troef is ${KJgame.troef} </h3>
 	<script>
 		window.onload = function(){
 			var images = document.getElementsByClassName('playerCard');
@@ -24,32 +23,49 @@
 		}
 	</script>
 	
+		<table>
+		<tr>
+		<c:forEach items="${KJgame.players}" var="p">
+			<td>
+				<c:if test="${p.playCard!=null}">
+					<img  src="<c:url value="${p.playCard.image}" />" height="122"  >
+				</c:if>
+				<c:if test="${p.playCard==null}">
+					<img src="<c:url value="/IMAGES/emptyCard.svg" />" height="122"  >
+				</c:if>
+			</td>	
+			<td class="box"> 
+			<c:if test="${p.name!=KJplayer.name}">
+				<h3>${p.name}</h3> 	
+					<h4>team: <span class="team">${p.team}</span></h4>
+					<h4>score: ${p.teamScore}</h4>
+			</c:if>	
+			<c:if test="${p.name==KJplayer.name}">
+					<h3> You</h3> 	
+					<h4>team: <span class="team">${p.team}</span> </h4>
+					<h4>score: ${p.teamScore}</h4>
+			</c:if>
+			</td>
+		</c:forEach>		
+		</tr>
+	</table>
+	
+	<h3> Which card do you want to play?</h3>
+	
+	
 	<form method="post" action="/Kaartspellen/Klaverjassen/Play" > 
 	<table>
-		<c:forEach items="${KJgame.players}" var="p">
 		<tr> 
-			<c:if test="${p.name!=KJplayer.name}">
-				<td> 
-					<h3>${p.name} 's hand:</h3> 	
-					<h4>team: <span class="team">${p.team}</span></h4>
-					<h4>score: ${p.teamScore}</h4>
-				</td>
-				<c:forEach items="${p.hand}" var="card">
-					<td>
-					<c:if test="${card != p.playCard }">
-						<img src="<c:url value="/IMAGES/backWithYCP.svg" />" height="122" width="84">							
-					</c:if>
-					</td>
-				</c:forEach>
-			</c:if>	
-			
-			<c:if test="${p.name==KJplayer.name}">
-				<td> 
-					<h3> Your hand:</h3> 	
-					<h4>team: <span class="team">${p.team}</span></h4>
-					<h4>score: ${p.teamScore}</h4>
-				</td>
-				<c:forEach items="${KJplayer.hand}" var="card">
+			<td >
+				<h3>Troef:   </h3>
+			</td>
+			<td class=troef>
+				<img src="<c:url value="${KJgame.troefCard.image}" />" height="122"  >
+			</td>
+			<td> 
+				<h3 class=box2> Your hand:</h3> 	
+			</td>
+			<c:forEach items="${KJplayer.hand}" var="card">
 				<td>
 					<c:if test="${card.clickable==false}">
 						<img class="playerCard" src="<c:url value="${card.image}" />" height="122" width="84">			
@@ -58,24 +74,11 @@
 						<input class="playerCard" type="image" src="<c:url value="${card.image}"/>" name="card" height="122" width="84" id="card"/>
 					</c:if>
 				</td>
-				</c:forEach>			
-			</c:if>
-			
-			<c:if test="${p.playCard!=null}">
-				<td>
-					<p style="color:#ffffff">-----------------</p>
-				</td>
-				<td>
-					 <img src="<c:url value="${p.playCard.image}" />" height="122" width="84" >			
-				</td>
-			</c:if>
-		</tr>
-		</c:forEach>		
-		<tr> 
+			</c:forEach>
 		</tr>
 	</table>
-	</form>	
-		
+	</form>
+	
 </div>
 </body>
 </html>

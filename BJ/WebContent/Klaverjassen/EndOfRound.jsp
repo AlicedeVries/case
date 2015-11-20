@@ -10,43 +10,9 @@
 <body>
 <h2>Klaverjassen Online</h2>
 <div class=page>
-	<h3>Troef is ${KJgame.troef} </h3>
 	<table>
+		<tr>
 		<c:forEach items="${KJgame.players}" var="p">
-		<tr> 
-			<c:if test="${p.name!=KJplayer.name}">
-				<td> 
-					<h3>${p.name} 's hand:</h3> 	
-					<h4>team: <span class="team">${p.team}</span></h4>
-					<h4>score: ${p.teamScore}</h4>
-					
-				</td>
-				<c:forEach items="${p.hand}" var="card">
-					<td>
-					<c:if test="${card != p.playCard }">
-						<img src="<c:url value="/IMAGES/backWithYCP.svg" />" height="122" width="84">							
-					</c:if>
-					</td>
-				</c:forEach>
-			</c:if>	
-			<c:if test="${p.name==KJplayer.name}">
-				<td> 
-					<h3> Your hand:</h3> 	
-					<h4>team: <span class="team">${p.team}</span></h4>
-					<h4>score: ${p.teamScore}</h4>
-				</td>
-				<c:forEach items="${KJplayer.hand}" var="card">
-				<td>
-					<c:if test="${card!=KJplayer.playCard}">
-						<img src="<c:url value="${card.image}" />" height="122" width="84" >			
-					</c:if>
-				</td>
-				</c:forEach>			
-			</c:if>
-			
-			<td>
-					<p style="color:#ffffff">-----------------</p>
-			</td>
 			<td>
 				<c:if test="${p==KJgame.winnerOfRound}">
 				 	<img id="winner" src="<c:url value="${p.playCard.image}" />" height="122" width="84" >			
@@ -54,10 +20,21 @@
 				<c:if test="${p!=KJgame.winnerOfRound}">
 				 	<img src="<c:url value="${p.playCard.image}" />" height="122" width="84" >			
 				</c:if>
+			</td>	
+			<td class="box"> 
+			<c:if test="${p.name!=KJplayer.name}">
+				<h3>${p.name}</h3> 	
+					<h4>team: <span class="team">${p.team}</span></h4>
+					<h4>score: ${p.teamScore}</h4>
+			</c:if>	
+			<c:if test="${p.name==KJplayer.name}">
+					<h3> You</h3> 	
+					<h4>team: <span class="team">${p.team}</span> </h4>
+					<h4>score: ${p.teamScore}</h4>
+			</c:if>
 			</td>
-
-		</tr>
 		</c:forEach>		
+		</tr>
 	</table>
 	
 	<h3> ${msg} ${msg2}</h3>
@@ -65,6 +42,19 @@
 		<form method="post" action="/Kaartspellen/Klaverjassen/EndOfRound" > 
 			<input type="submit" value="Next Round" style="width: 100px; color: #000000; height: 40px; font-size: 14px; font-weight: normal; background-color: #f67f00">			
 		</form>	
+		
+		<br>
+	<table>
+		<tr> 
+			<td >
+				<h3>Troef:   </h3>
+			</td>
+			<td class=troef>
+				<img src="<c:url value="${KJgame.troefCard.image}" />" height="122"  >
+			</td>
+		</tr>
+	</table>
+	
 </div>	
 		
 	<script type="text/javascript">

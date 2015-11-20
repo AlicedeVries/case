@@ -40,7 +40,7 @@ public class PlayPoker extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		
 		if (request.getParameter("restart")!=null || request.getAttribute("restart")!=null){
-			List<Player> players = (List<Player>) context.getAttribute("Pokerplayers");
+			List<Player> players = (List<Player>) session.getAttribute("Pokerplayers");
 			Player p = players.get(0);
 			p.clearHand();
 			p.setHasFolded(false);
@@ -50,7 +50,7 @@ public class PlayPoker extends HttpServlet {
 			ai.setHasFolded(false);
 			ai.setWinner(false);
 			ai.setVisibleHand(false);
-			context.setAttribute("winner", null);
+			session.setAttribute("winner", null);
 		}
 		
 
@@ -67,7 +67,7 @@ public class PlayPoker extends HttpServlet {
 			
 			ComputerPlayer computerPlayer;  
 			
-			List<Player> players = (List<Player>) context.getAttribute("Pokerplayers");
+			List<Player> players = (List<Player>) session.getAttribute("Pokerplayers");
 			if (players==null){
 				computerPlayer = new ComputerPlayer("AI player");
 				players = new ArrayList<Player>();		
@@ -81,7 +81,7 @@ public class PlayPoker extends HttpServlet {
 			Game game = new Game(players);
 			p.setSmallOrBigBlind(game);
 			computerPlayer.setSmallOrBigBlind(game);
-			context.setAttribute("Pokergame", game);
+			session.setAttribute("Pokergame", game);
 			if(computerPlayer.getDealer() == true) {
 				//de AI speler is de dealer, en mag dus preflop als eerst. 
 				int potsizeVoorActie = game.getPotSize();

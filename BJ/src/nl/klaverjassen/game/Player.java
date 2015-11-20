@@ -45,21 +45,29 @@ public class Player extends HandHolder {
 	}
 	
 	public boolean hasVolgKleur(Kleur volgKleur) {
-		boolean hasVolgKleur = false;
 		for ( Card c : getHand() )
 			if (c.getKleur()==volgKleur)
-				hasVolgKleur = true;
-		return hasVolgKleur;
+				return true;
+		return false;
+	}
+	
+	public boolean hasTroefKleur(Kleur troefKleur) {
+		for ( Card c : getHand() )
+			if (c.getKleur()==troefKleur)
+				return true; 
+		return false;
 	}
 	
 	public void setClickableCards(Game game){
 		boolean kanKleurVolgen = hasVolgKleur(game.getVolgkleur());
+		boolean kanTroeven = hasTroefKleur(game.getTroef()) && game.getVolgkleur()!=null;
 		for ( Card c : getHand() ){
-			if (kanKleurVolgen && c.getKleur()==game.getVolgkleur())
-				c.setClickable(true);
-			else if (kanKleurVolgen && c.getKleur()!=game.getVolgkleur())
+			System.out.println(c.getKleur() + " " + kanKleurVolgen +" "+ kanTroeven);
+			if (kanKleurVolgen && c.getKleur()!=game.getVolgkleur())
 				c.setClickable(false);
-			else
+			else if (!kanKleurVolgen && kanTroeven && c.getKleur()!=game.getTroef())
+				c.setClickable(false);
+			else 
 				c.setClickable(true);
 		}
 	}

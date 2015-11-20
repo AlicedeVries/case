@@ -45,5 +45,22 @@ h2{
 	position:relative;
 	left: 5%;
 	width: 80%;
-	
 }
+
+.box{
+	width: 120px;	
+	padding:15px;
+	padding-right:40px;
+}
+
+.box2{
+	padding-right:20px;
+}
+
+.troef{
+	padding-left:20px;
+	padding-right:60px;
+	text-align: left;
+}
+
+

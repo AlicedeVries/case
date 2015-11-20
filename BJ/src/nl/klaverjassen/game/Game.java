@@ -44,6 +44,10 @@ public class Game {
 		return troef;
 	}
 
+	public Card getTroefCard() {
+		return new Card(2,troef);
+	}
+
 	public void setTroef(Kleur troef) {
 		this.troef = troef;
 	}
@@ -157,6 +161,10 @@ public class Game {
 		for (Card c : slag)
 			score += cardValue(c);
 		return score;		
+	}
+	
+	public int getRoem(){
+		return 0;
 	}
 	
 	public void addScoreToWinningTeam(int score){

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import nl.poker.texasHoldEm.game.ComputerPlayer;
 import nl.poker.texasHoldEm.game.Game;
@@ -34,10 +35,12 @@ public class End extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = getServletContext();
-		Game game = (Game) context.getAttribute("Pokergame");
+		HttpSession session = request.getSession(true);
+
+		Game game = (Game) session.getAttribute("Pokergame");
 	
 		@SuppressWarnings("unchecked")
-		List<Player> players = (List<Player>) context.getAttribute("Pokerplayers");
+		List<Player> players = (List<Player>) session.getAttribute("Pokerplayers");
 		
 		if (game.isItAdraw(players.get(0), players.get(1))){
 			players.get(0).setStackBijWinstHand(game.getPotSize()/2);
